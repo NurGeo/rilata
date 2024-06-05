@@ -1,5 +1,5 @@
-import { UuidType } from '../../../../../src/core/types';
-import { ErrorDod } from '../../../../../src/domain/domain-data/domain-types';
+import { UuidType } from '../../../../../src/core/types.js';
+import { ErrorDod } from '../../../../../src/domain/domain-data/domain-types.js';
 
 export type PersonAlreadyExistsError = ErrorDod<'PersonAlreadyExistsError', {
   text: 'Человек с данным ИИН уже существует в системе',

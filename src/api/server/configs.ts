@@ -1,5 +1,6 @@
-import { getEnvLogMode, UnionToTuple } from '../../core/index';
-import { JwtConfig, RunMode, ServerConfig } from './types';
+import { getEnvLogMode } from '#core/logger/logger-modes.js';
+import { UnionToTuple } from '#core/tuple-types.js';
+import { JwtConfig, RunMode, ServerConfig } from './types.js';
 
 export const defaultServerConfig: Required<ServerConfig> = {
   hostname: 'localhost',

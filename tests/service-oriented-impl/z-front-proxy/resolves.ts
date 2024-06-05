@@ -1,8 +1,8 @@
-import { ModuleResolves } from '../../../src/api/module/m-resolves';
-import { AuthFacade } from '../auth/facade';
-import { CompanyFacade } from '../company/facade';
-import { SubjectFacade } from '../subject/facade';
-import { FrontProxyModule } from './module';
+import { ModuleResolves } from '../../../src/api/module/m-resolves.js';
+import { AuthFacade } from '../auth/facade.js';
+import { CompanyFacade } from '../company/facade.js';
+import { SubjectFacade } from '../subject/facade.js';
+import { FrontProxyModule } from './module.js';
 
 export type FrontendProxyResolves = ModuleResolves<FrontProxyModule> & {
   moduleUrls: ['/api/frontend-proxy-module/'],

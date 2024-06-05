@@ -1,6 +1,6 @@
-import { AggregateRootParams, ARDT, DomainMeta } from '../../../../../src/domain/domain-data/domain-types';
-import { PersonPhonesAddedEvent } from './add-phones/add-phones.params';
-import { PersonAddedEvent } from './add-person/a-params';
+import { AggregateRootParams, ARDT, DomainMeta } from '../../../../../src/domain/domain-data/domain-types.js';
+import { PersonPhonesAddedEvent } from './add-phones/add-phones.params.js';
+import { PersonAddedEvent } from './add-person/a-params.js';
 
 export type PhoneTypes = 'mobile' | 'work' | 'home';
 

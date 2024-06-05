@@ -1,9 +1,9 @@
-import { DomainUser } from '../../../src/api/controller/types';
-import { GeneralModuleResolver } from '../../../src/api/module/types';
-import { Facadable } from '../../../src/api/resolve/facadable';
-import { FullServiceResult } from '../../../src/api/service/types';
-import { UuidType } from '../../../src/core/types';
-import { GetCompanyServiceParams } from './services/get-company/s.params';
+import { DomainUser } from '../../../src/api/controller/types.js';
+import { GeneralModuleResolver } from '../../../src/api/module/types.js';
+import { Facadable } from '../../../src/api/resolve/facadable.js';
+import { FullServiceResult } from '../../../src/api/service/types.js';
+import { UuidType } from '../../../src/core/types.js';
+import { GetCompanyServiceParams } from './services/get-company/s.params.js';
 
 export interface CompanyFacade {
   init(resolver: GeneralModuleResolver): void

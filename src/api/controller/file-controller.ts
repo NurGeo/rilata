@@ -1,8 +1,8 @@
 import { join } from 'node:path';
-import { responseUtility } from '../../core/utils/response/response-utility';
-import { GeneralServerResolver, GeneralModuleResolver } from '../base.index';
-import { Controller } from './controller';
-import { ResponseFileOptions } from './types';
+import { responseUtility } from '../../core/utils/response/response-utility.js';
+import { GeneralServerResolver, GeneralModuleResolver } from '../base.index.js';
+import { Controller } from './controller.js';
+import { ResponseFileOptions } from './types.js';
 
 export abstract class FileController<
   R extends GeneralServerResolver | GeneralModuleResolver

@@ -57,4 +57,4 @@ module.exports = {
     'object-curly-newline': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
   },
-};
+}

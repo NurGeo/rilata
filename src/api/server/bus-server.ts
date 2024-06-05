@@ -1,7 +1,7 @@
-import { SubcribeToBusMessage } from '../bus/types';
-import { BunServer } from './bun-server';
-import { BusServerResolver } from './bus.s-resolver';
-import { GeneralServerResolver } from './types';
+import { SubcribeToBusMessage } from '../bus/types.js';
+import { BunServer } from './bun-server.js';
+import { BusServerResolver } from './bus.s-resolver.js';
+import { GeneralServerResolver } from './types.js';
 
 export abstract class BusBunServer extends BunServer {
   declare protected resolver: GeneralServerResolver;

@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'bun:test';
-import { arrayUtility } from './array-utility';
+import { arrayUtility } from './array-utility.js';
 
 describe('arrayUtility class', () => {
   test('перемешать содержимое списка случайным образом', async () => {

@@ -1,8 +1,8 @@
-import { BusMessageRepository } from '../../../src/api/database/bus-message.repository';
-import { EventRepository } from '../../../src/api/database/event.repository';
-import { ModuleResolves } from '../../../src/api/module/m-resolves';
-import { CompanyReadRepository } from './domain/company/repo';
-import { CompanyReadModule } from './module';
+import { BusMessageRepository } from '../../../src/api/database/bus-message.repository.js';
+import { EventRepository } from '../../../src/api/database/event.repository.js';
+import { ModuleResolves } from '../../../src/api/module/m-resolves.js';
+import { CompanyReadRepository } from './domain/company/repo.js';
+import { CompanyReadModule } from './module.js';
 
 export type CompanyReadResolves = ModuleResolves<CompanyReadModule> & {
   moduleUrls: ['/api/company-read-module/'],

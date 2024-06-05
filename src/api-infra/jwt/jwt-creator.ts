@@ -1,8 +1,8 @@
-import { JwtCreator } from '../../api/jwt/jwt-creator';
-import { GeneralServerResolver, JwtConfig } from '../../api/server/types';
-import { JwtPayload, JwtType } from '../../core/jwt/types';
-import { JwtHmacHashUtils } from '../../core/utils/jwt/jwt-utils';
-import { DTO } from '../../domain/dto';
+import { JwtCreator } from '../../api/jwt/jwt-creator.js';
+import { GeneralServerResolver, JwtConfig } from '../../api/server/types.js';
+import { JwtPayload, JwtType } from '../../core/jwt/types.js';
+import { JwtHmacHashUtils } from '../../core/utils/jwt/jwt-utils.js';
+import { DTO } from '../../domain/dto.js';
 
 export class JwtCreatorImpl<PAYLOAD extends DTO> implements JwtCreator<PAYLOAD> {
   protected resolver!: GeneralServerResolver;

@@ -1,5 +1,5 @@
-import { EventDod } from '../../../../../../src/domain/domain-data/domain-types';
-import { PersonAttrs, PersonOutARDT } from '../params';
+import { EventDod } from '../../../../../../src/domain/domain-data/domain-types.js';
+import { PersonAttrs, PersonOutARDT } from '../params.js';
 
 export type AddingPersonActionAttrs = Omit<PersonAttrs, 'id' | 'contacts'>;
 

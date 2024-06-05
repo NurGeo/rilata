@@ -1,18 +1,18 @@
-import { EventRepository } from '../../../../../src/api/database/event.repository';
-import { DatabaseObjectSavingError } from '../../../../../src/core/exeptions';
-import { Logger } from '../../../../../src/core/logger/logger';
-import { failure } from '../../../../../src/core/result/failure';
-import { success } from '../../../../../src/core/result/success';
-import { Result } from '../../../../../src/core/result/types';
-import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility';
-import { dtoUtility } from '../../../../../src/core/utils/dto/dto-utility';
-import { FakeClassImplements } from '../../../../fixtures/fake-class-implements';
-import { PersonAttrs } from '../../../subject/domain-data/person/params';
-import { PersonAR } from '../../../subject/domain-object/person/a-root';
-import { PersonFactory } from '../../../subject/domain-object/person/factory';
-import { PersonRepository } from '../../../subject/domain-object/person/repo';
-import { PersonAlreadyExistsError, PersonDoesntExistByIdError, PersonDoesntExistByIinError } from '../../../subject/domain-object/person/repo-errors';
-import { SubjectModuleResolver } from '../../../subject/resolver';
+import { EventRepository } from '../../../../../src/api/database/event.repository.js';
+import { DatabaseObjectSavingError } from '../../../../../src/core/exeptions.js';
+import { Logger } from '../../../../../src/core/logger/logger.js';
+import { failure } from '../../../../../src/core/result/failure.js';
+import { success } from '../../../../../src/core/result/success.js';
+import { Result } from '../../../../../src/core/result/types.js';
+import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility.js';
+import { dtoUtility } from '../../../../../src/core/utils/dto/dto-utility.js';
+import { FakeClassImplements } from '../../../../fixtures/fake-class-implements.js';
+import { PersonAttrs } from '../../../subject/domain-data/person/params.js';
+import { PersonAR } from '../../../subject/domain-object/person/a-root.js';
+import { PersonFactory } from '../../../subject/domain-object/person/factory.js';
+import { PersonRepository } from '../../../subject/domain-object/person/repo.js';
+import { PersonAlreadyExistsError, PersonDoesntExistByIdError, PersonDoesntExistByIinError } from '../../../subject/domain-object/person/repo-errors.js';
+import { SubjectModuleResolver } from '../../../subject/resolver.js';
 
 export class PersonRepositoryImpl implements PersonRepository {
   testRepo: FakeClassImplements.TestMemoryRepository<

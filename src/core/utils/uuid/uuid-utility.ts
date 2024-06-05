@@ -1,6 +1,6 @@
 import { uuidv7 } from 'uuidv7';
-import { UuidType } from '../../types';
-import { AssertionException } from '../../exeptions';
+import { UuidType } from '../../types.js';
+import { AssertionException } from '../../exeptions.js';
 
 class UUIDUtility {
   private uuidRegex = '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$';

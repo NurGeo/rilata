@@ -1,16 +1,16 @@
 import {
   describe, test, expect, afterAll,
 } from 'bun:test';
-import { EventRepository } from '../../../src/api/database/event.repository';
-import { BusBunServer } from '../../../src/api/server/bus-server';
-import { dodUtility } from '../../../src/core/utils/dod/dod-utility';
-import { dtoUtility } from '../../../src/core/utils/dto/dto-utility';
-import { uuidUtility } from '../../../src/core/utils/uuid/uuid-utility';
-import { AddCompanyRequestDod, AddCompanyRequestDodAttrs } from '../company-cmd/services/company/add-company/s.params';
-import { CompanyOutAttrs } from '../company-read/domain/company/params';
-import { CompanyReadRepository } from '../company-read/domain/company/repo';
-import { CompanyReadModule } from '../company-read/module';
-import { serverStarter } from './starter';
+import { EventRepository } from '../../../src/api/database/event.repository.js';
+import { BusBunServer } from '../../../src/api/server/bus-server.js';
+import { dodUtility } from '../../../src/core/utils/dod/dod-utility.js';
+import { dtoUtility } from '../../../src/core/utils/dto/dto-utility.js';
+import { uuidUtility } from '../../../src/core/utils/uuid/uuid-utility.js';
+import { AddCompanyRequestDod, AddCompanyRequestDodAttrs } from '../company-cmd/services/company/add-company/s.params.js';
+import { CompanyOutAttrs } from '../company-read/domain/company/params.js';
+import { CompanyReadRepository } from '../company-read/domain/company/repo.js';
+import { CompanyReadModule } from '../company-read/module.js';
+import { serverStarter } from './starter.js';
 
 describe('add company service tests', async () => {
   function timeout() {

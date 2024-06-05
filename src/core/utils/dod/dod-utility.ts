@@ -1,10 +1,10 @@
-import { Caller } from '../../../api/controller/types';
-import { requestStoreDispatcher } from '../../../api/request-store/request-store-dispatcher';
-import { ValidationError } from '../../../api/service/error-types';
-import { GeneralRequestDod, GeneralErrorDod, GeneralEventDod } from '../../../domain/domain-data/domain-types';
-import { UuidType } from '../../types';
-import { dtoUtility } from '../dto/dto-utility';
-import { uuidUtility } from '../uuid/uuid-utility';
+import { Caller } from '../../../api/controller/types.js';
+import { requestStoreDispatcher } from '../../../api/request-store/request-store-dispatcher.js';
+import { ValidationError } from '../../../api/service/error-types.js';
+import { GeneralRequestDod, GeneralErrorDod, GeneralEventDod } from '../../../domain/domain-data/domain-types.js';
+import { UuidType } from '../../types.js';
+import { dtoUtility } from '../dto/dto-utility.js';
+import { uuidUtility } from '../uuid/uuid-utility.js';
 
 /** Утилита для работы с объектами DomainObjectData */
 class DodUtility {

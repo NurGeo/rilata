@@ -1,6 +1,6 @@
-import { GeneralServerResolver } from '../../base.index';
-import { RilataRequest } from '../../http.index';
-import { Afterware } from '../afterware';
+import { GeneralServerResolver } from '../../base.index.js';
+import { RilataRequest } from '../../http.index.js';
+import { Afterware } from '../afterware.js';
 
 export class LogResponseAfterware extends Afterware<GeneralServerResolver> {
   process(req: RilataRequest, resp: Response): Response {

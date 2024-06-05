@@ -1,18 +1,18 @@
 /* eslint-disable max-len */
 /* eslint-disable no-use-before-define */
-import { Result } from '../../core/result/types';
+import { Result } from '../../core/result/types.js';
 import {
   DomainAttrs, EventDod,
   GeneralArParams,
   GeneralErrorDod, GeneralEventDod, GeneralRequestDod, SimpleARDT,
-} from '../../domain/domain-data/domain-types';
-import { DtoFieldValidator } from '../../domain/validator/field-validator/dto-field-validator';
-import { GeneralModuleResolver, GetModuleResolves } from '../module/types';
-import { ServiceBaseErrors } from './error-types';
-import { QueryService } from './concrete-service/query.service';
-import { CommandService } from './concrete-service/command.service';
-import { EventService } from './concrete-service/event.service';
-import { ResultDTO } from '../controller/types';
+} from '../../domain/domain-data/domain-types.js';
+import { DtoFieldValidator } from '../../domain/validator/field-validator/dto-field-validator.js';
+import { GeneralModuleResolver, GetModuleResolves } from '../module/types.js';
+import { ServiceBaseErrors } from './error-types.js';
+import { QueryService } from './concrete-service/query.service.js';
+import { CommandService } from './concrete-service/command.service.js';
+import { EventService } from './concrete-service/event.service.js';
+import { ResultDTO } from '../controller/types.js';
 
 export type AppEventType = 'command-event' | 'read-module' | 'event';
 

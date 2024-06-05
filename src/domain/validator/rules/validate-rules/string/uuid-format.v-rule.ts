@@ -1,6 +1,6 @@
-import { uuidUtility } from '../../../../../core/utils/uuid/uuid-utility';
-import { ValidationRuleAnswer } from '../../types';
-import { ValidationRule } from '../../validation-rule';
+import { uuidUtility } from '../../../../../core/utils/uuid/uuid-utility.js';
+import { ValidationRuleAnswer } from '../../types.js';
+import { ValidationRule } from '../../validation-rule.js';
 
 export class UUIDFormatValidationRule extends ValidationRule<'validate', string> {
   requirement = 'Значение должно соответствовать формату UUID';

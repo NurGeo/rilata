@@ -1,4 +1,4 @@
-import { DeliveryBusMessage } from '../bus/types';
+import { DeliveryBusMessage } from '../bus/types.js';
 
 export interface DelivererToBus {
   init(...args: unknown[]): void

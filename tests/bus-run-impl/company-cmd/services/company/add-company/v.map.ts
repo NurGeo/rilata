@@ -1,8 +1,8 @@
-import { InputDodValidator } from '../../../../../../src/api/service/types';
-import { DtoFieldValidator } from '../../../../../../src/domain/validator/field-validator/dto-field-validator';
-import { ValidatorMap } from '../../../../../../src/domain/validator/field-validator/types';
-import { companyAttrsVMap } from '../../../domain-data/company/v-map';
-import { AddCompanyRequestDod, AddCompanyRequestDodAttrs } from './s.params';
+import { InputDodValidator } from '../../../../../../src/api/service/types.js';
+import { DtoFieldValidator } from '../../../../../../src/domain/validator/field-validator/dto-field-validator.js';
+import { ValidatorMap } from '../../../../../../src/domain/validator/field-validator/types.js';
+import { companyAttrsVMap } from '../../../domain-data/company/v-map.js';
+import { AddCompanyRequestDod, AddCompanyRequestDodAttrs } from './s.params.js';
 
 const addCompanyVmap: ValidatorMap<AddCompanyRequestDodAttrs> = {
   name: companyAttrsVMap.name,

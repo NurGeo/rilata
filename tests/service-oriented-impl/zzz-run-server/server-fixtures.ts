@@ -1,7 +1,7 @@
-import { TestBatchRecords } from '../../../src/api/database/types';
-import { UserRepositoryImpl } from '../zz-infra/repositories/auth-module/user';
-import { CompanyRepositoryImpl } from '../zz-infra/repositories/company-module/company';
-import { PersonRepositoryImpl } from '../zz-infra/repositories/subject-module/person';
+import { TestBatchRecords } from '../../../src/api/database/types.js';
+import { UserRepositoryImpl } from '../zz-infra/repositories/auth-module/user.js';
+import { CompanyRepositoryImpl } from '../zz-infra/repositories/company-module/company.js';
+import { PersonRepositoryImpl } from '../zz-infra/repositories/subject-module/person.js';
 
 export namespace ServiceModulesFixtures {
   export const repoFixtures: TestBatchRecords<

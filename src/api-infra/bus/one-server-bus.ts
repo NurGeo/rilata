@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Bus } from '../../api/bus/bus';
-import { PublishBusMessage, SubcribeToBusMessage } from '../../api/bus/types';
-import { Module } from '../../api/module/module';
-import { GeneralServerResolver } from '../../api/server/types';
-import { GeneralEventDod } from '../../domain/domain-data/domain-types';
+import { Bus } from '../../api/bus/bus.js';
+import { PublishBusMessage, SubcribeToBusMessage } from '../../api/bus/types.js';
+import { Module } from '../../api/module/module.js';
+import { GeneralServerResolver } from '../../api/server/types.js';
+import { GeneralEventDod } from '../../domain/domain-data/domain-types.js';
 
 type ModuleName = string;
 

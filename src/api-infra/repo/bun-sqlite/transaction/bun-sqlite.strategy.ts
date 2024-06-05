@@ -1,6 +1,6 @@
-import { requestStoreDispatcher } from '../../../../api/base.index';
-import { TransactionStrategy } from '../../../../api/service/transaction-strategy/strategy';
-import { BunSqliteDatabase } from '../database';
+import { requestStoreDispatcher } from '#api/request-store/request-store-dispatcher.js';
+import { TransactionStrategy } from '#api/service/transaction-strategy/strategy.js';
+import { BunSqliteDatabase } from '../database.js';
 
 export class BunSqliteStrategy extends TransactionStrategy {
   protected executeWithTransaction<

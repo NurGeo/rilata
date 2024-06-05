@@ -1,8 +1,8 @@
-import { LocaleHint } from '../../locale';
+import { LocaleHint } from '../../locale.js';
 import {
   RuleType, RuleDataType, GetRuleAnswer, RuleError, GetFailBehaviourString,
   GetSuccessBehaviourString, GetFailRuleAnswer, GetSuccessRuleAnswer,
-} from './types';
+} from './types.js';
 
 /** Класс для правил валидации.
   Рекомендуется, чтобы один класс проверял только одну проверку.

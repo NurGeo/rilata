@@ -1,5 +1,5 @@
-import { ValidationRuleAnswer } from '../../types';
-import { ValidationRule } from '../../validation-rule';
+import { ValidationRuleAnswer } from '../../types.js';
+import { ValidationRule } from '../../validation-rule.js';
 
 export class NoContainedCharsValidationRule extends ValidationRule <'validate', string> {
   requirement = 'Строка не должна содержать символы {{noChars}}';

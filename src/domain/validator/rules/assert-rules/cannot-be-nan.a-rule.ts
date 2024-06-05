@@ -1,5 +1,5 @@
-import { ValidationRule } from '../validation-rule';
-import { TypeOrAssertRuleAnswer } from '../types';
+import { ValidationRule } from '../validation-rule.js';
+import { TypeOrAssertRuleAnswer } from '../types.js';
 
 export class CannotBeNanRule extends ValidationRule<'assert', unknown> {
   requirement = 'Значение не может быть NaN';

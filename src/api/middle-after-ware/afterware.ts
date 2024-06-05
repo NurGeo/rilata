@@ -1,6 +1,6 @@
-import { RilataRequest } from '../controller/types';
-import { GeneralModuleResolver } from '../module/types';
-import { GeneralServerResolver } from '../server/types';
+import { RilataRequest } from '../controller/types.js';
+import { GeneralModuleResolver } from '../module/types.js';
+import { GeneralServerResolver } from '../server/types.js';
 
 export abstract class Afterware<R extends GeneralServerResolver | GeneralModuleResolver> {
   protected resolver!: R;

@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Repositoriable } from '../resolve/repositoriable';
-import { Realisable } from '../resolve/realisable';
-import { Facadable } from '../resolve/facadable';
-import { DTO } from '../../domain/dto';
-import { GetModule } from './types';
-import { Module } from './module';
-import { GetServerResolves } from '../server/types';
-import { ServerResolver } from '../server/s-resolver';
-import { ServerResolves } from '../server/s-resolves';
-import { ModuleResolves } from './m-resolves';
+import { Repositoriable } from '../resolve/repositoriable.js';
+import { Realisable } from '../resolve/realisable.js';
+import { Facadable } from '../resolve/facadable.js';
+import { DTO } from '../../domain/dto.js';
+import { GetModule } from './types.js';
+import { Module } from './module.js';
+import { GetServerResolves } from '../server/types.js';
+import { ServerResolver } from '../server/s-resolver.js';
+import { ServerResolves } from '../server/s-resolves.js';
+import { ModuleResolves } from './m-resolves.js';
 
 export abstract class ModuleResolver<
   S_RES extends ServerResolver<ServerResolves<DTO>>, MR extends ModuleResolves<Module>,
@@ -27,7 +27,6 @@ implements Repositoriable, Realisable, Facadable {
   constructor(protected resolves: MR) {}
 
   getModulePath(): string {
-    // @ts-expect-error
     return import.meta.dir; // path/to/file
   }
 

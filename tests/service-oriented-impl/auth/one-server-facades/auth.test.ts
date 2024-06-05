@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'bun:test';
-import { DomainUser } from '../../../../src/api/controller/types';
-import { uuidUtility } from '../../../../src/core/utils/uuid/uuid-utility';
-import { CompanyModule } from '../../company/module';
-import { serverStarter } from '../../zzz-run-server/starter';
-import { AuthFacade } from '../facade';
-import { AddUserOut } from '../services/user/add-user/s-params';
+import { DomainUser } from '../../../../src/api/controller/types.js';
+import { uuidUtility } from '../../../../src/core/utils/uuid/uuid-utility.js';
+import { CompanyModule } from '../../company/module.js';
+import { serverStarter } from '../../zzz-run-server/starter.js';
+import { AuthFacade } from '../facade.js';
+import { AddUserOut } from '../services/user/add-user/s-params.js';
 
 describe('auth facade tests', async () => {
   const server = serverStarter.start(['CompanyModule', 'AuthModule']);

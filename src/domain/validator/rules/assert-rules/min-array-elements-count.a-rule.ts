@@ -1,6 +1,6 @@
-import { ValidationRule } from '../validation-rule';
-import { TypeOrAssertRuleAnswer } from '../types';
-import { AssertionException } from '../../../../core/exeptions';
+import { ValidationRule } from '../validation-rule.js';
+import { TypeOrAssertRuleAnswer } from '../types.js';
+import { AssertionException } from '../../../../core/exeptions.js';
 
 export class MinArrayElementsCountAssertionRule extends ValidationRule<'assert', unknown> {
   requirement = 'Минимальное количество элементов может быть {{min}}, сейчас {{currentCount}}';

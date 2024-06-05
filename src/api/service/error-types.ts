@@ -1,7 +1,7 @@
-import { JwtDecodeErrors, JwtVerifyErrors } from '../../core/jwt/jwt-errors';
-import { ErrorDod } from '../../domain/domain-data/domain-types';
-import { Locale } from '../../domain/locale';
-import { ArrayFieldErrors, FieldErrors } from '../../domain/validator/field-validator/types';
+import { JwtDecodeErrors, JwtVerifyErrors } from '../../core/jwt/jwt-errors.js';
+import { ErrorDod } from '../../domain/domain-data/domain-types.js';
+import { Locale } from '../../domain/locale.js';
+import { ArrayFieldErrors, FieldErrors } from '../../domain/validator/field-validator/types.js';
 
 export type ValidationError = {
   errors: FieldErrors | ArrayFieldErrors,

@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define */
-import { Result } from '../../../core/result/types';
-import { DTO } from '../../dto';
-import { LiteralDataType, RuleError } from '../../validator/rules/types';
-import { DtoFieldValidator } from './dto-field-validator';
-import { LiteralFieldValidator } from './literal-field-validator';
+import { Result } from '../../../core/result/types.js';
+import { DTO } from '../../dto.js';
+import { LiteralDataType, RuleError } from '../../validator/rules/types.js';
+import { DtoFieldValidator } from './dto-field-validator.js';
+import { LiteralFieldValidator } from './literal-field-validator.js';
 
 export type GetArrayConfig<B extends boolean> = B extends false
   ? {

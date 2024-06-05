@@ -1,7 +1,7 @@
-import { DTO } from '../../domain/dto';
-import { Result } from '../../core/result/types';
-import { JwtDecodeErrors } from './jwt-errors';
-import { JwtPayload, JwtType } from './types';
+import { DTO } from '../../domain/dto.js';
+import { Result } from '../../core/result/types.js';
+import { JwtDecodeErrors } from './jwt-errors.js';
+import { JwtPayload, JwtType } from './types.js';
 
 export interface JwtDecoder<PAYLOAD extends DTO> {
   /** Декодировать токен и получить его payload.

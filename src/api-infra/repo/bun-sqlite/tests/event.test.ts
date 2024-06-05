@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
-import { DeliveryEvent } from '../../../../api/bus/types';
-import { GetDtoKeysByDotNotation } from '../../../../core/type-functions';
-import { dtoUtility } from '../../../../core/utils/dto/dto-utility';
-import { GeneralEventDod } from '../../../../domain/domain-data/domain-types';
-import { EventRepositorySqlite } from '../repositories/event';
-import { SqliteTestFixtures } from './fixtures';
+import { DeliveryEvent } from '#api/bus/types.js';
+import { GetDtoKeysByDotNotation } from '#core/type-functions.js';
+import { dtoUtility } from '#core/utils/dto/dto-utility.js';
+import { GeneralEventDod } from '#domain/domain-data/domain-types.js';
+import { EventRepositorySqlite } from '../repositories/event.js';
+import { SqliteTestFixtures } from './fixtures.js';
 
 describe('bun sql event repository tests', () => {
-  const { fakeModuleResolver } = SqliteTestFixtures;
+  const fakeModuleResolver = SqliteTestFixtures.getResolverWithTestDb();
   const db = fakeModuleResolver.getDatabase() as SqliteTestFixtures.BlogDatabase;
   const sut = db.getRepository<EventRepositorySqlite>('events');
 

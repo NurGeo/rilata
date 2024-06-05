@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { DTO } from '../../domain/dto';
-import { TestRepository } from './test.repository';
+import { DTO } from '../../domain/dto.js';
+import { TestRepository } from './test.repository.js';
 
 export type BusPayloadAsJson = string;
 

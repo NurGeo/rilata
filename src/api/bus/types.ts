@@ -1,5 +1,5 @@
-import { UuidType } from '../../core/types';
-import { BusPayloadAsJson } from '../database/types';
+import { UuidType } from '../../core/types.js';
+import { BusPayloadAsJson } from '../database/types.js';
 
 /** тип сообщения шины. Позволяет за разе подписаться на любое событие агрегата. */
 export type BusMessageType = 'message' | 'event' | 'aggregate';

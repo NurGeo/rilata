@@ -1,6 +1,6 @@
-import { Caller } from '../../../api/controller/types';
-import { AssertionException } from '../../exeptions';
-import { UserId } from '../../types';
+import { Caller } from '../../../api/controller/types.js';
+import { AssertionException } from '../../exeptions.js';
+import { UserId } from '../../types.js';
 
 class CallerUtility {
   /** если пользователь не авторизован, то вернет undefined, иначе userId */

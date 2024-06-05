@@ -1,10 +1,10 @@
-import { success } from '../../../core/result/success';
-import { Result } from '../../../core/result/types';
-import { BusMessageType } from '../../bus/types';
-import { GeneralModuleResolver } from '../../module/types';
-import { BaseService } from '../base.service';
-import { TransactionStrategy } from '../transaction-strategy/strategy';
-import { GeneralEventServiceParams, ServiceResult } from '../types';
+import { success } from '../../../core/result/success.js';
+import { Result } from '../../../core/result/types.js';
+import { BusMessageType } from '../../bus/types.js';
+import { GeneralModuleResolver } from '../../module/types.js';
+import { BaseService } from '../base.service.js';
+import { TransactionStrategy } from '../transaction-strategy/strategy.js';
+import { GeneralEventServiceParams, ServiceResult } from '../types.js';
 
 export abstract class EventService<
   P extends GeneralEventServiceParams,

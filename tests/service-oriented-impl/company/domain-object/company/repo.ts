@@ -1,9 +1,9 @@
-import { Repositoriable } from '../../../../../src/api/resolve/repositoriable';
-import { Result } from '../../../../../src/core/result/types';
-import { UuidType } from '../../../../../src/core/types';
-import { CompanyModuleResolver } from '../../resolver';
-import { CompanyAR } from './a-root';
-import { CompanyDoesntExistByBinError, CompanyDoesntExistByIdError, CompanyAlreadyExistError } from './repo-errors';
+import { Repositoriable } from '../../../../../src/api/resolve/repositoriable.js';
+import { Result } from '../../../../../src/core/result/types.js';
+import { UuidType } from '../../../../../src/core/types.js';
+import { CompanyModuleResolver } from '../../resolver.js';
+import { CompanyAR } from './a-root.js';
+import { CompanyDoesntExistByBinError, CompanyDoesntExistByIdError, CompanyAlreadyExistError } from './repo-errors.js';
 
 export interface CompanyRepository {
   init(resolver: CompanyModuleResolver): void

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test';
-import { GroupRole } from '../../../../src/domain/domain-object/role/group-role';
-import { GroupRoleAttrs } from '../../../../src/domain/domain-object/types';
+import { GroupRole } from '../../../../src/domain/domain-object/role/group-role.js';
+import { GroupRoleAttrs } from '../../../../src/domain/domain-object/types.js';
 
 describe('Тесты объекта GroupRole', () => {
   class WorkshopManagersRole extends GroupRole<GroupRoleAttrs> {}

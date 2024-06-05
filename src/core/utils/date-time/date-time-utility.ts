@@ -1,4 +1,4 @@
-import { Timestamp } from '../../types';
+import { Timestamp } from '../../types.js';
 
 /* eslint-disable no-promise-executor-return */
 export class DateTimeUtility {

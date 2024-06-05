@@ -1,5 +1,5 @@
-import { ValidationRuleAnswer } from '../../types';
-import { ValidationRule } from '../../validation-rule';
+import { ValidationRuleAnswer } from '../../types.js';
+import { ValidationRule } from '../../validation-rule.js';
 
 export class MaxCharsCountValidationRule extends ValidationRule<'validate', string> {
   requirement = 'Длина строки должна быть не больше {{maxCount}}';

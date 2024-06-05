@@ -1,16 +1,16 @@
 import {
   describe, test, expect, beforeEach,
 } from 'bun:test';
-import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility';
-import { serverStarter } from '../../../zzz-run-server/starter';
-import { ServiceModulesFixtures } from '../../../zzz-run-server/server-fixtures';
-import { CompanyAttrs } from '../../domain-data/company/params';
-import { CompanyDoesntExistByIdError } from '../../domain-object/company/repo-errors';
-import { CompanyModule } from '../../module';
-import { GetCompanyRequestDod } from './s.params';
-import { GetingCompanyService } from './service';
-import { TestDatabase } from '../../../../../src/api/database/test.database';
-import { requestStoreMock } from '../../../../fixtures/request-store-mock';
+import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility.js';
+import { serverStarter } from '../../../zzz-run-server/starter.js';
+import { ServiceModulesFixtures } from '../../../zzz-run-server/server-fixtures.js';
+import { CompanyAttrs } from '../../domain-data/company/params.js';
+import { CompanyDoesntExistByIdError } from '../../domain-object/company/repo-errors.js';
+import { CompanyModule } from '../../module.js';
+import { GetCompanyRequestDod } from './s.params.js';
+import { GetingCompanyService } from './service.js';
+import { TestDatabase } from '../../../../../src/api/database/test.database.js';
+import { requestStoreMock } from '../../../../fixtures/request-store-mock.js';
 
 describe('register company saga service tests', async () => {
   const requestId = '5611f332-f4d9-4c16-a561-04dabe864fc9';

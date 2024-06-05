@@ -1,7 +1,7 @@
-import { UuidType } from '../../../core/types';
-import { DTO } from '../../../domain/dto';
-import { BunSqliteDatabase } from './database';
-import { BunSqliteRepository } from './repository';
+import { UuidType } from '#core/types.js';
+import { DTO } from '#domain/dto.js';
+import { BunSqliteDatabase } from './database.js';
+import { BunSqliteRepository } from './repository.js';
 
 export type MigrateRow = {
   id: UuidType,

@@ -1,26 +1,26 @@
 /* eslint-disable no-use-before-define */
-import { Logger } from '../../core/logger/logger';
+import { Logger } from '../../core/logger/logger.js';
 import {
   FullServiceResult,
   GeneralCommandService,
   GeneralCommandServiceParams, GeneralEventService,
   GeneralQueryServiceParams, GeneraQueryService, ServiceResult,
-} from '../service/types';
-import { Service } from '../service/service';
-import { GeneralModuleResolver, ModuleType } from './types';
-import { GeneralEventDod } from '../../domain/domain-data/domain-types';
-import { failure } from '../../core/result/failure';
-import { Locale } from '../../domain/locale';
-import { BadRequestError, InternalError } from '../service/error-types';
-import { Result } from '../../core/result/types';
-import { AssertionException } from '../../core/exeptions';
-import { GeneralServerResolver } from '../server/types';
-import { Caller } from '../controller/types';
-import { dodUtility } from '../../core/utils/dod/dod-utility';
-import { ModuleController } from '../controller/m-controller';
-import { Controller } from '../controller/controller';
-import { RequestStorePayload } from '../request-store/types';
-import { requestStoreDispatcher } from '../request-store/request-store-dispatcher';
+} from '../service/types.js';
+import { Service } from '../service/service.js';
+import { GeneralModuleResolver, ModuleType } from './types.js';
+import { GeneralEventDod } from '../../domain/domain-data/domain-types.js';
+import { failure } from '../../core/result/failure.js';
+import { Locale } from '../../domain/locale.js';
+import { BadRequestError, InternalError } from '../service/error-types.js';
+import { Result } from '../../core/result/types.js';
+import { AssertionException } from '../../core/exeptions.js';
+import { GeneralServerResolver } from '../server/types.js';
+import { Caller } from '../controller/types.js';
+import { dodUtility } from '../../core/utils/dod/dod-utility.js';
+import { ModuleController } from '../controller/m-controller.js';
+import { Controller } from '../controller/controller.js';
+import { RequestStorePayload } from '../request-store/types.js';
+import { requestStoreDispatcher } from '../request-store/request-store-dispatcher.js';
 
 export abstract class Module {
   readonly abstract moduleName: string;

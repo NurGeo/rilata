@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Constructor } from '../../core/types';
-import { DTO } from '../../domain/dto';
-import { Module } from '../module/module';
-import { RilataServer } from './server';
-import { ServerResolves } from './s-resolves';
-import { GeneralServerResolver, ModuleConstructors } from './types';
+import { Constructor } from '../../core/types.js';
+import { DTO } from '../../domain/dto.js';
+import { Module } from '../module/module.js';
+import { RilataServer } from './server.js';
+import { ServerResolves } from './s-resolves.js';
+import { GeneralServerResolver, ModuleConstructors } from './types.js';
 
 export class ServerStarter<M extends Module> {
   protected server!: RilataServer;

@@ -1,10 +1,10 @@
-import { CompanyRepository } from './domain-object/company/repo';
-import { CompanyResolves } from './resolves';
-import { AuthFacade } from '../auth/facade';
-import { SubjectFacade } from '../subject/facade';
-import { ModuleResolver } from '../../../src/api/module/m-resolver';
-import { GeneralServerResolver } from '../../../src/api/server/types';
-import { EventRepository } from '../../../src/api/database/event.repository';
+import { CompanyRepository } from './domain-object/company/repo.js';
+import { CompanyResolves } from './resolves.js';
+import { AuthFacade } from '../auth/facade.js';
+import { SubjectFacade } from '../subject/facade.js';
+import { ModuleResolver } from '../../../src/api/module/m-resolver.js';
+import { GeneralServerResolver } from '../../../src/api/server/types.js';
+import { EventRepository } from '../../../src/api/database/event.repository.js';
 
 export class CompanyModuleResolver extends ModuleResolver<
   GeneralServerResolver, CompanyResolves

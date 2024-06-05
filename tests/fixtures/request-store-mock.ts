@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { uuidUtility } from '../../src/core/utils/uuid/uuid-utility';
-import { GeneralModuleResolver } from '../../src/api/module/types';
-import { RequestStorePayload } from '../../src/api/request-store/types';
-import { requestStoreDispatcher } from '../../src/api/request-store/request-store-dispatcher';
+import { uuidUtility } from '../../src/core/utils/uuid/uuid-utility.js';
+import { GeneralModuleResolver } from '../../src/api/module/types.js';
+import { RequestStorePayload } from '../../src/api/request-store/types.js';
+import { requestStoreDispatcher } from '../../src/api/request-store/request-store-dispatcher.js';
 
 export function requestStoreMock(
   store: Partial<RequestStorePayload> & { moduleResolver: GeneralModuleResolver},

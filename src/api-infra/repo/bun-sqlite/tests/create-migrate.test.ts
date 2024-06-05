@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { describe, test, expect } from 'bun:test';
-import { MigrateRow } from '../types';
-import { SqliteTestFixtures } from './fixtures';
+import { describe, test, expect, beforeEach } from 'bun:test';
+import { MigrateRow } from '../types.js';
+import { SqliteTestFixtures } from './fixtures.js';
 
 describe('sqlite create and migrate tests', () => {
-  const { fakeModuleResolver } = SqliteTestFixtures;
+  const fakeModuleResolver = SqliteTestFixtures.getResolverWithTestDb();
   const db = fakeModuleResolver.getDatabase() as SqliteTestFixtures.BlogDatabase;
+  beforeEach(() => {
+    db.clear();
+  });
 
   test('успех. бд и таблицы созданы', () => {
     const tableNamesAsArrObj = db.sqliteDb.query('SELECT name FROM sqlite_master WHERE type="table"').all();

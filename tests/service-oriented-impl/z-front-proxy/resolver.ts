@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ModuleResolver } from '../../../src/api/module/m-resolver';
-import { ServerResolver } from '../../../src/api/server/s-resolver';
-import { ServerResolves } from '../../../src/api/server/s-resolves';
-import { AuthFacade } from '../auth/facade';
-import { UserJwtPayload } from '../auth/services/user/user-authentification/s-params';
-import { CompanyFacade } from '../company/facade';
-import { SubjectFacade } from '../subject/facade';
-import { FrontProxyModule } from './module';
-import { FrontendProxyResolves } from './resolves';
+import { ModuleResolver } from '../../../src/api/module/m-resolver.js';
+import { ServerResolver } from '../../../src/api/server/s-resolver.js';
+import { ServerResolves } from '../../../src/api/server/s-resolves.js';
+import { AuthFacade } from '../auth/facade.js';
+import { UserJwtPayload } from '../auth/services/user/user-authentification/s-params.js';
+import { CompanyFacade } from '../company/facade.js';
+import { SubjectFacade } from '../subject/facade.js';
+import { FrontProxyModule } from './module.js';
+import { FrontendProxyResolves } from './resolves.js';
 
 export class FrontendProxyModuleResolver extends ModuleResolver<
   ServerResolver<ServerResolves<UserJwtPayload>>, FrontendProxyResolves

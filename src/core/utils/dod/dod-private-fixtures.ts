@@ -1,6 +1,6 @@
 import {
   ARDT, DomainMeta, ErrorDod, EventDod,
-} from '../../../domain/domain-data/domain-types';
+} from '../../../domain/domain-data/domain-types.js';
 
 export namespace DODPrivateFixtures {
   export type PhoneAttrs = {

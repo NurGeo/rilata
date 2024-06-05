@@ -1,4 +1,4 @@
-import { ErrorDod } from '../../domain/domain-data/domain-types';
+import { ErrorDod } from '../../domain/domain-data/domain-types.js';
 
 type IncorrectTokenBody = {
   text: 'Невозможно расшифровать токен. Токен имеет не верный формат.',

@@ -1,7 +1,7 @@
-import { Result } from '../../../core/result/types';
-import { UnitOfWorkDatabase } from '../../database/transaction/uow.database';
-import { requestStoreDispatcher } from '../../request-store/request-store-dispatcher';
-import { TransactionStrategy } from './strategy';
+import { Result } from '../../../core/result/types.js';
+import { UnitOfWorkDatabase } from '../../database/transaction/uow.database.js';
+import { requestStoreDispatcher } from '../../request-store/request-store-dispatcher.js';
+import { TransactionStrategy } from './strategy.js';
 
 export class UowTransactionStrategy<ASYNC extends boolean>
   extends TransactionStrategy {

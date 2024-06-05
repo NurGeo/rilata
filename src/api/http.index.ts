@@ -1,22 +1,22 @@
-export * from './controller/controller';
-export * from './controller/m-controller';
-export * from './controller/file-controller';
-export * from './controller/constants';
+export * from './controller/controller.js';
+export * from './controller/m-controller.js';
+export * from './controller/file-controller.js';
+export * from './controller/constants.js';
 export type {
   Caller, ResultDTO, CallerType, DomainUser,
   ModuleCaller, AnonymousUser, RilataRequest,
   MimeTypes, DispositionTypes, ResponseFileOptions,
-} from './controller/types';
-export * from './middle-after-ware/middleware';
-export * from './middle-after-ware/afterware';
-export type { GeneralMiddleware, GeneralAfterware } from './middle-after-ware/types';
-export * from './middle-after-ware/middlewares/inject-caller';
-export * from './middle-after-ware/afterwares/log-request';
-export type { JwtCreator } from './jwt/jwt-creator';
-export type { JwtVerifier } from './jwt/jwt-verifier';
+} from './controller/types.js';
+export * from './middle-after-ware/middleware.js';
+export * from './middle-after-ware/afterware.js';
+export type { GeneralMiddleware, GeneralAfterware } from './middle-after-ware/types.js';
+export * from './middle-after-ware/middlewares/inject-caller.js';
+export * from './middle-after-ware/afterwares/log-request.js';
+export type { JwtCreator } from './jwt/jwt-creator.js';
+export type { JwtVerifier } from './jwt/jwt-verifier.js';
 
 // ++++++++++ infra implementations +++++++++++++
 
-export * from '../api-infra/jwt/jwt-verifier';
-export * from '../api-infra/jwt/jwt-creator';
-export * from '../api-infra/jwt/base-jwt-decoder';
+export * from '../api-infra/jwt/jwt-verifier.js';
+export * from '../api-infra/jwt/jwt-creator.js';
+export * from '../api-infra/jwt/base-jwt-decoder.js';

@@ -1,5 +1,5 @@
-import { ValidationRuleAnswer } from '../../types';
-import { ValidationRule } from '../../validation-rule';
+import { ValidationRuleAnswer } from '../../types.js';
+import { ValidationRule } from '../../validation-rule.js';
 
 export class OnlyDashAndLitinicOrCyrillicCharsValidationRule extends ValidationRule <'validate', string> {
   requirement = 'Строка не должна содержать символы кроме "-"(дефис) и может содержать слова только на латинице или на кирилице.';

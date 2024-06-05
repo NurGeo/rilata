@@ -1,7 +1,7 @@
-import { Logger } from '../../core/logger/logger';
-import { Result } from '../../core/result/types';
-import { GeneralModuleResolver } from '../module/types';
-import { requestStoreDispatcher } from '../request-store/request-store-dispatcher';
+import { Logger } from '../../core/logger/logger.js';
+import { Result } from '../../core/result/types.js';
+import { GeneralModuleResolver } from '../module/types.js';
+import { requestStoreDispatcher } from '../request-store/request-store-dispatcher.js';
 
 export abstract class Service<R extends GeneralModuleResolver> {
   abstract aRootName: string;

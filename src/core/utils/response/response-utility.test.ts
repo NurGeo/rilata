@@ -2,7 +2,7 @@ import {
   describe, test, expect, beforeEach, jest,
   spyOn,
 } from 'bun:test';
-import { responseUtility } from './response-utility';
+import { responseUtility } from './response-utility.js';
 
 describe('response utility tests', () => {
   describe('response utility method createJsonResponse', () => {

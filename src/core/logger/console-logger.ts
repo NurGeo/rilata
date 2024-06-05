@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import { AssertionException } from '../exeptions';
-import { BinaryKeyFlag } from '../utils/binary/binary-flag/binary-flag';
-import { Logger } from './logger';
-import { InputLoggerModes, loggerModes } from './logger-modes';
+import { AssertionException } from '../exeptions.js';
+import { BinaryKeyFlag } from '../utils/binary/binary-flag/binary-flag.js';
+import { Logger } from './logger.js';
+import { InputLoggerModes, loggerModes } from './logger-modes.js';
 
 export class ConsoleLogger implements Logger {
   timeFormat: Intl.DateTimeFormatOptions = {

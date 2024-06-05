@@ -1,11 +1,11 @@
-import { UuidType } from '../../core/types';
-import { dtoUtility } from '../../core/utils/dto/dto-utility';
-import { ARDT, GeneralArParams, GeneralEventDod } from '../domain-data/domain-types';
-import { Logger } from '../../core/logger/logger';
-import { Caller } from '../../api/controller/types';
-import { dodUtility } from '../../core/utils/dod/dod-utility';
-import { GetArrayType } from '../../core/type-functions';
-import { domainStoreDispatcher } from '../../core/index';
+import { UuidType } from '../../core/types.js';
+import { dtoUtility } from '../../core/utils/dto/dto-utility.js';
+import { ARDT, GeneralArParams, GeneralEventDod } from '../domain-data/domain-types.js';
+import { Logger } from '../../core/logger/logger.js';
+import { Caller } from '../../api/controller/types.js';
+import { dodUtility } from '../../core/utils/dod/dod-utility.js';
+import { GetArrayType } from '../../core/type-functions.js';
+import { domainStoreDispatcher } from '../../core/index.js';
 
 /** Класс помощник агрегата. Забирает себе всю техническую работу агрегата,
     позволяя агрегату сосредоточиться на решении логики предметного уровня. */

@@ -1,5 +1,5 @@
-import { DomainAttrs } from '../domain-data/domain-types';
-import { GeneralAR } from './types';
+import { DomainAttrs } from '../domain-data/domain-types.js';
+import { GeneralAR } from './types.js';
 
 /** Доменный объект, обычно часть агрегата */
 export abstract class DomainObject<ATTRS extends DomainAttrs> {

@@ -3,27 +3,27 @@
 import {
   describe, test, expect, beforeEach, spyOn, afterEach, Mock,
 } from 'bun:test';
-import { failure } from '../../../../../src/core/result/failure';
-import { success } from '../../../../../src/core/result/success';
-import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility';
-import { dtoUtility } from '../../../../../src/core/utils/dto/dto-utility';
-import { uuidUtility } from '../../../../../src/core/utils/uuid/uuid-utility';
-import { AuthFacade } from '../../../auth/facade';
-import { PersonAlreadyExistsError, PersonDoesntExistByIinError } from '../../../subject/domain-object/person/repo-errors';
-import { SubjectFacade } from '../../../subject/facade';
-import { AddPersonRequestDodAttrs } from '../../../subject/services/person/add-person/s-params';
-import { serverStarter } from '../../../zzz-run-server/starter';
-import { ServiceModulesFixtures } from '../../../zzz-run-server/server-fixtures';
-import { CompanyAR } from '../../domain-object/company/a-root';
-import { CompanyRepository } from '../../domain-object/company/repo';
-import { CompanyAlreadyExistError } from '../../domain-object/company/repo-errors';
-import { CompanyModule } from '../../module';
-import { RegisterCompanyRequestDod, RegisterCompanyOut, RegisterCompanyRequestDodAttrs } from './s.params';
-import { RegisteringCompanyService } from './service';
-import { TestDatabase } from '../../../../../src/api/database/test.database';
-import { EventRepository } from '../../../../../src/api/database/event.repository';
-import { DomainUser } from '../../../../../src/api/controller/types';
-import { requestStoreMock } from '../../../../fixtures/request-store-mock';
+import { failure } from '../../../../../src/core/result/failure.js';
+import { success } from '../../../../../src/core/result/success.js';
+import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility.js';
+import { dtoUtility } from '../../../../../src/core/utils/dto/dto-utility.js';
+import { uuidUtility } from '../../../../../src/core/utils/uuid/uuid-utility.js';
+import { AuthFacade } from '../../../auth/facade.js';
+import { PersonAlreadyExistsError, PersonDoesntExistByIinError } from '../../../subject/domain-object/person/repo-errors.js';
+import { SubjectFacade } from '../../../subject/facade.js';
+import { AddPersonRequestDodAttrs } from '../../../subject/services/person/add-person/s-params.js';
+import { serverStarter } from '../../../zzz-run-server/starter.js';
+import { ServiceModulesFixtures } from '../../../zzz-run-server/server-fixtures.js';
+import { CompanyAR } from '../../domain-object/company/a-root.js';
+import { CompanyRepository } from '../../domain-object/company/repo.js';
+import { CompanyAlreadyExistError } from '../../domain-object/company/repo-errors.js';
+import { CompanyModule } from '../../module.js';
+import { RegisterCompanyRequestDod, RegisterCompanyOut, RegisterCompanyRequestDodAttrs } from './s.params.js';
+import { RegisteringCompanyService } from './service.js';
+import { TestDatabase } from '../../../../../src/api/database/test.database.js';
+import { EventRepository } from '../../../../../src/api/database/event.repository.js';
+import { DomainUser } from '../../../../../src/api/controller/types.js';
+import { requestStoreMock } from '../../../../fixtures/request-store-mock.js';
 
 describe('register company saga service tests', async () => {
   const requestId = 'c22fd027-a94b-4728-90eb-f6d4f96992c2';

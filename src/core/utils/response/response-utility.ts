@@ -2,8 +2,8 @@
 import { stat } from 'fs/promises';
 import { createGzip, createDeflate, brotliCompress } from 'zlib';
 import { promisify } from 'util';
-import { MimeTypes, ResponseFileOptions } from '../../../api/controller/types';
-import { mimeTypesMap, dispositionTypeMap } from '../../../api/controller/constants';
+import { MimeTypes, ResponseFileOptions } from '../../../api/controller/types.js';
+import { mimeTypesMap, dispositionTypeMap } from '../../../api/controller/constants.js';
 
 const brotliCompressAsync = promisify(brotliCompress);
 

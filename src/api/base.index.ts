@@ -1,49 +1,49 @@
-export * from './server/bun-server';
-export * from './server/bus-server';
-export * from './server/bus.s-resolver';
-export * from './server/configs';
-export * from './server/s-resolver';
-export type { ServerResolves, BusServerResolves } from './server/s-resolves';
-export * from './server/server-starter';
-export * from './server/server';
+export * from './server/bun-server.js';
+export * from './server/bus-server.js';
+export * from './server/bus.s-resolver.js';
+export * from './server/configs.js';
+export * from './server/s-resolver.js';
+export type { ServerResolves, BusServerResolves } from './server/s-resolves.js';
+export * from './server/server-starter.js';
+export * from './server/server.js';
 export type {
   RunMode, JwtConfig, GetJwtType, ServerConfig,
   GetServerResolves, ModuleConstructors, GeneralServerResolver,
-} from './server/types';
+} from './server/types.js';
 
-export * from './module/bus.m-resolver';
-export * from './module/m-resolver';
-export type { ModuleResolves } from './module/m-resolves';
-export * from './module/module';
+export * from './module/bus.m-resolver.js';
+export * from './module/m-resolver.js';
+export type { ModuleResolves } from './module/m-resolves.js';
+export * from './module/module.js';
 export type {
   GetModule, ModuleType, GetModuleResolves, GeneralModuleResolver,
-} from './module/types';
+} from './module/types.js';
 
-export * from './service/concrete-service/command.service';
-export * from './service/concrete-service/event.service';
-export * from './service/concrete-service/query.service';
-export * from './service/transaction-strategy/strategy';
-export * from './service/transaction-strategy/uow.strategy';
-export * from './service/base.service';
-export * from './service/constants';
+export * from './service/concrete-service/command.service.js';
+export * from './service/concrete-service/event.service.js';
+export * from './service/concrete-service/query.service.js';
+export * from './service/transaction-strategy/strategy.js';
+export * from './service/transaction-strategy/uow.strategy.js';
+export * from './service/base.service.js';
+export * from './service/constants.js';
 export type {
   NetError, InternalError, NotFoundError, BadRequestError,
   ValidationError, BackendBaseErrors, ServiceBaseErrors, PermissionDeniedError,
   GeneralInternalError, GeneralNotFoundError, GeneralPermissionDeniedError,
   GeneralNetError, GeneralBadRequestError,
-} from './service/error-types';
-export * from './service/service';
+} from './service/error-types.js';
+export * from './service/service.js';
 export type {
   AppEventType, GetModuleName, ServiceResult, BaseServiceParams,
   FullServiceResult, InputDodValidator, EventServiceParams, GeneraQueryService,
   QueryServiceParams, GeneralEventService, CommandServiceParams, FullServiceResultDTO,
   GeneralCommandService, GeneralBaseServiceParams, GeneralEventServiceParams,
   GeneralQueryServiceParams, GeneralCommandServiceParams,
-} from './service/types';
+} from './service/types.js';
 
-export type { Facadable } from './resolve/facadable';
-export type { Realisable } from './resolve/realisable';
-export type { Repositoriable } from './resolve/repositoriable';
+export type { Facadable } from './resolve/facadable.js';
+export type { Realisable } from './resolve/realisable.js';
+export type { Repositoriable } from './resolve/repositoriable.js';
 
-export type { RequestStore as ThreadStore, RequestStorePayload as StorePayload } from './request-store/types';
-export * from './request-store/request-store-dispatcher';
+export type { RequestStore, RequestStorePayload } from './request-store/types.js';
+export * from './request-store/request-store-dispatcher.js';

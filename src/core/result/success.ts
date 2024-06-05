@@ -1,5 +1,5 @@
-import { Result } from './types';
-import { Failure } from './failure';
+import { Result } from './types.js';
+import { Failure } from './failure.js';
 
 export class Success<F, S> {
   readonly value: S;

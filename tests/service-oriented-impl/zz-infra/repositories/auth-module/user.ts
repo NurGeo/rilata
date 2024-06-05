@@ -1,16 +1,16 @@
-import { EventRepository } from '../../../../../src/api/database/event.repository';
-import { DatabaseObjectSavingError } from '../../../../../src/core/exeptions';
-import { Logger } from '../../../../../src/core/logger/logger';
-import { failure } from '../../../../../src/core/result/failure';
-import { success } from '../../../../../src/core/result/success';
-import { Result } from '../../../../../src/core/result/types';
-import { UuidType } from '../../../../../src/core/types';
-import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility';
-import { FakeClassImplements } from '../../../../fixtures/fake-class-implements';
-import { UserRepository, UserRepositoryRecord } from '../../../auth/domain-object/user/repo';
-import { UserDoesNotExistByIdError } from '../../../auth/domain-object/user/repo-errors';
-import { AuthModuleResolver } from '../../../auth/resolver';
-import { UserAddedEvent } from '../../../auth/services/user/add-user/s-params';
+import { EventRepository } from '../../../../../src/api/database/event.repository.js';
+import { DatabaseObjectSavingError } from '../../../../../src/core/exeptions.js';
+import { Logger } from '../../../../../src/core/logger/logger.js';
+import { failure } from '../../../../../src/core/result/failure.js';
+import { success } from '../../../../../src/core/result/success.js';
+import { Result } from '../../../../../src/core/result/types.js';
+import { UuidType } from '../../../../../src/core/types.js';
+import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility.js';
+import { FakeClassImplements } from '../../../../fixtures/fake-class-implements.js';
+import { UserRepository, UserRepositoryRecord } from '../../../auth/domain-object/user/repo.js';
+import { UserDoesNotExistByIdError } from '../../../auth/domain-object/user/repo-errors.js';
+import { AuthModuleResolver } from '../../../auth/resolver.js';
+import { UserAddedEvent } from '../../../auth/services/user/add-user/s-params.js';
 
 export class UserRepositoryImpl implements UserRepository {
   testRepo: FakeClassImplements.TestMemoryRepository<

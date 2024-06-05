@@ -1,28 +1,28 @@
-import { DomainUser } from '../../../../../src/api/controller/types';
-import { ServiceBaseErrors, ValidationError } from '../../../../../src/api/service/error-types';
-import { CommandService } from '../../../../../src/api/service/concrete-service/command.service';
-import { FullServiceResult, InputDodValidator, ServiceResult } from '../../../../../src/api/service/types';
-import { failure } from '../../../../../src/core/result/failure';
-import { success } from '../../../../../src/core/result/success';
-import { Result } from '../../../../../src/core/result/types';
-import { UuidType } from '../../../../../src/core/types';
-import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility';
-import { dtoUtility } from '../../../../../src/core/utils/dto/dto-utility';
-import { AuthFacade } from '../../../auth/facade';
-import { PersonAlreadyExistsError, PersonDoesntExistByIinError } from '../../../subject/domain-object/person/repo-errors';
-import { SubjectFacade } from '../../../subject/facade';
-import { RegisterCompanyDomainCommand } from '../../domain-data/company/register-company/a-params';
-import { CompanyARFactory } from '../../domain-object/company/factory';
-import { CompanyRepository } from '../../domain-object/company/repo';
-import { CompanyAlreadyExistError } from '../../domain-object/company/repo-errors';
-import { CompanyModuleResolver } from '../../resolver';
+import { DomainUser } from '../../../../../src/api/controller/types.js';
+import { ServiceBaseErrors, ValidationError } from '../../../../../src/api/service/error-types.js';
+import { CommandService } from '../../../../../src/api/service/concrete-service/command.service.js';
+import { FullServiceResult, InputDodValidator, ServiceResult } from '../../../../../src/api/service/types.js';
+import { failure } from '../../../../../src/core/result/failure.js';
+import { success } from '../../../../../src/core/result/success.js';
+import { Result } from '../../../../../src/core/result/types.js';
+import { UuidType } from '../../../../../src/core/types.js';
+import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility.js';
+import { dtoUtility } from '../../../../../src/core/utils/dto/dto-utility.js';
+import { AuthFacade } from '../../../auth/facade.js';
+import { PersonAlreadyExistsError, PersonDoesntExistByIinError } from '../../../subject/domain-object/person/repo-errors.js';
+import { SubjectFacade } from '../../../subject/facade.js';
+import { RegisterCompanyDomainCommand } from '../../domain-data/company/register-company/a-params.js';
+import { CompanyARFactory } from '../../domain-object/company/factory.js';
+import { CompanyRepository } from '../../domain-object/company/repo.js';
+import { CompanyAlreadyExistError } from '../../domain-object/company/repo-errors.js';
+import { CompanyModuleResolver } from '../../resolver.js';
 import {
   CompanyRegisteredServiceParams, RegisterCompanyOut, RegisterCompanyRequestDod,
   RegisterCompanyRequestDodAttrs,
-} from './s.params';
-import { RegisterCompanyValidator } from './v.map';
-import { UowTransactionStrategy } from '../../../../../src/api/service/transaction-strategy/uow.strategy';
-import { requestStoreDispatcher } from '../../../../../src/api/request-store/request-store-dispatcher';
+} from './s.params.js';
+import { RegisterCompanyValidator } from './v.map.js';
+import { UowTransactionStrategy } from '../../../../../src/api/service/transaction-strategy/uow.strategy.js';
+import { requestStoreDispatcher } from '../../../../../src/api/request-store/request-store-dispatcher.js';
 
 export class RegisteringCompanyService extends CommandService<
   CompanyRegisteredServiceParams, CompanyModuleResolver

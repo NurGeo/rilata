@@ -1,16 +1,16 @@
-import { DtoFieldValidator } from '../../../../../src/domain/validator/field-validator/dto-field-validator';
-import { LiteralFieldValidator } from '../../../../../src/domain/validator/field-validator/literal-field-validator';
-import { CannotEmptyStringField } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/cannot-empty-string';
-import { StringChoiceFieldValidator } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/choice';
-import { UuidField } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/uuid-field';
-import { GetArrayConfig, ValidatorMap } from '../../../../../src/domain/validator/field-validator/types';
-import { GeneralValidationRule } from '../../../../../src/domain/validator/rules/types';
-import { EmailFormatValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/email-format.field-v-rule';
-import { MaxCharsCountValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/max-chars-count.v-rule';
-import { RegexMatchesValueValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/regex-matches-value.field-v-rule';
+import { DtoFieldValidator } from '../../../../../src/domain/validator/field-validator/dto-field-validator.js';
+import { LiteralFieldValidator } from '../../../../../src/domain/validator/field-validator/literal-field-validator.js';
+import { CannotEmptyStringField } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/cannot-empty-string.js';
+import { StringChoiceFieldValidator } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/choice.js';
+import { UuidField } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/uuid-field.js';
+import { GetArrayConfig, ValidatorMap } from '../../../../../src/domain/validator/field-validator/types.js';
+import { GeneralValidationRule } from '../../../../../src/domain/validator/rules/types.js';
+import { EmailFormatValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/email-format.field-v-rule.js';
+import { MaxCharsCountValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/max-chars-count.v-rule.js';
+import { RegexMatchesValueValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/regex-matches-value.field-v-rule.js';
 import {
   ContactsAttrs, EmailAttrs, EmailTypes, PersonAttrs, PhoneAttrs, PhoneTypes,
-} from './params';
+} from './params.js';
 
 class PhoneNumberFieldValidator<
   NAME extends string, REQ extends boolean, IS_ARR extends boolean,

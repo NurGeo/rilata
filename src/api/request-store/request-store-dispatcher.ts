@@ -1,5 +1,5 @@
-import { AssertionException } from '../../core/exeptions';
-import { RequestStorePayload, RequestStore } from './types';
+import { AssertionException } from '../../core/exeptions.js';
+import { RequestStorePayload, RequestStore } from './types.js';
 
 /**
   Оберка над asyncLocalStorage.

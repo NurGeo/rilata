@@ -1,10 +1,10 @@
-import { JwtDecoder } from '../../core/jwt/jwt-decoder';
-import { Logger } from '../../core/logger/logger';
-import { DTO } from '../../domain/dto';
-import { Bus } from '../bus/bus';
-import { JwtCreator } from '../jwt/jwt-creator';
-import { JwtVerifier } from '../jwt/jwt-verifier';
-import { RunMode, ServerConfig } from './types';
+import { JwtDecoder } from '../../core/jwt/jwt-decoder.js';
+import { Logger } from '../../core/logger/logger.js';
+import { DTO } from '../../domain/dto.js';
+import { Bus } from '../bus/bus.js';
+import { JwtCreator } from '../jwt/jwt-creator.js';
+import { JwtVerifier } from '../jwt/jwt-verifier.js';
+import { RunMode, ServerConfig } from './types.js';
 
 export type ServerResolves<JWT_P extends DTO> = {
   logger: Logger,

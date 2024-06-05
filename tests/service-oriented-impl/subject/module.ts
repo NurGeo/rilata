@@ -1,8 +1,8 @@
-import { Module } from '../../../src/api/module/module';
-import { ModuleType } from '../../../src/api/module/types';
-import { GeneralCommandService, GeneralEventService, GeneraQueryService } from '../../../src/api/service/types';
-import { AddingPersonService } from './services/person/add-person/service';
-import { GetingPersonByIinService } from './services/person/get-by-iin/service';
+import { Module } from '../../../src/api/module/module.js';
+import { ModuleType } from '../../../src/api/module/types.js';
+import { GeneralCommandService, GeneralEventService, GeneraQueryService } from '../../../src/api/service/types.js';
+import { AddingPersonService } from './services/person/add-person/service.js';
+import { GetingPersonByIinService } from './services/person/get-by-iin/service.js';
 
 export class SubjectModule extends Module {
   moduleName = 'SubjectModule' as const;

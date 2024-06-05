@@ -1,11 +1,11 @@
-import { QueryService } from '../../../../../src/api/service/concrete-service/query.service';
-import { ServiceResult } from '../../../../../src/api/service/types';
-import { failure } from '../../../../../src/core/result/failure';
-import { success } from '../../../../../src/core/result/success';
-import { CompanyRepository } from '../../domain-object/company/repo';
-import { CompanyModuleResolver } from '../../resolver';
-import { GetCompanyRequestDod, GetCompanyServiceParams } from './s.params';
-import { getCompanyValidator } from './v-map';
+import { QueryService } from '../../../../../src/api/service/concrete-service/query.service.js';
+import { ServiceResult } from '../../../../../src/api/service/types.js';
+import { failure } from '../../../../../src/core/result/failure.js';
+import { success } from '../../../../../src/core/result/success.js';
+import { CompanyRepository } from '../../domain-object/company/repo.js';
+import { CompanyModuleResolver } from '../../resolver.js';
+import { GetCompanyRequestDod, GetCompanyServiceParams } from './s.params.js';
+import { getCompanyValidator } from './v-map.js';
 
 export class GetingCompanyService extends QueryService<
   GetCompanyServiceParams, CompanyModuleResolver

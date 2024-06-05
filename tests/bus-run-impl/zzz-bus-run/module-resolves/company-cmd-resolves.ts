@@ -1,7 +1,7 @@
-import { FakeClassImplements } from '../../../fixtures/fake-class-implements';
-import { CompanyCmdRepository } from '../../company-cmd/domain-object/company/repo';
-import { CompanyCmdResolves } from '../../company-cmd/resolves';
-import { CompanyCmdRepositoryImpl } from '../../zz-infra/repositories/company-cmd';
+import { FakeClassImplements } from '../../../fixtures/fake-class-implements.js';
+import { CompanyCmdRepository } from '../../company-cmd/domain-object/company/repo.js';
+import { CompanyCmdResolves } from '../../company-cmd/resolves.js';
+import { CompanyCmdRepositoryImpl } from '../../zz-infra/repositories/company-cmd.js';
 
 let isResolved = false;
 

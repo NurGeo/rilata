@@ -1,13 +1,13 @@
-import { EventRepository } from '../../../../../src/api/database/event.repository';
-import { EventService } from '../../../../../src/api/service/concrete-service/event.service';
-import { UowTransactionStrategy } from '../../../../../src/api/service/transaction-strategy/uow.strategy';
-import { ServiceResult } from '../../../../../src/api/service/types';
-import { success } from '../../../../../src/core/result/success';
-import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility';
-import { CompanyAddedEvent } from '../../../company-cmd/domain-data/company/add-company/a-params';
-import { CompanyReadRepository } from '../../domain/company/repo';
-import { CompanyReadModuleResolver } from '../../resolver';
-import { CompanyAddedServiceParams } from './s-params';
+import { EventRepository } from '../../../../../src/api/database/event.repository.js';
+import { EventService } from '../../../../../src/api/service/concrete-service/event.service.js';
+import { UowTransactionStrategy } from '../../../../../src/api/service/transaction-strategy/uow.strategy.js';
+import { ServiceResult } from '../../../../../src/api/service/types.js';
+import { success } from '../../../../../src/core/result/success.js';
+import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility.js';
+import { CompanyAddedEvent } from '../../../company-cmd/domain-data/company/add-company/a-params.js';
+import { CompanyReadRepository } from '../../domain/company/repo.js';
+import { CompanyReadModuleResolver } from '../../resolver.js';
+import { CompanyAddedServiceParams } from './s-params.js';
 
 export class CompanyAddedService extends EventService<
   CompanyAddedServiceParams, CompanyReadModuleResolver

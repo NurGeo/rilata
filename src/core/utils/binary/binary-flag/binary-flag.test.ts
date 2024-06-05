@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'bun:test';
-import { BinaryKeyFlag } from './binary-flag';
+import { BinaryKeyFlag } from './binary-flag.js';
 
 const loggerModes = {
   prod: 0b1, // 1

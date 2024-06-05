@@ -1,11 +1,11 @@
-import { QueryService } from '../../../../../../src/api/service/concrete-service/query.service';
-import { ServiceResult } from '../../../../../../src/api/service/types';
-import { failure } from '../../../../../../src/core/result/failure';
-import { success } from '../../../../../../src/core/result/success';
-import { PersonRepository } from '../../../domain-object/person/repo';
-import { SubjectModuleResolver } from '../../../resolver';
-import { GetPersonByIinRequestDod, GetPersonByIinServiceParams } from './s-params';
-import { getPersonByIinValidator } from './v-map';
+import { QueryService } from '../../../../../../src/api/service/concrete-service/query.service.js';
+import { ServiceResult } from '../../../../../../src/api/service/types.js';
+import { failure } from '../../../../../../src/core/result/failure.js';
+import { success } from '../../../../../../src/core/result/success.js';
+import { PersonRepository } from '../../../domain-object/person/repo.js';
+import { SubjectModuleResolver } from '../../../resolver.js';
+import { GetPersonByIinRequestDod, GetPersonByIinServiceParams } from './s-params.js';
+import { getPersonByIinValidator } from './v-map.js';
 
 export class GetingPersonByIinService extends QueryService<
   GetPersonByIinServiceParams, SubjectModuleResolver

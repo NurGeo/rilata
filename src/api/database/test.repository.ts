@@ -1,5 +1,5 @@
-import { DTO } from '../../domain/dto';
-import { Asyncable } from './types';
+import { DTO } from '../../domain/dto.js';
+import { Asyncable } from './types.js';
 
 export interface TestRepository<
   TABLE_NAME extends string, RECORDS extends DTO, ASYNC extends boolean

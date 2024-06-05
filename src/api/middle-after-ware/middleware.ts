@@ -1,6 +1,6 @@
-import { GeneralModuleResolver } from '../base.index';
-import { RilataRequest } from '../controller/types';
-import { GeneralServerResolver } from '../server/types';
+import { GeneralModuleResolver } from '../base.index.js';
+import { RilataRequest } from '../controller/types.js';
+import { GeneralServerResolver } from '../server/types.js';
 
 export abstract class Middleware<R extends GeneralServerResolver | GeneralModuleResolver> {
   protected resolver!: R;

@@ -1,18 +1,18 @@
-import { EventRepository } from '../../../../src/api/database/event.repository';
-import { requestStoreDispatcher } from '../../../../src/api/request-store/request-store-dispatcher';
-import { DatabaseObjectSavingError } from '../../../../src/core/exeptions';
-import { Logger } from '../../../../src/core/logger/logger';
-import { failure } from '../../../../src/core/result/failure';
-import { success } from '../../../../src/core/result/success';
-import { Result } from '../../../../src/core/result/types';
-import { dodUtility } from '../../../../src/core/utils/dod/dod-utility';
-import { FakeClassImplements } from '../../../fixtures/fake-class-implements';
-import { CompanyAttrs } from '../../company-cmd/domain-data/company/params';
-import { CompanyAR } from '../../company-cmd/domain-object/company/a-root';
-import { CompanyCmdARFactory } from '../../company-cmd/domain-object/company/factory';
-import { CompanyCmdRepository } from '../../company-cmd/domain-object/company/repo';
-import { CompanyAlreadyExistError, CompanyDoesntExistByBinError } from '../../company-cmd/domain-object/company/repo-errors';
-import { CompanyCmdModuleResolver } from '../../company-cmd/resolver';
+import { EventRepository } from '../../../../src/api/database/event.repository.js';
+import { requestStoreDispatcher } from '../../../../src/api/request-store/request-store-dispatcher.js';
+import { DatabaseObjectSavingError } from '../../../../src/core/exeptions.js';
+import { Logger } from '../../../../src/core/logger/logger.js';
+import { failure } from '../../../../src/core/result/failure.js';
+import { success } from '../../../../src/core/result/success.js';
+import { Result } from '../../../../src/core/result/types.js';
+import { dodUtility } from '../../../../src/core/utils/dod/dod-utility.js';
+import { FakeClassImplements } from '../../../fixtures/fake-class-implements.js';
+import { CompanyAttrs } from '../../company-cmd/domain-data/company/params.js';
+import { CompanyAR } from '../../company-cmd/domain-object/company/a-root.js';
+import { CompanyCmdARFactory } from '../../company-cmd/domain-object/company/factory.js';
+import { CompanyCmdRepository } from '../../company-cmd/domain-object/company/repo.js';
+import { CompanyAlreadyExistError, CompanyDoesntExistByBinError } from '../../company-cmd/domain-object/company/repo-errors.js';
+import { CompanyCmdModuleResolver } from '../../company-cmd/resolver.js';
 
 export class CompanyCmdRepositoryImpl implements CompanyCmdRepository {
   testRepo: FakeClassImplements.TestMemoryRepository<

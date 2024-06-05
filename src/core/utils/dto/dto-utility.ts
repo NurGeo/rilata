@@ -1,14 +1,14 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-continue */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DTO } from '../../../domain/dto';
-import { AssertionException } from '../../exeptions';
+import { DTO } from '../../../domain/dto.js';
+import { AssertionException } from '../../exeptions.js';
 import {
   DeepPartial,
   ExcludeDeepDtoAttrs, ExcludeDtoAttrs, ExtendDtoAttrs,
   GetDomainAttrsDotKeys, UnknownDto, ManyDtoKeys, ReplaceDtoAttrs,
-} from '../../type-functions';
-import { DeepAttr } from '../../types';
+} from '../../type-functions.js';
+import { DeepAttr } from '../../types.js';
 
 class DtoUtility {
   /** Возвращает копию объекта T, с исключенными атрибутами K. */

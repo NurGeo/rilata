@@ -1,15 +1,15 @@
 import {
   beforeEach, describe, expect, test,
 } from 'bun:test';
-import { ServiceModulesFixtures } from '../../../../zzz-run-server/server-fixtures';
-import { SubjectModule } from '../../../module';
-import { dodUtility } from '../../../../../../src/core/utils/dod/dod-utility';
-import { GetPersonByIinRequestDod, GetPersonByIinOut } from './s-params';
-import { GetingPersonByIinService } from './service';
-import { PersonDoesntExistByIinError } from '../../../domain-object/person/repo-errors';
-import { serverStarter } from '../../../../zzz-run-server/starter';
-import { TestDatabase } from '../../../../../../src/api/database/test.database';
-import { requestStoreMock } from '../../../../../fixtures/request-store-mock';
+import { ServiceModulesFixtures } from '../../../../zzz-run-server/server-fixtures.js';
+import { SubjectModule } from '../../../module.js';
+import { dodUtility } from '../../../../../../src/core/utils/dod/dod-utility.js';
+import { GetPersonByIinRequestDod, GetPersonByIinOut } from './s-params.js';
+import { GetingPersonByIinService } from './service.js';
+import { PersonDoesntExistByIinError } from '../../../domain-object/person/repo-errors.js';
+import { serverStarter } from '../../../../zzz-run-server/starter.js';
+import { TestDatabase } from '../../../../../../src/api/database/test.database.js';
+import { requestStoreMock } from '../../../../../fixtures/request-store-mock.js';
 
 describe('get person by iin service tests', async () => {
   const requestId = 'c22fd027-a94b-4728-90eb-f6d4f96992c2';

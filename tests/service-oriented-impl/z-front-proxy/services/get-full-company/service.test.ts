@@ -1,17 +1,17 @@
 import {
   beforeEach, describe, expect, test,
 } from 'bun:test';
-import { DomainUser } from '../../../../../src/api/controller/types';
-import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility';
-import { AuthModule } from '../../../auth/module';
-import { CompanyModule } from '../../../company/module';
-import { SubjectModule } from '../../../subject/module';
-import { serverStarter } from '../../../zzz-run-server/starter';
-import { ServiceModulesFixtures } from '../../../zzz-run-server/server-fixtures';
-import { FullCompany } from '../../domain-data/full-company/params';
-import { FrontProxyModule } from '../../module';
-import { GetFullCompanyRequestDod, GetFullCompanyServiceParams } from './s-params';
-import { TestDatabase } from '../../../../../src/api/database/test.database';
+import { DomainUser } from '../../../../../src/api/controller/types.js';
+import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility.js';
+import { AuthModule } from '../../../auth/module.js';
+import { CompanyModule } from '../../../company/module.js';
+import { SubjectModule } from '../../../subject/module.js';
+import { serverStarter } from '../../../zzz-run-server/starter.js';
+import { ServiceModulesFixtures } from '../../../zzz-run-server/server-fixtures.js';
+import { FullCompany } from '../../domain-data/full-company/params.js';
+import { FrontProxyModule } from '../../module.js';
+import { GetFullCompanyRequestDod, GetFullCompanyServiceParams } from './s-params.js';
+import { TestDatabase } from '../../../../../src/api/database/test.database.js';
 
 describe('get full company service tests', async () => {
   const testServer = serverStarter.start('all');
