@@ -14,23 +14,37 @@ import { Middleware } from '../middle-after-ware/middleware';
 import { Afterware } from '../middle-after-ware/afterware';
 import { requestStoreDispatcher } from '../request-store/request-store-dispatcher';
 import { RequestStorePayload } from '../request-store/types';
+import { Constructor, makeInstance } from '../../core/constructor-functions';
+import { Module } from '../module/module';
 
 export abstract class BunServer extends RilataServer {
   port: number | undefined;
 
   hostname: string | undefined;
 
-  protected abstract middlewares: Middleware<GeneralServerResolver>[];
+  protected middlewares: Middleware<GeneralServerResolver>[];
 
-  protected abstract afterwares: Afterware<GeneralServerResolver>[];
+  protected afterwares: Afterware<GeneralServerResolver>[];
 
-  protected abstract serverControllers: Controller<GeneralServerResolver>[];
+  protected serverControllers: Controller<GeneralServerResolver>[];
 
   protected stringUrls: Record<string, Controller<any>> = {};
 
   protected regexUrls: [RegExp, Controller<any>][] = [];
 
   protected server: Server | undefined;
+
+  constructor(
+    protected moduleCtors: Constructor<Module>[],
+    protected middlewareCtors: Constructor<Middleware<GeneralServerResolver>>[],
+    protected afterwareCtors: Constructor<Afterware<GeneralServerResolver>>[],
+    protected serverControllerCtors: Constructor<Controller<GeneralServerResolver>>[],
+  ) {
+    super(moduleCtors.map((Ctor) => makeInstance(Ctor)));
+    this.middlewares = middlewareCtors.map((Ctor) => makeInstance(Ctor));
+    this.afterwares = afterwareCtors.map((Ctor) => makeInstance(Ctor));
+    this.serverControllers = serverControllerCtors.map((Ctor) => makeInstance(Ctor));
+  }
 
   init(serverResolver: GeneralServerResolver): void {
     super.init(serverResolver);

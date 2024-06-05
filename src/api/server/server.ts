@@ -2,13 +2,16 @@ import { Logger } from '../../core/logger/logger';
 import { domainStoreDispatcher } from '../../core/domain-store/domain-store-dispatcher';
 import { Module } from '../module/module';
 import { GeneralServerResolver } from './types';
+import { Constructor } from '../../core';
 
 export abstract class RilataServer {
   protected resolver!: GeneralServerResolver;
 
   protected logger!: Logger;
 
-  constructor(protected modules: Module[]) {}
+  protected modules: Module[];
+
+  constructor(moduleCtors: Constructor<Module>[]) {}
 
   init(serverResolver: GeneralServerResolver): void {
     serverResolver.init(this);

@@ -1,8 +1,9 @@
 export type {
   UuidType, IdType, UserId, AttrName, DeepAttr,
-  FlatAttrs, Timestamp, Constructor, LiteralType,
-  LiteralRecord, LiteralWithUndefined, ConstructorReturnType, LiteralRecordWithUndefined,
+  FlatAttrs, Timestamp, LiteralType,
+  LiteralRecord, LiteralWithUndefined, LiteralRecordWithUndefined,
 } from './types';
+export { type Constructor } from './constructor-functions.js';
 export type {
   TupleToUnion, UnionToTuple, TupleToObject, RemoveFirstFromTuple,
   TupleToObjectWithPropNames,

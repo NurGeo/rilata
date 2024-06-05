@@ -10,13 +10,6 @@ export class ServerResolver<RES extends ServerResolves<DTO>> {
 
   constructor(protected resolves: RES) {}
 
-  /** инициализация выполняется классом server */
-  init(server: RilataServer): void {
-    this.server = server;
-
-    this.initResolves();
-  }
-
   getServerPath(): string {
     // @ts-expect-error
     return import.meta.dir; // path/to/file
