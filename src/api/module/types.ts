@@ -1,7 +1,7 @@
-import { GeneralServerResolver } from '../server/types';
-import { Module } from './module';
-import { ModuleResolver } from './m-resolver';
-import { ModuleResolves } from './m-resolves';
+import { GeneralServerResolver } from '../server/types.js';
+import { Module } from './module.js';
+import { ModuleResolver } from './m-resolver.js';
+import { ModuleResolves } from './m-resolves.js';
 
 export type ModuleType = 'command-module' | 'read-module' | 'common-module';
 

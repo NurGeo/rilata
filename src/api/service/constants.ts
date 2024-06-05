@@ -1,7 +1,7 @@
-import { Locale } from '../../domain/locale';
+import { Locale } from '../../domain/locale.js';
 import {
   BadRequestError, InternalError, NotFoundError, PermissionDeniedError,
-} from './error-types';
+} from './error-types.js';
 
 export const badRequestError: BadRequestError<Locale<'Bad request'>> = {
   locale: {

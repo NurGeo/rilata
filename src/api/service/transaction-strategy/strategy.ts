@@ -1,6 +1,6 @@
-import { DatabaseObjectSavingError, OptimisticLockVersionMismatchError } from '../../../core/exeptions';
-import { Logger } from '../../../core/logger/logger';
-import { requestStoreDispatcher } from '../../request-store/request-store-dispatcher';
+import { DatabaseObjectSavingError, OptimisticLockVersionMismatchError } from '../../../core/exeptions.js';
+import { Logger } from '../../../core/logger/logger.js';
+import { requestStoreDispatcher } from '../../request-store/request-store-dispatcher.js';
 
 export abstract class TransactionStrategy {
   /** Ответственнен за выполнение транзацкии */

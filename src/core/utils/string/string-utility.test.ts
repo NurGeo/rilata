@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'bun:test';
-import { stringUtility } from './string-utility';
+import { stringUtility } from './string-utility.js';
 
 describe('Тестирование класса StringUtility', () => {
   const sut = stringUtility;

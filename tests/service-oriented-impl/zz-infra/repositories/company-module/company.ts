@@ -1,19 +1,19 @@
-import { EventRepository } from '../../../../../src/api/database/event.repository';
-import { requestStoreDispatcher } from '../../../../../src/api/request-store/request-store-dispatcher';
-import { DatabaseObjectSavingError } from '../../../../../src/core/exeptions';
-import { Logger } from '../../../../../src/core/logger/logger';
-import { failure } from '../../../../../src/core/result/failure';
-import { success } from '../../../../../src/core/result/success';
-import { Result } from '../../../../../src/core/result/types';
-import { UuidType } from '../../../../../src/core/types';
-import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility';
-import { FakeClassImplements } from '../../../../fixtures/fake-class-implements';
-import { CompanyAttrs } from '../../../company/domain-data/company/params';
-import { CompanyAR } from '../../../company/domain-object/company/a-root';
-import { CompanyARFactory } from '../../../company/domain-object/company/factory';
-import { CompanyRepository } from '../../../company/domain-object/company/repo';
-import { CompanyDoesntExistByBinError, CompanyDoesntExistByIdError, CompanyAlreadyExistError } from '../../../company/domain-object/company/repo-errors';
-import { CompanyModuleResolver } from '../../../company/resolver';
+import { EventRepository } from '../../../../../src/api/database/event.repository.js';
+import { requestStoreDispatcher } from '../../../../../src/api/request-store/request-store-dispatcher.js';
+import { DatabaseObjectSavingError } from '../../../../../src/core/exeptions.js';
+import { Logger } from '../../../../../src/core/logger/logger.js';
+import { failure } from '../../../../../src/core/result/failure.js';
+import { success } from '../../../../../src/core/result/success.js';
+import { Result } from '../../../../../src/core/result/types.js';
+import { UuidType } from '../../../../../src/core/types.js';
+import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility.js';
+import { FakeClassImplements } from '../../../../fixtures/fake-class-implements.js';
+import { CompanyAttrs } from '../../../company/domain-data/company/params.js';
+import { CompanyAR } from '../../../company/domain-object/company/a-root.js';
+import { CompanyARFactory } from '../../../company/domain-object/company/factory.js';
+import { CompanyRepository } from '../../../company/domain-object/company/repo.js';
+import { CompanyDoesntExistByBinError, CompanyDoesntExistByIdError, CompanyAlreadyExistError } from '../../../company/domain-object/company/repo-errors.js';
+import { CompanyModuleResolver } from '../../../company/resolver.js';
 
 export class CompanyRepositoryImpl implements CompanyRepository {
   testRepo: FakeClassImplements.TestMemoryRepository<

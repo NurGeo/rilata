@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DTO } from '../../domain/dto';
-import { RilataServer } from './server';
-import { ServerResolves } from './s-resolves';
-import { ServerConfig } from './types';
-import { defaultServerConfig } from './configs';
+import { DTO } from '../../domain/dto.js';
+import { RilataServer } from './server.js';
+import { ServerResolves } from './s-resolves.js';
+import { ServerConfig } from './types.js';
+import { defaultServerConfig } from './configs.js';
 
 export class ServerResolver<RES extends ServerResolves<DTO>> {
   protected server!: RilataServer;
@@ -18,7 +18,6 @@ export class ServerResolver<RES extends ServerResolves<DTO>> {
   }
 
   getServerPath(): string {
-    // @ts-expect-error
     return import.meta.dir; // path/to/file
   }
 

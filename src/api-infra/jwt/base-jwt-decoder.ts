@@ -2,17 +2,17 @@
 import {
   IncorrectTokenError, JwtDecodeErrors,
   NotValidTokenPayloadError, TokenExpiredError,
-} from '../../core/jwt/jwt-errors';
-import { DTO } from '../../domain/dto';
-import { failure } from '../../core/result/failure';
-import { success } from '../../core/result/success';
-import { Result } from '../../core/result/types';
-import { dodUtility } from '../../core/utils/dod/dod-utility';
-import { dtoUtility } from '../../core/utils/dto/dto-utility';
-import { JwtHmacHashUtils } from '../../core/utils/jwt/jwt-utils';
-import { UnionToTuple } from '../../core/tuple-types';
-import { JwtDecoder } from '../../core/jwt/jwt-decoder';
-import { JwtPayload, JwtType } from '../../core/jwt/types';
+} from '../../core/jwt/jwt-errors.js';
+import { DTO } from '../../domain/dto.js';
+import { failure } from '../../core/result/failure.js';
+import { success } from '../../core/result/success.js';
+import { Result } from '../../core/result/types.js';
+import { dodUtility } from '../../core/utils/dod/dod-utility.js';
+import { dtoUtility } from '../../core/utils/dto/dto-utility.js';
+import { JwtHmacHashUtils } from '../../core/utils/jwt/jwt-utils.js';
+import { UnionToTuple } from '../../core/tuple-types.js';
+import { JwtDecoder } from '../../core/jwt/jwt-decoder.js';
+import { JwtPayload, JwtType } from '../../core/jwt/types.js';
 
 /** Класс для декодирования JWT токена. */
 export abstract class BaseJwtDecoder<

@@ -1,8 +1,8 @@
-import { uuidUtility } from '../../../../../src/core/utils/uuid/uuid-utility';
-import { AggregateFactory } from '../../../../../src/domain/domain-object/aggregate-factory';
-import { AddingPersonActionAttrs } from '../../domain-data/person/add-person/a-params';
-import { PersonAttrs, PersonParams } from '../../domain-data/person/params';
-import { PersonAR } from './a-root';
+import { uuidUtility } from '../../../../../src/core/utils/uuid/uuid-utility.js';
+import { AggregateFactory } from '../../../../../src/domain/domain-object/aggregate-factory.js';
+import { AddingPersonActionAttrs } from '../../domain-data/person/add-person/a-params.js';
+import { PersonAttrs, PersonParams } from '../../domain-data/person/params.js';
+import { PersonAR } from './a-root.js';
 
 export class PersonFactory extends AggregateFactory<PersonParams> {
   create(actionAttrs: AddingPersonActionAttrs): PersonAR {

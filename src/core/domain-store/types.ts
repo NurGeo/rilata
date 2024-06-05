@@ -1,4 +1,4 @@
-import { Logger } from '../index';
+import { Logger } from '../index.js';
 
 export type DomainStorePayload = {
   logger: Logger

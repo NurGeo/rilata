@@ -1,8 +1,8 @@
-import { UuidType } from '../../core/types';
-import { GeneralArParams, GeneralEventDod } from '../../domain/domain-data/domain-types';
-import { GeneralModuleResolver } from '../module/types';
-import { Repositoriable } from '../resolve/repositoriable';
-import { Asyncable } from './types';
+import { UuidType } from '../../core/types.js';
+import { GeneralArParams, GeneralEventDod } from '../../domain/domain-data/domain-types.js';
+import { GeneralModuleResolver } from '../module/types.js';
+import { Repositoriable } from '../resolve/repositoriable.js';
+import { Asyncable } from './types.js';
 
 export interface EventRepository<ASYNC extends boolean> {
   init(resovler: GeneralModuleResolver): void

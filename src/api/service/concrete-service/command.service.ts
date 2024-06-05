@@ -1,7 +1,7 @@
-import { GeneralCommandServiceParams, ServiceResult } from '../types';
-import { GeneralModuleResolver } from '../../module/types';
-import { TransactionStrategy } from '../transaction-strategy/strategy';
-import { BaseService } from '../base.service';
+import { GeneralCommandServiceParams, ServiceResult } from '../types.js';
+import { GeneralModuleResolver } from '../../module/types.js';
+import { TransactionStrategy } from '../transaction-strategy/strategy.js';
+import { BaseService } from '../base.service.js';
 
 /** Сервис для обработки команд */
 export abstract class CommandService<

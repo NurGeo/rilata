@@ -1,11 +1,11 @@
-import { CommandService } from '../../../../../../src/api/service/concrete-service/command.service';
-import { UowTransactionStrategy } from '../../../../../../src/api/service/transaction-strategy/uow.strategy';
-import { ServiceResult } from '../../../../../../src/api/service/types';
-import { PersonFactory } from '../../../domain-object/person/factory';
-import { PersonRepository } from '../../../domain-object/person/repo';
-import { SubjectModuleResolver } from '../../../resolver';
-import { AddPersonRequestDod, AddPersonServiceParams } from './s-params';
-import { addPersonValidator } from './v-map';
+import { CommandService } from '../../../../../../src/api/service/concrete-service/command.service.js';
+import { UowTransactionStrategy } from '../../../../../../src/api/service/transaction-strategy/uow.strategy.js';
+import { ServiceResult } from '../../../../../../src/api/service/types.js';
+import { PersonFactory } from '../../../domain-object/person/factory.js';
+import { PersonRepository } from '../../../domain-object/person/repo.js';
+import { SubjectModuleResolver } from '../../../resolver.js';
+import { AddPersonRequestDod, AddPersonServiceParams } from './s-params.js';
+import { addPersonValidator } from './v-map.js';
 
 export class AddingPersonService extends CommandService<
   AddPersonServiceParams, SubjectModuleResolver

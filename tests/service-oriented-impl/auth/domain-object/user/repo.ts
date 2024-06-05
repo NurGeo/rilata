@@ -1,9 +1,9 @@
-import { Repositoriable } from '../../../../../src/api/resolve/repositoriable';
-import { Result } from '../../../../../src/core/result/types';
-import { UuidType } from '../../../../../src/core/types';
-import { UserAttrs } from '../../domain-data/user/params';
-import { AuthModuleResolver } from '../../resolver';
-import { UserDoesNotExistByIdError } from './repo-errors';
+import { Repositoriable } from '../../../../../src/api/resolve/repositoriable.js';
+import { Result } from '../../../../../src/core/result/types.js';
+import { UuidType } from '../../../../../src/core/types.js';
+import { UserAttrs } from '../../domain-data/user/params.js';
+import { AuthModuleResolver } from '../../resolver.js';
+import { UserDoesNotExistByIdError } from './repo-errors.js';
 
 export type UserRepositoryRecord = UserAttrs & { version: number }
 

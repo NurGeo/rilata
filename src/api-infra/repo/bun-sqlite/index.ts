@@ -1,8 +1,8 @@
-export * from './database';
-export * from './repository';
+export * from './database.js';
+export * from './repository.js';
 export type {
   MigrateRow, BunRepoCtor, MigratinsRecord, BunSqliteTransactionData,
-} from './types';
-export * from './repositories/event';
-export * from './repositories/migrations';
-export * from './transaction/bun-sqlite.strategy';
+} from './types.js';
+export * from './repositories/event.js';
+export * from './repositories/migrations.js';
+export * from './transaction/bun-sqlite.strategy.js';

@@ -1,6 +1,6 @@
-import { GeneralModuleResolver } from '../../module/types';
-import { BaseService } from '../base.service';
-import { GeneralQueryServiceParams, ServiceResult } from '../types';
+import { GeneralModuleResolver } from '../../module/types.js';
+import { BaseService } from '../base.service.js';
+import { GeneralQueryServiceParams, ServiceResult } from '../types.js';
 
 export abstract class QueryService<
   P extends GeneralQueryServiceParams, RES extends GeneralModuleResolver

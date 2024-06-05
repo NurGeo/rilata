@@ -1,13 +1,13 @@
-import { BadRequestError } from '../../api/service/error-types';
-import { FullServiceResult, FullServiceResultDTO, GeneralCommandServiceParams, GeneralQueryServiceParams } from '../../api/service/types';
-import { JwtDecoder } from '../../core/jwt/jwt-decoder';
-import { Logger } from '../../core/logger/logger';
-import { failure } from '../../core/result/failure';
-import { success } from '../../core/result/success';
-import { Result } from '../../core/result/types';
-import { dodUtility } from '../../core/utils/dod/dod-utility';
-import { DTO } from '../../domain/dto';
-import { Locale } from '../../domain/locale';
+import { BadRequestError } from '../../api/service/error-types.js';
+import { FullServiceResult, FullServiceResultDTO, GeneralCommandServiceParams, GeneralQueryServiceParams } from '../../api/service/types.js';
+import { JwtDecoder } from '../../core/jwt/jwt-decoder.js';
+import { Logger } from '../../core/logger/logger.js';
+import { failure } from '../../core/result/failure.js';
+import { success } from '../../core/result/success.js';
+import { Result } from '../../core/result/types.js';
+import { dodUtility } from '../../core/utils/dod/dod-utility.js';
+import { DTO } from '../../domain/dto.js';
+import { Locale } from '../../domain/locale.js';
 
 export abstract class BackendApi {
     protected abstract moduleUrl: string;

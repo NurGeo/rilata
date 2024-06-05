@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'bun:test';
-import { eNumUtility } from './enum-utility';
+import { eNumUtility } from './enum-utility.js';
 
 describe('Test eNumUtility', () => {
   enum strEnum {

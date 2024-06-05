@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
-import { failure } from '../../../core/result/failure';
-import { success } from '../../../core/result/success';
-import { DTO } from '../../dto';
-import { FieldValidator } from './field-validator';
+import { failure } from '../../../core/result/failure.js';
+import { success } from '../../../core/result/success.js';
+import { DTO } from '../../dto.js';
+import { FieldValidator } from './field-validator.js';
 import {
   ArrayFieldErrors, FieldErrors, FullFieldResult, GetArrayConfig,
   GetFieldValidatorDataType, RuleErrors, ValidatorMap,
-} from './types';
+} from './types.js';
 
 export class DtoFieldValidator<
   NAME extends string,

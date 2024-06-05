@@ -1,11 +1,11 @@
-import { DomainUser, ModuleCaller } from '../../../../../src/api/controller/types';
-import { GeneralModuleResolver } from '../../../../../src/api/module/types';
-import { FullServiceResult, ServiceResult } from '../../../../../src/api/service/types';
-import { UuidType } from '../../../../../src/core/types';
-import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility';
-import { CompanyFacade } from '../../facade';
-import { CompanyModule } from '../../module';
-import { GetCompanyRequestDod, GetCompanyServiceParams } from '../../services/get-company/s.params';
+import { DomainUser, ModuleCaller } from '../../../../../src/api/controller/types.js';
+import { GeneralModuleResolver } from '../../../../../src/api/module/types.js';
+import { FullServiceResult, ServiceResult } from '../../../../../src/api/service/types.js';
+import { UuidType } from '../../../../../src/core/types.js';
+import { dodUtility } from '../../../../../src/core/utils/dod/dod-utility.js';
+import { CompanyFacade } from '../../facade.js';
+import { CompanyModule } from '../../module.js';
+import { GetCompanyRequestDod, GetCompanyServiceParams } from '../../services/get-company/s.params.js';
 
 /** Реализация фасада для работы в рамках одного сервера */
 export class CompanyFacadeOneServerImpl implements CompanyFacade {

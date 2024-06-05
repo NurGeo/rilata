@@ -1,9 +1,9 @@
-import { BunServer } from '../../../src/api/server/bun-server';
-import { RilataServer } from '../../../src/api/server/server';
-import { serverStarter } from './starter';
-import { ServiceModulesFixtures } from './server-fixtures';
-import { TestDatabase } from '../../../src/api/database/test.database';
-import { GeneralServerResolver } from '../../../src/api/server/types';
+import { BunServer } from '../../../src/api/server/bun-server.js';
+import { RilataServer } from '../../../src/api/server/server.js';
+import { serverStarter } from './starter.js';
+import { ServiceModulesFixtures } from './server-fixtures.js';
+import { TestDatabase } from '../../../src/api/database/test.database.js';
+import { GeneralServerResolver } from '../../../src/api/server/types.js';
 
 function parseArgs(
   server: RilataServer, resolver: GeneralServerResolver,

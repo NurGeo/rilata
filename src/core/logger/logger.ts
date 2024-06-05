@@ -1,4 +1,4 @@
-import { InputLoggerModes } from './logger-modes';
+import { InputLoggerModes } from './logger-modes.js';
 
 export interface Logger {
   logMode: InputLoggerModes

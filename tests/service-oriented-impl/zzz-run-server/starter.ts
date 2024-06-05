@@ -1,19 +1,19 @@
-import { ServerStarter } from '../../../src/api/server/server-starter';
-import { serverResolves } from './resolves';
-import { ServiceModulesBunServer } from './server';
-import { AuthModule } from '../auth/module';
-import { AuthModuleResolver } from '../auth/resolver';
-import { CompanyModule } from '../company/module';
-import { CompanyModuleResolver } from '../company/resolver';
-import { SubjectModule } from '../subject/module';
-import { SubjectModuleResolver } from '../subject/resolver';
-import { FrontProxyModule } from '../z-front-proxy/module';
-import { FrontendProxyModuleResolver } from '../z-front-proxy/resolver';
-import { getAuthResolves } from './module-resolves/auth-resolves';
-import { getCompanyResolves } from './module-resolves/company-resolves';
-import { getFrontProxyResolves } from './module-resolves/front-proxy-resolves';
-import { getSubjectResolves } from './module-resolves/subject-resolves';
-import { ServerResolver } from '../../../src/api/server/s-resolver';
+import { ServerStarter } from '../../../src/api/server/server-starter.js';
+import { serverResolves } from './resolves.js';
+import { ServiceModulesBunServer } from './server.js';
+import { AuthModule } from '../auth/module.js';
+import { AuthModuleResolver } from '../auth/resolver.js';
+import { CompanyModule } from '../company/module.js';
+import { CompanyModuleResolver } from '../company/resolver.js';
+import { SubjectModule } from '../subject/module.js';
+import { SubjectModuleResolver } from '../subject/resolver.js';
+import { FrontProxyModule } from '../z-front-proxy/module.js';
+import { FrontendProxyModuleResolver } from '../z-front-proxy/resolver.js';
+import { getAuthResolves } from './module-resolves/auth-resolves.js';
+import { getCompanyResolves } from './module-resolves/company-resolves.js';
+import { getFrontProxyResolves } from './module-resolves/front-proxy-resolves.js';
+import { getSubjectResolves } from './module-resolves/subject-resolves.js';
+import { ServerResolver } from '../../../src/api/server/s-resolver.js';
 
 type AllServerModules = AuthModule | SubjectModule | CompanyModule | FrontProxyModule;
 

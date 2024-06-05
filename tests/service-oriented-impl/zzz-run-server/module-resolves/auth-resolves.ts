@@ -1,6 +1,6 @@
-import { FakeClassImplements } from '../../../fixtures/fake-class-implements';
-import { AuthResolves } from '../../auth/resolves';
-import { UserRepositoryImpl } from '../../zz-infra/repositories/auth-module/user';
+import { FakeClassImplements } from '../../../fixtures/fake-class-implements.js';
+import { AuthResolves } from '../../auth/resolves.js';
+import { UserRepositoryImpl } from '../../zz-infra/repositories/auth-module/user.js';
 
 let db: FakeClassImplements.TestMemoryDatabase;
 

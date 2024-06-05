@@ -1,11 +1,11 @@
-import { loggerModes } from '../../core/logger/logger-modes';
-import { Constructor } from '../../core/types';
-import { DTO } from '../../domain/dto';
-import { Module } from '../module/module';
-import { ModuleResolves } from '../module/m-resolves';
-import { GeneralModuleResolver } from '../module/types';
-import { ServerResolver } from './s-resolver';
-import { ServerResolves } from './s-resolves';
+import { loggerModes } from '../../core/logger/logger-modes.js';
+import { Constructor } from '../../core/types.js';
+import { DTO } from '../../domain/dto.js';
+import { Module } from '../module/module.js';
+import { ModuleResolves } from '../module/m-resolves.js';
+import { GeneralModuleResolver } from '../module/types.js';
+import { ServerResolver } from './s-resolver.js';
+import { ServerResolves } from './s-resolves.js';
 
 export type RunMode = 'test' | 'dev' | 'prod';
 

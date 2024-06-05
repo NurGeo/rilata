@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { failure } from '../../core/result/failure';
-import { success } from '../../core/result/success';
-import { Result } from '../../core/result/types';
+import { failure } from '../../core/result/failure.js';
+import { success } from '../../core/result/success.js';
+import { Result } from '../../core/result/types.js';
 import {
   ServiceResult, InputDodValidator,
   GeneralBaseServiceParams, GetModuleName,
-} from './types';
-import { Service } from './service';
-import { ValidationError } from './error-types';
-import { GeneralModuleResolver } from '../module/types';
-import { permissionDeniedError } from './constants';
-import { CallerType } from '../controller/types';
-import { dodUtility } from '../../core/utils/dod/dod-utility';
-import { requestStoreDispatcher } from '../request-store/request-store-dispatcher';
+} from './types.js';
+import { Service } from './service.js';
+import { ValidationError } from './error-types.js';
+import { GeneralModuleResolver } from '../module/types.js';
+import { permissionDeniedError } from './constants.js';
+import { CallerType } from '../controller/types.js';
+import { dodUtility } from '../../core/utils/dod/dod-utility.js';
+import { requestStoreDispatcher } from '../request-store/request-store-dispatcher.js';
 
 export abstract class BaseService<
   P extends GeneralBaseServiceParams, RES extends GeneralModuleResolver

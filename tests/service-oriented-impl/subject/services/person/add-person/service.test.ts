@@ -1,19 +1,19 @@
 import {
   beforeEach, describe, expect, test,
 } from 'bun:test';
-import { dodUtility } from '../../../../../../src/core/utils/dod/dod-utility';
-import { uuidUtility } from '../../../../../../src/core/utils/uuid/uuid-utility';
-import { serverStarter } from '../../../../zzz-run-server/starter';
-import { ServiceModulesFixtures } from '../../../../zzz-run-server/server-fixtures';
-import { PersonAR } from '../../../domain-object/person/a-root';
-import { PersonRepository } from '../../../domain-object/person/repo';
-import { PersonAlreadyExistsError } from '../../../domain-object/person/repo-errors';
-import { SubjectModule } from '../../../module';
-import { AddPersonRequestDod, AddPersonOut } from './s-params';
-import { AddingPersonService } from './service';
-import { TestDatabase } from '../../../../../../src/api/database/test.database';
-import { EventRepository } from '../../../../../../src/api/database/event.repository';
-import { requestStoreMock } from '../../../../../fixtures/request-store-mock';
+import { dodUtility } from '../../../../../../src/core/utils/dod/dod-utility.js';
+import { uuidUtility } from '../../../../../../src/core/utils/uuid/uuid-utility.js';
+import { serverStarter } from '../../../../zzz-run-server/starter.js';
+import { ServiceModulesFixtures } from '../../../../zzz-run-server/server-fixtures.js';
+import { PersonAR } from '../../../domain-object/person/a-root.js';
+import { PersonRepository } from '../../../domain-object/person/repo.js';
+import { PersonAlreadyExistsError } from '../../../domain-object/person/repo-errors.js';
+import { SubjectModule } from '../../../module.js';
+import { AddPersonRequestDod, AddPersonOut } from './s-params.js';
+import { AddingPersonService } from './service.js';
+import { TestDatabase } from '../../../../../../src/api/database/test.database.js';
+import { EventRepository } from '../../../../../../src/api/database/event.repository.js';
+import { requestStoreMock } from '../../../../../fixtures/request-store-mock.js';
 
 describe('add person service tests', async () => {
   const requestId = 'c22fd027-a94b-4728-90eb-f6d4f96992c2';

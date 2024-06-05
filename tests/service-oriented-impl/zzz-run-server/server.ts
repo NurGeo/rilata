@@ -1,9 +1,9 @@
-import { GeneralServerResolver } from '../../../src/api/base.index';
-import { Controller } from '../../../src/api/controller/controller';
-import { Afterware, InjectCallerMiddleware } from '../../../src/api/http.index';
-import { LogResponseAfterware } from '../../../src/api/middle-after-ware/afterwares/log-request';
-import { BunServer } from '../../../src/api/server/bun-server';
-import { AboutController } from './controllers/about';
+import { GeneralServerResolver } from '../../../src/api/base.index.js';
+import { Controller } from '../../../src/api/controller/controller.js';
+import { Afterware, InjectCallerMiddleware } from '../../../src/api/http.index.js';
+import { LogResponseAfterware } from '../../../src/api/middle-after-ware/afterwares/log-request.js';
+import { BunServer } from '../../../src/api/server/bun-server.js';
+import { AboutController } from './controllers/about.js';
 
 export class ServiceModulesBunServer extends BunServer {
   protected middlewares = [

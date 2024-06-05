@@ -1,22 +1,22 @@
 import {
   describe, expect, spyOn, test,
 } from 'bun:test';
-import { UserId } from '../../../src/core/types';
-import { JwtCreator } from '../../api/jwt/jwt-creator';
-import { JwtVerifier } from '../../api/jwt/jwt-verifier';
-import { defaultJwtConfig } from '../../api/server/configs';
-import { ServerResolver } from '../../api/server/s-resolver';
-import { ServerResolves } from '../../api/server/s-resolves';
-import { JwtConfig } from '../../api/server/types';
-import { getEnvLogMode } from '../../core/index';
-import { JwtDecoder } from '../../core/jwt/jwt-decoder';
-import { IncorrectTokenError, JwtVerifyErrors, NotValidTokenPayloadError, TokenExpiredError } from '../../core/jwt/jwt-errors';
-import { ConsoleLogger } from '../../core/logger/console-logger';
-import { Logger } from '../../core/logger/logger';
-import { uuidUtility } from '../../core/utils/uuid/uuid-utility';
-import { BaseJwtDecoder } from './base-jwt-decoder';
-import { JwtCreatorImpl } from './jwt-creator';
-import { JwtVerifierImpl } from './jwt-verifier';
+import { getEnvLogMode } from '#core/logger/logger-modes.js';
+import { UserId } from '../../../src/core/types.js';
+import { JwtCreator } from '../../api/jwt/jwt-creator.js';
+import { JwtVerifier } from '../../api/jwt/jwt-verifier.js';
+import { defaultJwtConfig } from '../../api/server/configs.js';
+import { ServerResolver } from '../../api/server/s-resolver.js';
+import { ServerResolves } from '../../api/server/s-resolves.js';
+import { JwtConfig } from '../../api/server/types.js';
+import { JwtDecoder } from '../../core/jwt/jwt-decoder.js';
+import { IncorrectTokenError, JwtVerifyErrors, NotValidTokenPayloadError, TokenExpiredError } from '../../core/jwt/jwt-errors.js';
+import { ConsoleLogger } from '../../core/logger/console-logger.js';
+import { Logger } from '../../core/logger/logger.js';
+import { uuidUtility } from '../../core/utils/uuid/uuid-utility.js';
+import { BaseJwtDecoder } from './base-jwt-decoder.js';
+import { JwtCreatorImpl } from './jwt-creator.js';
+import { JwtVerifierImpl } from './jwt-verifier.js';
 
 type TestJwtPayload = {
   userId: UserId,

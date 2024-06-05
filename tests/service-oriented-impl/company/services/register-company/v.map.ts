@@ -1,11 +1,11 @@
-import { ValidatorMap } from '../../../../../src/domain/validator/field-validator/types';
+import { ValidatorMap } from '../../../../../src/domain/validator/field-validator/types.js';
 import {
   ExistPerson, NewPerson, RegisterCompanyRequestDodAttrs,
-} from './s.params';
-import { DtoFieldValidator } from '../../../../../src/domain/validator/field-validator/dto-field-validator';
-import { companyAttrsVMap } from '../../domain-data/company/v-map';
-import { personAttrsVMap } from '../../../subject/domain-data/person/v-map';
-import { StrictEqualFieldValidator } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/strict-equal';
+} from './s.params.js';
+import { DtoFieldValidator } from '../../../../../src/domain/validator/field-validator/dto-field-validator.js';
+import { companyAttrsVMap } from '../../domain-data/company/v-map.js';
+import { personAttrsVMap } from '../../../subject/domain-data/person/v-map.js';
+import { StrictEqualFieldValidator } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/strict-equal.js';
 
 const existPersonVmap: ValidatorMap<ExistPerson> = {
   type: new StrictEqualFieldValidator('type', 'existPerson'),

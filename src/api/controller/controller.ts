@@ -1,5 +1,5 @@
-import { GeneralModuleResolver } from '../module/types';
-import { GeneralServerResolver } from '../server/types';
+import { GeneralModuleResolver } from '../module/types.js';
+import { GeneralServerResolver } from '../server/types.js';
 
 export abstract class Controller<R extends GeneralServerResolver | GeneralModuleResolver> {
   resolver!: R;

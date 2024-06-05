@@ -1,5 +1,5 @@
-import { IdType } from '../../core/types';
-import { dispositionTypeMap, mimeTypesMap } from './constants';
+import { IdType } from '../../core/types.js';
+import { dispositionTypeMap, mimeTypesMap } from './constants.js';
 
 export type AnonymousUser = {
   type: 'AnonymousUser',

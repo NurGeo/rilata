@@ -1,7 +1,7 @@
-import { QueryServiceParams } from '../../../../../../src/api/service/types';
-import { RequestDod } from '../../../../../../src/domain/domain-data/domain-types';
-import { PersonAttrs, PersonParams } from '../../../domain-data/person/params';
-import { PersonDoesntExistByIinError } from '../../../domain-object/person/repo-errors';
+import { QueryServiceParams } from '../../../../../../src/api/service/types.js';
+import { RequestDod } from '../../../../../../src/domain/domain-data/domain-types.js';
+import { PersonAttrs, PersonParams } from '../../../domain-data/person/params.js';
+import { PersonDoesntExistByIinError } from '../../../domain-object/person/repo-errors.js';
 
 export type GetPersonByIinRequestDodAttrs = {
   iin: string,

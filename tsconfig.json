@@ -1,14 +1,21 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "module": "nodenext",
-    "target": "es2022",
-    "moduleResolution": "nodenext",
-    "noEmit": true,
-    "esModuleInterop": true,
-    "noErrorTruncation": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-  }
+    "target": "esnext",  // В какую версию js кода должна компилироваться код ts.
+    // Хорошая статья как настраивать разрешения путей https://habr.com/ru/articles/738132/
+    "module": "nodenext",  // Как должны разрешаться модули js после компиляции кода ts.
+    "moduleResolution": "nodenext",  // Стратегия поиска и разрешения модулей (файлов) ts.
+    "outDir": "./dist",  // Директория для выходных файлов
+    "lib": ["esnext", "dom"],  // Включение библиотек для браузера и стандартной библиотеки ES
+    "baseUrl": "./",
+    "paths": {
+        "#*": ["./src/*"],
+    },
+    "esModuleInterop": true,  // Включение совместимости с CommonJS модулями
+    "allowSyntheticDefaultImports": true,  // Разрешение синтетических импортов по умолчанию
+    "skipLibCheck": true,  // Пропуск проверки типов в файлах библиотеки для ускорения компиляции
+    "strict": true,  // Включение строгого режима для повышения качества кода
+    "sourceMap": true  // Генерация карт источников для отладки
+  },
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

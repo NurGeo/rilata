@@ -1,7 +1,7 @@
-import { EventServiceParams } from '../../../../../src/api/service/types';
-import { EventDod } from '../../../../../src/domain/domain-data/domain-types';
-import { AddCompanyDomainCommand, CompanyAddedEvent } from '../../../company-cmd/domain-data/company/add-company/a-params';
-import { CompanyCmdARDT, CompanyParams } from '../../../company-cmd/domain-data/company/params';
+import { EventServiceParams } from '../../../../../src/api/service/types.js';
+import { EventDod } from '../../../../../src/domain/domain-data/domain-types.js';
+import { AddCompanyDomainCommand, CompanyAddedEvent } from '../../../company-cmd/domain-data/company/add-company/a-params.js';
+import { CompanyCmdARDT, CompanyParams } from '../../../company-cmd/domain-data/company/params.js';
 
 export type CompanyAddedReadEvent = EventDod<
   'CompanyAddedEvent',

@@ -1,7 +1,7 @@
-import { Logger } from '../../core/logger/logger';
-import { UuidType } from '../../core/types';
-import { Caller } from '../controller/types';
-import { GeneralModuleResolver } from '../module/types';
+import { Logger } from '../../core/logger/logger.js';
+import { UuidType } from '../../core/types.js';
+import { Caller } from '../controller/types.js';
+import { GeneralModuleResolver } from '../module/types.js';
 
 export type RequestStorePayload = {
   serviceName: string,

@@ -1,6 +1,6 @@
-import { UuidType } from '../../../core/types';
-import { Database } from '../database';
-import { Asyncable } from '../types';
+import { UuidType } from '../../../core/types.js';
+import { Database } from '../database.js';
+import { Asyncable } from '../types.js';
 
 type TransactionId = UuidType;
 

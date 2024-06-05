@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'bun:test';
-import { dodUtility } from './dod-utility';
-import { DODPrivateFixtures as DODF } from './dod-private-fixtures';
+import { dodUtility } from './dod-utility.js';
+import { DODPrivateFixtures as DODF } from './dod-private-fixtures.js';
 
 const sut = dodUtility;
 

@@ -1,6 +1,6 @@
-import { FakeClassImplements } from '../../../fixtures/fake-class-implements';
-import { SubjectResolves } from '../../subject/resolves';
-import { PersonRepositoryImpl } from '../../zz-infra/repositories/subject-module/person';
+import { FakeClassImplements } from '../../../fixtures/fake-class-implements.js';
+import { SubjectResolves } from '../../subject/resolves.js';
+import { PersonRepositoryImpl } from '../../zz-infra/repositories/subject-module/person.js';
 
 let db: FakeClassImplements.TestMemoryDatabase;
 

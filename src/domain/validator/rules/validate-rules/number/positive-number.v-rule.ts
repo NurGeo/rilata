@@ -1,5 +1,5 @@
-import { ValidationRuleAnswer } from '../../types';
-import { ValidationRule } from '../../validation-rule';
+import { ValidationRuleAnswer } from '../../types.js';
+import { ValidationRule } from '../../validation-rule.js';
 
 export class PositiveNumberValidationRule extends ValidationRule<'validate', number> {
   requirement = 'Число должно быть положительным';

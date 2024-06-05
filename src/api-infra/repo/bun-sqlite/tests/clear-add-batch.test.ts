@@ -1,16 +1,15 @@
 /* eslint-disable no-useless-escape */
 import { beforeEach, describe, expect, test } from 'bun:test';
-import { SqliteTestFixtures } from './fixtures';
+import { SqliteTestFixtures } from './fixtures.js';
 
 describe('bun sqlite db: add batch to db, and clear db tests', () => {
-  const { fakeModuleResolver } = SqliteTestFixtures;
+  const fakeModuleResolver = SqliteTestFixtures.getResolverWithTestDb();
   const db = fakeModuleResolver.getDatabase() as SqliteTestFixtures.BlogDatabase;
+  beforeEach(() => {
+    db.clear();
+  });
 
   describe('add batch to db tests', () => {
-    beforeEach(() => {
-      db.clear();
-    });
-
     test('успех, данные добавлены', () => {
       const usersBefore = db.sqliteDb.query('SELECT * FROM users').all();
       expect(usersBefore.length).toBe(0);

@@ -1,11 +1,11 @@
-import { DtoFieldValidator } from '../../../../../src/domain/validator/field-validator/dto-field-validator';
-import { LiteralFieldValidator } from '../../../../../src/domain/validator/field-validator/literal-field-validator';
-import { UuidField } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/uuid-field';
-import { ValidatorMap } from '../../../../../src/domain/validator/field-validator/types';
-import { MaxCharsCountValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/max-chars-count.v-rule';
-import { RegexMatchesValueValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/regex-matches-value.field-v-rule';
-import { UUIDFormatValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/uuid-format.v-rule';
-import { CompanyAttrs } from './params';
+import { DtoFieldValidator } from '../../../../../src/domain/validator/field-validator/dto-field-validator.js';
+import { LiteralFieldValidator } from '../../../../../src/domain/validator/field-validator/literal-field-validator.js';
+import { UuidField } from '../../../../../src/domain/validator/field-validator/prepared-fields/string/uuid-field.js';
+import { ValidatorMap } from '../../../../../src/domain/validator/field-validator/types.js';
+import { MaxCharsCountValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/max-chars-count.v-rule.js';
+import { RegexMatchesValueValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/regex-matches-value.field-v-rule.js';
+import { UUIDFormatValidationRule } from '../../../../../src/domain/validator/rules/validate-rules/string/uuid-format.v-rule.js';
+import { CompanyAttrs } from './params.js';
 
 export const companyAttrsVMap: ValidatorMap<CompanyAttrs> = {
   id: new UuidField('id'),

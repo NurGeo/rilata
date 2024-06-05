@@ -1,6 +1,6 @@
-import { DTO } from '../dto';
-import { GeneralArParams } from '../index';
-import { AggregateRoot } from './aggregate-root';
+import { DTO } from '../dto.js';
+import { GeneralArParams } from '../index.js';
+import { AggregateRoot } from './aggregate-root.js';
 
 export abstract class AggregateFactory<PARAMS extends GeneralArParams> {
   /** создать экземпляр агрегата по событию */

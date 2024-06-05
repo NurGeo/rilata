@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { describe, test, expect } from 'bun:test';
-import { AssertionException } from '../../exeptions';
-import { uuidUtility } from './uuid-utility';
+import { AssertionException } from '../../exeptions.js';
+import { uuidUtility } from './uuid-utility.js';
 
 describe('uuidUtility class test', () => {
   const incorrectUUID = '0dd856f7-c085-4c1b-8805-15ef64';

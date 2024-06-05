@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ServiceBaseErrors } from '../service/error-types';
-import { STATUS_CODES } from './constants';
-import { Result } from '../../core/result/types';
-import { Controller } from './controller';
-import { ResultDTO, RilataRequest } from './types';
-import { GeneralModuleResolver } from '../module/types';
-import { GeneralRequestDod } from '../../domain/domain-data/domain-types';
-import { badRequestError } from '../service/constants';
-import { dtoUtility } from '../../core/utils/dto/dto-utility';
-import { success } from '../../core/result/success';
-import { failure } from '../../core/result/failure';
-import { responseUtility } from '../../core/utils/response/response-utility';
+import { ServiceBaseErrors } from '../service/error-types.js';
+import { STATUS_CODES } from './constants.js';
+import { Result } from '../../core/result/types.js';
+import { Controller } from './controller.js';
+import { ResultDTO, RilataRequest } from './types.js';
+import { GeneralModuleResolver } from '../module/types.js';
+import { GeneralRequestDod } from '../../domain/domain-data/domain-types.js';
+import { badRequestError } from '../service/constants.js';
+import { dtoUtility } from '../../core/utils/dto/dto-utility.js';
+import { success } from '../../core/result/success.js';
+import { failure } from '../../core/result/failure.js';
+import { responseUtility } from '../../core/utils/response/response-utility.js';
 
 export class ModuleController extends Controller<GeneralModuleResolver> {
   protected moduleResolver!: GeneralModuleResolver;

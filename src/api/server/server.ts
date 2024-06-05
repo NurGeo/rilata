@@ -1,7 +1,7 @@
-import { Logger } from '../../core/logger/logger';
-import { domainStoreDispatcher } from '../../core/domain-store/domain-store-dispatcher';
-import { Module } from '../module/module';
-import { GeneralServerResolver } from './types';
+import { Logger } from '../../core/logger/logger.js';
+import { domainStoreDispatcher } from '../../core/domain-store/domain-store-dispatcher.js';
+import { Module } from '../module/module.js';
+import { GeneralServerResolver } from './types.js';
 
 export abstract class RilataServer {
   protected resolver!: GeneralServerResolver;

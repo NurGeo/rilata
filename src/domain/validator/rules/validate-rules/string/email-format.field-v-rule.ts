@@ -1,6 +1,6 @@
 import { validate } from 'email-validator';
-import { ValidationRuleAnswer } from '../../types';
-import { ValidationRule } from '../../validation-rule';
+import { ValidationRuleAnswer } from '../../types.js';
+import { ValidationRule } from '../../validation-rule.js';
 
 export class EmailFormatValidationRule extends ValidationRule<'validate', string> {
   requirement = 'Строка не соответствует формату электронной почты';

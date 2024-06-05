@@ -1,8 +1,8 @@
-import { Module } from '../../../src/api/module/module';
-import { ModuleType } from '../../../src/api/module/types';
-import { GeneralCommandService, GeneralEventService, GeneraQueryService } from '../../../src/api/service/types';
-import { GetingCompanyService } from './services/get-company/service';
-import { RegisteringCompanyService } from './services/register-company/service';
+import { Module } from '../../../src/api/module/module.js';
+import { ModuleType } from '../../../src/api/module/types.js';
+import { GeneralCommandService, GeneralEventService, GeneraQueryService } from '../../../src/api/service/types.js';
+import { GetingCompanyService } from './services/get-company/service.js';
+import { RegisteringCompanyService } from './services/register-company/service.js';
 
 export class CompanyModule extends Module {
   moduleName = 'CompanyModule' as const;

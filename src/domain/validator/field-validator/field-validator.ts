@@ -1,27 +1,27 @@
-import { failure } from '../../../core/result/failure';
-import { success } from '../../../core/result/success';
-import { AssertionException } from '../../../core/exeptions';
-import { DTO } from '../../dto';
-import { CannotBeEmptyArrayAssertionRule } from '../../validator/rules/assert-rules/cannot-be-empty-array.a-rule';
-import { CannotBeNullableAssertionRule } from '../../validator/rules/assert-rules/cannot-be-nullable.a-rule';
-import { MaxArrayElementsCountAssertionRule } from '../../validator/rules/assert-rules/max-array-elements-count.a-rule';
-import { MinArrayElementsCountAssertionRule } from '../../validator/rules/assert-rules/min-array-elements-count.a-rule';
-import { CanBeNullableRule } from '../../validator/rules/nullable-rules/can-be-nullable.n-rule';
-import { IsArrayTypeRule } from '../../validator/rules/type-rules/is-array-type.t-rule';
-import { IsBooleanTypeRule } from '../../validator/rules/type-rules/is-boolean-type.t-rule';
-import { IsDTOTypeRule } from '../../validator/rules/type-rules/is-dto-type.t-rule';
-import { IsNumberTypeRule } from '../../validator/rules/type-rules/is-number-type.t-rule';
-import { IsStringTypeRule } from '../../validator/rules/type-rules/is-string-type.t-rule';
-import { GeneralValidationRule, LiteralDataType, RuleError } from '../../validator/rules/types';
-import { ValidationRule } from '../../validator/rules/validation-rule';
-import { CannotBeInfinityRule } from '../rules/assert-rules/cannot-be-infinity.a-rule';
-import { CannotBeNanRule } from '../rules/assert-rules/cannot-be-nan.a-rule';
+import { failure } from '../../../core/result/failure.js';
+import { success } from '../../../core/result/success.js';
+import { AssertionException } from '../../../core/exeptions.js';
+import { DTO } from '../../dto.js';
+import { CannotBeEmptyArrayAssertionRule } from '../../validator/rules/assert-rules/cannot-be-empty-array.a-rule.js';
+import { CannotBeNullableAssertionRule } from '../../validator/rules/assert-rules/cannot-be-nullable.a-rule.js';
+import { MaxArrayElementsCountAssertionRule } from '../../validator/rules/assert-rules/max-array-elements-count.a-rule.js';
+import { MinArrayElementsCountAssertionRule } from '../../validator/rules/assert-rules/min-array-elements-count.a-rule.js';
+import { CanBeNullableRule } from '../../validator/rules/nullable-rules/can-be-nullable.n-rule.js';
+import { IsArrayTypeRule } from '../../validator/rules/type-rules/is-array-type.t-rule.js';
+import { IsBooleanTypeRule } from '../../validator/rules/type-rules/is-boolean-type.t-rule.js';
+import { IsDTOTypeRule } from '../../validator/rules/type-rules/is-dto-type.t-rule.js';
+import { IsNumberTypeRule } from '../../validator/rules/type-rules/is-number-type.t-rule.js';
+import { IsStringTypeRule } from '../../validator/rules/type-rules/is-string-type.t-rule.js';
+import { GeneralValidationRule, LiteralDataType, RuleError } from '../../validator/rules/types.js';
+import { ValidationRule } from '../../validator/rules/validation-rule.js';
+import { CannotBeInfinityRule } from '../rules/assert-rules/cannot-be-infinity.a-rule.js';
+import { CannotBeNanRule } from '../rules/assert-rules/cannot-be-nan.a-rule.js';
 import {
   GetArrayConfig, GetFieldValidatorDataType,
   RulesValidatedAnswer, RuleErrors, FieldResult, FullFieldResult,
   ArrayFieldResult, ArrayFieldErrors, FieldErrors,
-} from './types';
-import { domainStoreDispatcher } from '../../../core/index';
+} from './types.js';
+import { domainStoreDispatcher } from '../../../core/index.js';
 
 export abstract class FieldValidator<
   NAME extends string,

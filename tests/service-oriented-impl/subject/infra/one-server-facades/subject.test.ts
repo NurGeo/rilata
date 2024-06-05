@@ -1,13 +1,13 @@
 import { describe, expect, test } from 'bun:test';
-import { DomainUser } from '../../../../../src/api/controller/types';
-import { uuidUtility } from '../../../../../src/core/utils/uuid/uuid-utility';
-import { CompanyModule } from '../../../company/module';
-import { serverStarter } from '../../../zzz-run-server/starter';
-import { PersonAR } from '../../domain-object/person/a-root';
-import { PersonRepository } from '../../domain-object/person/repo';
-import { SubjectFacade } from '../../facade';
-import { SubjectModule } from '../../module';
-import { AddPersonOut, AddPersonRequestDodAttrs } from '../../services/person/add-person/s-params';
+import { DomainUser } from '../../../../../src/api/controller/types.js';
+import { uuidUtility } from '../../../../../src/core/utils/uuid/uuid-utility.js';
+import { CompanyModule } from '../../../company/module.js';
+import { serverStarter } from '../../../zzz-run-server/starter.js';
+import { PersonAR } from '../../domain-object/person/a-root.js';
+import { PersonRepository } from '../../domain-object/person/repo.js';
+import { SubjectFacade } from '../../facade.js';
+import { SubjectModule } from '../../module.js';
+import { AddPersonOut, AddPersonRequestDodAttrs } from '../../services/person/add-person/s-params.js';
 
 describe('subject facade tests', async () => {
   const server = serverStarter.start([

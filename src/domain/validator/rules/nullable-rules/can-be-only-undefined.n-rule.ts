@@ -1,5 +1,5 @@
-import { ValidationRule } from '../validation-rule';
-import { EmptyValueRuleAnswer } from '../types';
+import { ValidationRule } from '../validation-rule.js';
+import { EmptyValueRuleAnswer } from '../types.js';
 
 export class CanBeUndefinedValidationRule extends ValidationRule<'nullable', unknown> {
   requirement = 'Значение может быть undefined';

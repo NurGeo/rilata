@@ -1,9 +1,9 @@
-import { FakeClassImplements } from '../../../fixtures/fake-class-implements';
-import { AuthFacadeOneServerImpl } from '../../auth/one-server-facades/auth';
-import { CompanyRepository } from '../../company/domain-object/company/repo';
-import { CompanyResolves } from '../../company/resolves';
-import { SubjectFacadeOneServerImpl } from '../../subject/infra/one-server-facades/subject';
-import { CompanyRepositoryImpl } from '../../zz-infra/repositories/company-module/company';
+import { FakeClassImplements } from '../../../fixtures/fake-class-implements.js';
+import { AuthFacadeOneServerImpl } from '../../auth/one-server-facades/auth.js';
+import { CompanyRepository } from '../../company/domain-object/company/repo.js';
+import { CompanyResolves } from '../../company/resolves.js';
+import { SubjectFacadeOneServerImpl } from '../../subject/infra/one-server-facades/subject.js';
+import { CompanyRepositoryImpl } from '../../zz-infra/repositories/company-module/company.js';
 
 let isResolved = false;
 

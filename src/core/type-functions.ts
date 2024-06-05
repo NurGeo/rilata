@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DTO } from '../domain/dto';
-import { UnionToTuple } from './tuple-types';
+import { DTO } from '../domain/dto.js';
+import { UnionToTuple } from './tuple-types.js';
 
 export type ContainsAll<T, U> = U extends T ? true : false;
 

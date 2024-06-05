@@ -2,18 +2,18 @@
 /* eslint-disable max-len */
 import { Serve, Server } from 'bun';
 import { AsyncLocalStorage } from 'async_hooks';
-import { RilataServer } from './server';
-import { Controller } from '../controller/controller';
-import { ResultDTO, RilataRequest } from '../controller/types';
-import { GeneralInternalError, GeneralNotFoundError } from '../service/error-types';
-import { GeneralErrorDod } from '../../domain/domain-data/domain-types';
-import { GeneralServerResolver } from './types';
-import { dodUtility } from '../../core/utils/dod/dod-utility';
-import { responseUtility } from '../../core/utils/response/response-utility';
-import { Middleware } from '../middle-after-ware/middleware';
-import { Afterware } from '../middle-after-ware/afterware';
-import { requestStoreDispatcher } from '../request-store/request-store-dispatcher';
-import { RequestStorePayload } from '../request-store/types';
+import { RilataServer } from './server.js';
+import { Controller } from '../controller/controller.js';
+import { ResultDTO, RilataRequest } from '../controller/types.js';
+import { GeneralInternalError, GeneralNotFoundError } from '../service/error-types.js';
+import { GeneralErrorDod } from '../../domain/domain-data/domain-types.js';
+import { GeneralServerResolver } from './types.js';
+import { dodUtility } from '../../core/utils/dod/dod-utility.js';
+import { responseUtility } from '../../core/utils/response/response-utility.js';
+import { Middleware } from '../middle-after-ware/middleware.js';
+import { Afterware } from '../middle-after-ware/afterware.js';
+import { requestStoreDispatcher } from '../request-store/request-store-dispatcher.js';
+import { RequestStorePayload } from '../request-store/types.js';
 
 export abstract class BunServer extends RilataServer {
   port: number | undefined;

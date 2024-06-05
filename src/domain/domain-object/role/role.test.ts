@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test';
-import { Role } from '../../../../src/domain/domain-object/role/role';
-import { RoleAttrs } from '../../../../src/domain/domain-object/types';
+import { Role } from '../../../../src/domain/domain-object/role/role.js';
+import { RoleAttrs } from '../../../../src/domain/domain-object/types.js';
 
 describe('Тесты объекта Role', () => {
   class WorkshopOwnerRole extends Role<RoleAttrs> {}

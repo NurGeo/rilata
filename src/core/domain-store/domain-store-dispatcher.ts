@@ -1,4 +1,4 @@
-import { DomainStorePayload } from './types';
+import { DomainStorePayload } from './types.js';
 
 /**
   Доставляет до доменного слоя технические объекты.

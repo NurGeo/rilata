@@ -1,13 +1,18 @@
-import { describe, expect, spyOn, test } from 'bun:test';
-import { requestStoreMock } from '../../../../../tests/fixtures/request-store-mock';
-import { DomainUser } from '../../../../api/controller/types';
-import { EventRepository } from '../../../../api/database/event.repository';
-import { dodUtility } from '../../../../core/utils/dod/dod-utility';
-import { uuidUtility } from '../../../../core/utils/uuid/uuid-utility';
-import { SqliteTestFixtures } from './fixtures';
+import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
+import { requestStoreMock } from 'tests/fixtures/request-store-mock.js';
+import { DomainUser } from '#api/controller/types.js';
+import { EventRepository } from '#api/database/event.repository.js';
+import { dodUtility } from '#core/utils/dod/dod-utility.js';
+import { uuidUtility } from '#core/utils/uuid/uuid-utility.js';
+import { SqliteTestFixtures } from './fixtures.js';
 
 describe('bun sqlite db transaction tests', () => {
-  const { fakeModuleResolver } = SqliteTestFixtures;
+  const fakeModuleResolver = SqliteTestFixtures.getResolverWithTestDb();
+  const db = fakeModuleResolver.getDatabase() as SqliteTestFixtures.BlogDatabase;
+
+  beforeEach(() => {
+    db.clear();
+  });
 
   const sut = new SqliteTestFixtures.AddPostService();
 
@@ -23,8 +28,8 @@ describe('bun sqlite db transaction tests', () => {
   });
 
   test('успех, транзакция трех репозиториев проходит успешно', async () => {
-    SqliteTestFixtures.db.clear();
-    SqliteTestFixtures.db.addBatch(SqliteTestFixtures.batchRecords);
+    db.clear();
+    db.addBatch(SqliteTestFixtures.batchRecords);
 
     const requestDodAttrs: SqliteTestFixtures.AddPostServiceParams['input']['attrs'] = {
       name: 'Рецензия на пожалуй лучший фильм года "Интерстеллар"',
@@ -101,8 +106,8 @@ describe('bun sqlite db transaction tests', () => {
   });
 
   test('провал, первая транзакция происходит, вторая проваливается что приводит к отмене первого', async () => {
-    SqliteTestFixtures.db.clear();
-    SqliteTestFixtures.db.addBatch(SqliteTestFixtures.batchRecords);
+    db.clear();
+    db.addBatch(SqliteTestFixtures.batchRecords);
 
     const requestDodAttrs: SqliteTestFixtures.AddPostServiceParams['input']['attrs'] = {
       name: 'Рецензия на пожалуй лучший фильм года "Интерстеллар"',

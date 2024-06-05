@@ -1,15 +1,15 @@
-import { requestStoreDispatcher } from '../../../../src/api/request-store/request-store-dispatcher';
-import { DatabaseObjectSavingError } from '../../../../src/core/exeptions';
-import { Logger } from '../../../../src/core/logger/logger';
-import { failure } from '../../../../src/core/result/failure';
-import { success } from '../../../../src/core/result/success';
-import { Result } from '../../../../src/core/result/types';
-import { dodUtility } from '../../../../src/core/utils/dod/dod-utility';
-import { FakeClassImplements } from '../../../fixtures/fake-class-implements';
-import { CompanyDoesntExistByBinError } from '../../company-cmd/domain-object/company/repo-errors';
-import { CompanyOutAttrs } from '../../company-read/domain/company/params';
-import { CompanyReadRepository } from '../../company-read/domain/company/repo';
-import { CompanyReadModuleResolver } from '../../company-read/resolver';
+import { requestStoreDispatcher } from '../../../../src/api/request-store/request-store-dispatcher.js';
+import { DatabaseObjectSavingError } from '../../../../src/core/exeptions.js';
+import { Logger } from '../../../../src/core/logger/logger.js';
+import { failure } from '../../../../src/core/result/failure.js';
+import { success } from '../../../../src/core/result/success.js';
+import { Result } from '../../../../src/core/result/types.js';
+import { dodUtility } from '../../../../src/core/utils/dod/dod-utility.js';
+import { FakeClassImplements } from '../../../fixtures/fake-class-implements.js';
+import { CompanyDoesntExistByBinError } from '../../company-cmd/domain-object/company/repo-errors.js';
+import { CompanyOutAttrs } from '../../company-read/domain/company/params.js';
+import { CompanyReadRepository } from '../../company-read/domain/company/repo.js';
+import { CompanyReadModuleResolver } from '../../company-read/resolver.js';
 
 export class CompanyReadRepositoryImpl implements CompanyReadRepository {
   testRepo: FakeClassImplements.TestMemoryRepository<

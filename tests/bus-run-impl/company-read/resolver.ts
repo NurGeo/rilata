@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CompanyReadResolves } from './resolves';
-import { CompanyReadRepository } from './domain/company/repo';
-import { DelivererToBus } from '../../../src/api/bus/deliverer-to-bus';
-import { ModuleResolver } from '../../../src/api/module/m-resolver';
-import { BusRunServerResolver } from '../zzz-bus-run/s-resolver';
-import { BusModuleResolver } from '../../../src/api/module/bus.m-resolver';
-import { Bus } from '../../../src/api/bus/bus';
-import { BusMessageRepository } from '../../../src/api/database/bus-message.repository';
-import { EventRepository } from '../../../src/api/database/event.repository';
-import { CompanyReadModule } from './module';
-import { TimeoutCallbackDelivererToBus } from '../../../src/api-infra/deliverer-to-bus/timeout-callback-impl';
+import { CompanyReadResolves } from './resolves.js';
+import { CompanyReadRepository } from './domain/company/repo.js';
+import { DelivererToBus } from '../../../src/api/bus/deliverer-to-bus.js';
+import { ModuleResolver } from '../../../src/api/module/m-resolver.js';
+import { BusRunServerResolver } from '../zzz-bus-run/s-resolver.js';
+import { BusModuleResolver } from '../../../src/api/module/bus.m-resolver.js';
+import { Bus } from '../../../src/api/bus/bus.js';
+import { BusMessageRepository } from '../../../src/api/database/bus-message.repository.js';
+import { EventRepository } from '../../../src/api/database/event.repository.js';
+import { CompanyReadModule } from './module.js';
+import { TimeoutCallbackDelivererToBus } from '../../../src/api-infra/deliverer-to-bus/timeout-callback-impl.js';
 
 export class CompanyReadModuleResolver extends ModuleResolver<
   BusRunServerResolver, CompanyReadResolves

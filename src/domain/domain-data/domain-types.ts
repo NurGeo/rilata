@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define */
-import { Caller } from '../../api/controller/types';
-import { ExcludeDeepDotNotationAttrs, GetDtoKeysByDotNotation } from '../../core/type-functions';
-import { UuidType } from '../../core/types';
-import { DTO } from '../dto';
-import { Locale } from '../locale';
+import { Caller } from '../../api/controller/types.js';
+import { ExcludeDeepDotNotationAttrs, GetDtoKeysByDotNotation } from '../../core/type-functions.js';
+import { UuidType } from '../../core/types.js';
+import { DTO } from '../dto.js';
+import { Locale } from '../locale.js';
 
 // ++++++++++ Domain Object Data - DOD ++++++++++
 

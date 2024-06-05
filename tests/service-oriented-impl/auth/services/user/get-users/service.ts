@@ -1,12 +1,12 @@
-import { QueryService } from '../../../../../../src/api/service/concrete-service/query.service';
-import { ServiceResult } from '../../../../../../src/api/service/types';
-import { success } from '../../../../../../src/core/result/success';
-import { dtoUtility } from '../../../../../../src/core/utils/dto/dto-utility';
-import { UserAttrs } from '../../../domain-data/user/params';
-import { UserRepository } from '../../../domain-object/user/repo';
-import { AuthModuleResolver } from '../../../resolver';
-import { GetUsersRequestDod, GetUsersServiceParams } from './s-params';
-import { getUsersValidator } from './v-map';
+import { QueryService } from '../../../../../../src/api/service/concrete-service/query.service.js';
+import { ServiceResult } from '../../../../../../src/api/service/types.js';
+import { success } from '../../../../../../src/core/result/success.js';
+import { dtoUtility } from '../../../../../../src/core/utils/dto/dto-utility.js';
+import { UserAttrs } from '../../../domain-data/user/params.js';
+import { UserRepository } from '../../../domain-object/user/repo.js';
+import { AuthModuleResolver } from '../../../resolver.js';
+import { GetUsersRequestDod, GetUsersServiceParams } from './s-params.js';
+import { getUsersValidator } from './v-map.js';
 
 export class GetingUsersService extends QueryService<
   GetUsersServiceParams, AuthModuleResolver

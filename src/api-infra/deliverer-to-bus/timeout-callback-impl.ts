@@ -1,8 +1,8 @@
-import { DelivererToBus } from '../../api/bus/deliverer-to-bus';
-import { DeliveryBusMessage, PublishBusMessage } from '../../api/bus/types';
-import { BusModuleResolver } from '../../api/module/bus.m-resolver';
-import { GeneralModuleResolver } from '../../api/module/types';
-import { BusServerResolver } from '../../api/server/bus.s-resolver';
+import { DelivererToBus } from '../../api/bus/deliverer-to-bus.js';
+import { DeliveryBusMessage, PublishBusMessage } from '../../api/bus/types.js';
+import { BusModuleResolver } from '../../api/module/bus.m-resolver.js';
+import { GeneralModuleResolver } from '../../api/module/types.js';
+import { BusServerResolver } from '../../api/server/bus.s-resolver.js';
 
 export class TimeoutCallbackDelivererToBus implements DelivererToBus {
   protected moduleResolver!: GeneralModuleResolver;

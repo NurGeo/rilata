@@ -1,14 +1,14 @@
 import { describe, test, expect } from 'bun:test';
-import { BunServer } from '../../../../src/api/server/bun-server';
-import { AuthModule } from '../../auth/module';
-import { CompanyModule } from '../../company/module';
-import { GetCompanyRequestDod } from '../../company/services/get-company/s.params';
-import { SubjectModule } from '../../subject/module';
-import { GetPersonByIinRequestDod } from '../../subject/services/person/get-by-iin/s-params';
-import { serverStarter } from '../starter';
-import { ServiceModulesFixtures } from '../server-fixtures';
-import { TestDatabase } from '../../../../src/api/database/test.database';
-import { dodUtility } from '../../../../src/core/utils/index';
+import { BunServer } from '../../../../src/api/server/bun-server.js';
+import { AuthModule } from '../../auth/module.js';
+import { CompanyModule } from '../../company/module.js';
+import { GetCompanyRequestDod } from '../../company/services/get-company/s.params.js';
+import { SubjectModule } from '../../subject/module.js';
+import { GetPersonByIinRequestDod } from '../../subject/services/person/get-by-iin/s-params.js';
+import { serverStarter } from '../starter.js';
+import { ServiceModulesFixtures } from '../server-fixtures.js';
+import { TestDatabase } from '../../../../src/api/database/test.database.js';
+import { dodUtility } from '../../../../src/core/utils/index.js';
 
 describe('process http requests by server class', async () => {
   const sut = serverStarter.start('all') as BunServer;

@@ -1,5 +1,5 @@
-import { TypeOrAssertRuleAnswer } from '../types';
-import { ValidationRule } from '../validation-rule';
+import { TypeOrAssertRuleAnswer } from '../types.js';
+import { ValidationRule } from '../validation-rule.js';
 
 export class CannotBeEmptyStringAssertionRule extends ValidationRule<'assert', string> {
   requirement = 'Строка обязательна к заполнению';

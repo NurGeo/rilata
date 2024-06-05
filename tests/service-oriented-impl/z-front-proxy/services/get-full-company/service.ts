@@ -1,17 +1,17 @@
-import { DomainUser } from '../../../../../src/api/controller/types';
-import { requestStoreDispatcher } from '../../../../../src/api/request-store/request-store-dispatcher';
-import { QueryService } from '../../../../../src/api/service/concrete-service/query.service';
-import { FullServiceResult, ServiceResult } from '../../../../../src/api/service/types';
-import { failure } from '../../../../../src/core/result/failure';
-import { success } from '../../../../../src/core/result/success';
-import { UserId, UuidType } from '../../../../../src/core/types';
-import { AuthFacade } from '../../../auth/facade';
-import { CompanyFacade } from '../../../company/facade';
-import { SubjectFacade } from '../../../subject/facade';
-import { FullUser } from '../../domain-data/full-company/params';
-import { FrontendProxyModuleResolver } from '../../resolver';
-import { GetFullCompanyRequestDod, GetFullCompanyServiceParams } from './s-params';
-import { getFullCompanyValidator } from './v-map';
+import { DomainUser } from '../../../../../src/api/controller/types.js';
+import { requestStoreDispatcher } from '../../../../../src/api/request-store/request-store-dispatcher.js';
+import { QueryService } from '../../../../../src/api/service/concrete-service/query.service.js';
+import { FullServiceResult, ServiceResult } from '../../../../../src/api/service/types.js';
+import { failure } from '../../../../../src/core/result/failure.js';
+import { success } from '../../../../../src/core/result/success.js';
+import { UserId, UuidType } from '../../../../../src/core/types.js';
+import { AuthFacade } from '../../../auth/facade.js';
+import { CompanyFacade } from '../../../company/facade.js';
+import { SubjectFacade } from '../../../subject/facade.js';
+import { FullUser } from '../../domain-data/full-company/params.js';
+import { FrontendProxyModuleResolver } from '../../resolver.js';
+import { GetFullCompanyRequestDod, GetFullCompanyServiceParams } from './s-params.js';
+import { getFullCompanyValidator } from './v-map.js';
 
 export class GetingFullCompanyService extends QueryService<
   GetFullCompanyServiceParams, FrontendProxyModuleResolver

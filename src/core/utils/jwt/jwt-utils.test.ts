@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { JwtHmacHashUtils } from './jwt-utils';
+import { JwtHmacHashUtils } from './jwt-utils.js';
 
 describe('jwt hmac utils tests', () => {
   const sut = new JwtHmacHashUtils();

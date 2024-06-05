@@ -1,9 +1,9 @@
-import { CommandServiceParams } from '../../../../../../src/api/service/types';
-import { UuidType } from '../../../../../../src/core/types';
-import { RequestDod } from '../../../../../../src/domain/domain-data/domain-types';
-import { AddingPersonActionAttrs, PersonAddedEvent } from '../../../domain-data/person/add-person/a-params';
-import { PersonParams } from '../../../domain-data/person/params';
-import { PersonAlreadyExistsError } from '../../../domain-object/person/repo-errors';
+import { CommandServiceParams } from '../../../../../../src/api/service/types.js';
+import { UuidType } from '../../../../../../src/core/types.js';
+import { RequestDod } from '../../../../../../src/domain/domain-data/domain-types.js';
+import { AddingPersonActionAttrs, PersonAddedEvent } from '../../../domain-data/person/add-person/a-params.js';
+import { PersonParams } from '../../../domain-data/person/params.js';
+import { PersonAlreadyExistsError } from '../../../domain-object/person/repo-errors.js';
 
 export type AddPersonRequestDodAttrs = AddingPersonActionAttrs
 

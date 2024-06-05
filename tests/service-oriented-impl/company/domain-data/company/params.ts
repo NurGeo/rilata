@@ -1,6 +1,6 @@
-import { UserId, UuidType } from '../../../../../src/core/types';
-import { AggregateRootParams, ARDT, DomainMeta } from '../../../../../src/domain/domain-data/domain-types';
-import { CompanyRegisteredEvent } from './register-company/a-params';
+import { UserId, UuidType } from '../../../../../src/core/types.js';
+import { AggregateRootParams, ARDT, DomainMeta } from '../../../../../src/domain/domain-data/domain-types.js';
+import { CompanyRegisteredEvent } from './register-company/a-params.js';
 
 export type CompanyAttrs = {
   id: UuidType,

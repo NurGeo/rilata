@@ -1,4 +1,4 @@
-import { BackendBaseErrors } from '../service/error-types';
+import { BackendBaseErrors } from '../service/error-types.js';
 
 /**
  * dispositionTypeMap - Карта типов disposition для заголовка Content-Disposition.

@@ -1,5 +1,5 @@
-import { UserId } from '../../../core/types';
-import { GroupRoleAttrs } from '../types';
+import { UserId } from '../../../core/types.js';
+import { GroupRoleAttrs } from '../types.js';
 
 export abstract class GroupRole<A extends GroupRoleAttrs> {
   constructor(protected attrs: A) {}

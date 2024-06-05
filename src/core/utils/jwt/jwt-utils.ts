@@ -1,6 +1,6 @@
 import { createHmac } from 'crypto';
-import { DTO } from '../../../domain/dto';
-import { urlUtils } from '../url/url-utils';
+import { DTO } from '../../../domain/dto.js';
+import { urlUtils } from '../url/url-utils.js';
 
 export class JwtHmacHashUtils<T extends DTO | string> {
   /** returned jwt token */

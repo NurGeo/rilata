@@ -1,12 +1,12 @@
-import { DomainUser, ModuleCaller } from '../../../../src/api/controller/types';
-import { GeneralModuleResolver } from '../../../../src/api/module/types';
-import { FullServiceResult } from '../../../../src/api/service/types';
-import { UserId } from '../../../../src/core/types';
-import { dodUtility } from '../../../../src/core/utils/dod/dod-utility';
-import { AuthFacade } from '../facade';
-import { AuthModule } from '../module';
-import { AddUserRequestDod, AddUserServiceParams } from '../services/user/add-user/s-params';
-import { GetUsersRequestDod, GetUsersServiceParams } from '../services/user/get-users/s-params';
+import { DomainUser, ModuleCaller } from '../../../../src/api/controller/types.js';
+import { GeneralModuleResolver } from '../../../../src/api/module/types.js';
+import { FullServiceResult } from '../../../../src/api/service/types.js';
+import { UserId } from '../../../../src/core/types.js';
+import { dodUtility } from '../../../../src/core/utils/dod/dod-utility.js';
+import { AuthFacade } from '../facade.js';
+import { AuthModule } from '../module.js';
+import { AddUserRequestDod, AddUserServiceParams } from '../services/user/add-user/s-params.js';
+import { GetUsersRequestDod, GetUsersServiceParams } from '../services/user/get-users/s-params.js';
 
 /** Реализация фасада для работы в рамках одного сервера */
 export class AuthFacadeOneServerImpl implements AuthFacade {

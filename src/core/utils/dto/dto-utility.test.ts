@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
-import { AssertionException } from '../../exeptions';
-import { ReplaceDtoAttrs } from '../../type-functions';
-import { dtoUtility } from './dto-utility';
+import { AssertionException } from '../../exeptions.js';
+import { ReplaceDtoAttrs } from '../../type-functions.js';
+import { dtoUtility } from './dto-utility.js';
 
 const sut = dtoUtility;
 

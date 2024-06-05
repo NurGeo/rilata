@@ -1,11 +1,11 @@
 import { SQLQueryBindings } from 'bun:sqlite';
-import { TestRepository } from '../../../api/database/test.repository';
-import { GeneralModuleResolver } from '../../../api/module/types';
-import { Logger } from '../../../core/logger/logger';
-import { dtoUtility } from '../../../core/utils/dto/dto-utility';
-import { DTO } from '../../../domain/dto';
-import { BunSqliteDatabase } from './database';
-import { MigrateRow } from './types';
+import { TestRepository } from '#api/database/test.repository.js';
+import { GeneralModuleResolver } from '#api/module/types.js';
+import { Logger } from '#core/logger/logger.js';
+import { dtoUtility } from '#core/utils/dto/dto-utility.js';
+import { DTO } from '#domain/dto.js';
+import { BunSqliteDatabase } from './database.js';
+import { MigrateRow } from './types.js';
 
 export abstract class BunSqliteRepository<
   TN extends string, R extends DTO

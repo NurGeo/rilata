@@ -1,8 +1,8 @@
-import { GeneralModuleResolver } from '../../../../../src/api/module/types';
-import { Repositoriable } from '../../../../../src/api/resolve/repositoriable';
-import { Result } from '../../../../../src/core/result/types';
-import { CompanyDoesntExistByBinError } from '../../../company-cmd/domain-object/company/repo-errors';
-import { CompanyOutAttrs } from './params';
+import { GeneralModuleResolver } from '../../../../../src/api/module/types.js';
+import { Repositoriable } from '../../../../../src/api/resolve/repositoriable.js';
+import { Result } from '../../../../../src/core/result/types.js';
+import { CompanyDoesntExistByBinError } from '../../../company-cmd/domain-object/company/repo-errors.js';
+import { CompanyOutAttrs } from './params.js';
 
 export interface CompanyReadRepository {
   init(resolver: GeneralModuleResolver): void

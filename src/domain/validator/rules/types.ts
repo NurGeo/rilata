@@ -1,5 +1,5 @@
-import { Locale } from '../../locale';
-import { ValidationRule } from './validation-rule';
+import { Locale } from '../../locale.js';
+import { ValidationRule } from './validation-rule.js';
 
 export type RuleType = 'nullable' |'type' | 'assert' | 'validate';
 
