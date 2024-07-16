@@ -24,6 +24,8 @@ export type UserId = UuidType;
 /** Имя атрибута через точечную нотацию */
 export type DeepAttr = string;
 
+export type MaybePromise<T> = T | Promise<T>;
+
 export type Constructor<T> = new (...args: any[]) => T;
 
 export type ConstructorReturnType<C extends Constructor<any>>

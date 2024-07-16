@@ -3,12 +3,13 @@ import { GeneralBotModuleResolves } from '#api/module/bot-types.js';
 import { ModuleResolver } from '#api/module/m-resolver.js';
 import { GeneralServerResolver } from '#api/server/types.js';
 import { ModuleController } from './m-controller.js';
-import { ApiMethodNames, ApiMethodsParams, BotReplyMessage } from '#api/bot/types.js';
+import { ApiMethodNames, ApiMethodsParams } from '#api/bot/types.js';
 import { TELEGRAM_API } from './constants.ts';
 import { dtoUtility } from '#core/utils/dto/dto-utility.js';
+import { BotModule } from '#api/module/bot.module.js';
 
 export class BotModuleController extends ModuleController {
-  constructor(protected botName: string, protected botToken: string) {
+  constructor(protected botToken: string) {
     super();
   }
 
@@ -26,7 +27,7 @@ export class BotModuleController extends ModuleController {
 
   async executeUpdate(update: Update): Promise<void> {
     const module = this.resolver.getModule();
-    const payload = await module.executeService(this.botName, update) as BotReplyMessage;
+    const payload = await (module as BotModule).executeService(update);
     if (payload.method === 'notResponse') return;
 
     await this.postRequest(payload);

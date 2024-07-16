@@ -15,6 +15,7 @@ describe('bun sqlite db transaction tests', () => {
   });
 
   const sut = new SqliteTestFixtures.AddPostService();
+  sut.init(fakeModuleResolver);
 
   const caller: DomainUser = {
     type: 'DomainUser',

@@ -8,8 +8,8 @@ import { ModuleResolver } from './m-resolver.ts';
 import { Module } from './module.js';
 import { ApiMethodsParams, BotReplyMessage, SendMessage } from '#api/bot/types.js';
 import { TELEGRAM_API } from '#api/controller/constants.js';
-import { BotDialogueRouter } from '#api/bot/dialogue-router.js';
 import { updateUtils } from '#api/bot/utils/update.js';
+import { BotDialogueService } from '#api/bot/dialogue-service.js';
 
 type TelegramId = string;
 
@@ -21,26 +21,11 @@ type GetUpdatesData = {
 }
 
 export abstract class BotModule extends Module {
-  protected abstract services: BotDialogueRouter[];
+  protected abstract service: BotDialogueService;
 
   declare protected moduleController: BotModuleController;
 
   declare protected moduleResolver: ModuleResolver<GeneralServerResolver, GeneralBotModuleResolves>;
-
-  protected botName!: string;
-
-  protected botToken!: string;
-
-  protected botSubscribeMode!: BotSubscribeMode;
-
-  protected updatesConfig_?: GetUpdatesMode;
-
-  protected get updatesConfig(): GetUpdatesMode {
-    if (!this.updatesConfig_) {
-      throw this.logger.error('should not have been called without first being installed');
-    }
-    return this.updatesConfig_;
-  }
 
   protected updatesData_?: GetUpdatesData;
 
@@ -55,29 +40,32 @@ export abstract class BotModule extends Module {
     moduleResolver: ModuleResolver<GeneralServerResolver, GeneralBotModuleResolves>,
     serverResolver: GeneralServerResolver,
   ): void {
-    this.moduleResolver = moduleResolver;
-    const resolves = moduleResolver.getModuleResolves();
-    this.botToken = resolves.botToken;
-    this.botName = resolves.botName;
-    this.botSubscribeMode = resolves.botSubscribeMode;
-    this.moduleController = new BotModuleController(this.botName, this.botToken);
+    const { botToken } = moduleResolver.getModuleResolves();
+    this.moduleController = new BotModuleController(botToken);
     super.init(moduleResolver, serverResolver);
-    this.services.forEach((s) => (s as any).init(this.moduleResolver)); // s BotDialogue
     this.subscribeToUpdates();
+    this.service.init(moduleResolver);
+  }
+
+  getSubscribeMode(): BotSubscribeMode {
+    return this.moduleResolver.getModuleResolves().botSubscribeMode;
+  }
+
+  getBotToken(): string {
+    return this.moduleResolver.getModuleResolves().botToken;
   }
 
   getModuleController(): BotModuleController {
     return this.moduleController;
   }
 
-  async executeService(routerName: string, update: Update): Promise<BotReplyMessage> {
+  async executeService(update: Update): Promise<BotReplyMessage> {
     try {
-      const service = this.getService(routerName) as BotDialogueRouter;
-      return service.execute(update);
+      return this.service.execute(update);
     } catch (e) {
       this.logger.error(
         `Ошибка при обработке запроса телеграм. Err: ${(e as Error).message}`,
-        { serviceName: routerName, update },
+        { serviceName: this.moduleName, update },
         e as Error,
       );
       const msg: SendMessage = {
@@ -90,14 +78,21 @@ export abstract class BotModule extends Module {
     }
   }
 
+  getServices(): BotDialogueService[] {
+    return [this.service];
+  }
+
+  getService(): BotDialogueService {
+    return this.service;
+  }
+
   protected subscribeToUpdates(): void {
-    if (this.botSubscribeMode.type === 'getUpdates') {
-      const resolves = this.moduleResolver.getModuleResolves();
+    if (this.getSubscribeMode().type === 'getUpdates') {
       this.unSubscribeFromWebhook().then(() => {
-        this.moduleResolver.getLogger().info('successfully webhook unsubscribed for bot');
-        this.updatesConfig_ = resolves.botSubscribeMode as GetUpdatesMode;
         this.subscribeGetUpdates();
-        this.logger.info(`successfully subscribed for bot: ${this.botName}. Mode: ${this.botSubscribeMode.type}.`);
+        const { moduleName } = this.moduleResolver.getModuleResolves();
+        const msg = `successfully subscribed for bot module: ${moduleName}. Current mode: getUpdates.`;
+        this.logger.info(msg);
       });
     } else {
       this.subscribeToWebHook();
@@ -136,6 +131,9 @@ export abstract class BotModule extends Module {
     if (!response.ok) {
       throw new Error('Failed to unsubscribe from webhook');
     }
+    const resolves = this.moduleResolver.getModuleResolves();
+    const msg = `successfully webhook unsubscribed for bot module: ${resolves.moduleName}`;
+    this.moduleResolver.getLogger().info(msg);
   }
 
   protected subscribeGetUpdates(lastUpdate?: Update): void {
@@ -157,9 +155,10 @@ export abstract class BotModule extends Module {
       this.updatesData.newUpdateId = lastUpdate.update_id + 1;
       this.updatesData.atLastUpdate = Date.now();
     }
+    const getUpdateMode = this.getSubscribeMode() as GetUpdatesMode;
     if (this.updatesData.mode === 'activeMode' && !lastUpdate) {
       const timeShift = Date.now() - this.updatesData.atLastUpdate;
-      const needToPassive = timeShift > this.updatesConfig.timeoutToPassive;
+      const needToPassive = timeShift > getUpdateMode.timeoutToPassive;
       if (needToPassive) {
         this.updatesData.mode = 'passiveMode';
       }
@@ -167,8 +166,8 @@ export abstract class BotModule extends Module {
       this.updatesData.mode = 'activeMode';
     }
     const timeout = this.updatesData.mode === 'activeMode'
-      ? this.updatesConfig.activeModeTimout
-      : this.updatesConfig.passiveModeTimeout;
+      ? getUpdateMode.activeModeTimout
+      : getUpdateMode.passiveModeTimeout;
     this.updatesData.timer = subscribe(timeout);
   }
 
@@ -231,6 +230,6 @@ export abstract class BotModule extends Module {
   }
 
   getBotUrl(): string {
-    return `${TELEGRAM_API}bot${this.botToken}`;
+    return `${TELEGRAM_API}bot${this.getBotToken()}`;
   }
 }

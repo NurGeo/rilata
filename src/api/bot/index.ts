@@ -1,10 +1,12 @@
-export { BotDialogueRouter } from './dialogue-router.js';
+export { BotDialogueService } from './dialogue-service.js';
+export { BotMiddleware } from './middleware.js';
 export { BotDialogueRepository } from './dialogue-repo.js';
 export { BotState } from './state.js';
 export type {
   DialogueContext, NotResponse, SendMessage, BotReplyMessage,
   ApiMethodsParams, ApiMethodNames,
   UpdateContextAttrs, FinishContextAttrs,
+  GeneralBotMiddleware,
 } from './types.js';
 export { updateUtils } from './utils/update.js';
 export { messageUtils } from './utils/message.js';

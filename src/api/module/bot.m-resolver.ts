@@ -11,8 +11,4 @@ export abstract class BotModuleResolver<
   getBotToken(): string {
     return this.resolves.botToken;
   }
-
-  getBotName(): string {
-    return this.resolves.botName;
-  }
 }

@@ -21,6 +21,7 @@ import { dtoUtility } from '#core/utils/dto/dto-utility.js';
 import { ServiceBaseErrors } from '#api/service/error-types.js';
 import { badRequestError, internalError } from '#api/service/constants.js';
 import { success } from '#core/result/success.js';
+import { AssertionException } from '#core/exeptions.js';
 
 export abstract class WebModule extends Module {
   readonly abstract queryServices: GeneraQueryService[]
@@ -39,6 +40,7 @@ export abstract class WebModule extends Module {
   ): void {
     super.init(moduleResolver, serverResolver);
     this.services = [...this.queryServices, ...this.commandServices, ...this.eventServices];
+    this.services.forEach((service) => service.init(moduleResolver));
   }
 
   /** Обеспачиват выполнение сервиса. */
@@ -54,6 +56,20 @@ export abstract class WebModule extends Module {
     } catch (e) {
       return this.catchRunModeError(inputDod, caller, e as Error);
     }
+  }
+
+  getServices(): GeneralWebService[] {
+    return this.services;
+  }
+
+  getService<S extends GeneralWebService>(handleName: S['handleName']): S {
+    const service = this.services.find((s) => s.handleName === handleName);
+    if (!service) {
+      const errStr = `Не найден обработчик для запроса ${handleName} в модуле ${this.moduleName}`;
+      this.logger.warning(errStr);
+      throw new AssertionException(errStr);
+    }
+    return service as S;
   }
 
   protected catchRunModeError(

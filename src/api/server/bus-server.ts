@@ -16,7 +16,7 @@ export abstract class BusBunServer extends BunServer {
     this.modules.forEach((module) => {
       const busResolver = this.resolver as unknown as BusServerResolver;
       const bus = busResolver.getBus();
-      module.getServises().forEach((service) => {
+      module.getServices().forEach((service) => {
         if (service instanceof EventService) {
           const eventSubscribe: SubcribeToBusMessage = {
             type: service.busMessageType,

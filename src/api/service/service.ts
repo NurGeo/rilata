@@ -1,18 +1,18 @@
 import { Logger } from '../../core/logger/logger.js';
 import { GeneralModuleResolver } from '../module/types.js';
-import { requestStoreDispatcher } from '../request-store/request-store-dispatcher.js';
 
+/** Обработчик входящих в модуль запросов */
 export abstract class Service<R extends GeneralModuleResolver> {
   abstract aRootName: string;
 
   abstract serviceName: string;
 
-  abstract handleName: string;
-
   abstract moduleName: string;
 
-  protected get moduleResolver(): R {
-    return requestStoreDispatcher.getPayload().moduleResolver as R;
+  protected moduleResolver!: R;
+
+  init(resolver: R): void {
+    this.moduleResolver = resolver;
   }
 
   protected get logger(): Logger {

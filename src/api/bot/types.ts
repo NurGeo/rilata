@@ -1,6 +1,7 @@
 import { ApiMethods } from '@grammyjs/types';
 import { Timestamp } from '#core/types.js';
 import { DTO } from '#domain/dto.js';
+import { BotMiddleware } from './middleware.ts';
 
 export type DialogueContext<R extends DTO, SN extends string> = {
   telegramId: string;
@@ -9,6 +10,8 @@ export type DialogueContext<R extends DTO, SN extends string> = {
   lastUpdate: Timestamp;
   payload: R;
 }
+
+export type GeneralBotMiddleware = BotMiddleware<DialogueContext<DTO, string>>
 
 export type NotResponse = {
   method: 'notResponse',
