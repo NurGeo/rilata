@@ -1,6 +1,7 @@
 import { Update } from '@grammyjs/types';
 import { BotReplyMessage } from './types.ts';
 import { GeneralModuleResolver } from '#api/module/types.js';
+import { MaybePromise } from '#core/types.js';
 import { BotDialogueService } from './dialogue-service.ts';
 
 export abstract class BotState {
@@ -16,5 +17,5 @@ export abstract class BotState {
     this.router = router;
   }
 
-  abstract execute(update: Update): Promise<BotReplyMessage>
+  abstract execute(update: Update): MaybePromise<BotReplyMessage>
 }

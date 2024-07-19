@@ -70,7 +70,7 @@ export abstract class BotModule extends Module {
       );
       const msg: SendMessage = {
         method: 'sendMessage',
-        chat_id: updateUtils.getChatId(update),
+        chat_id: updateUtils.getUserId(update),
         parse_mode: 'Markdown',
         text: '**К сожалению произошла непредвиденная ошибка.**\nПопробуйте еще раз, но с большой вероятностью ошибка полностью на нашей стороне.\nМы занимаемся этой ошибкой, но просим помочь вас и переслать это сообщение лицу которое предоставило ссылку на этот бот.',
       };
@@ -222,7 +222,7 @@ export abstract class BotModule extends Module {
   protected getUpdatesByUsers(updates: Update[]): Record<TelegramId, Update[]> {
     const result: Record<TelegramId, Update[]> = {};
     updates.forEach((update) => {
-      const telegramId = updateUtils.getChatId(update);
+      const telegramId = updateUtils.getUserId(update);
       if (telegramId in result) result[telegramId].push(update);
       else result[telegramId] = [update];
     });

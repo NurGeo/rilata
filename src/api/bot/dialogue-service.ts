@@ -36,7 +36,7 @@ export abstract class BotDialogueService extends Service<GeneralModuleResolver> 
         if (result) return result;
       }
 
-      const telegramId = updateUtils.getChatId(update);
+      const telegramId = updateUtils.getUserId(update);
       const context = this.findContext(telegramId);
       const stateName = context ? context.stateName : 'initialState';
 
@@ -68,7 +68,7 @@ export abstract class BotDialogueService extends Service<GeneralModuleResolver> 
   }
 
   protected processCatch(update: Update, err: Error): BotReplyMessage {
-    const chatId = updateUtils.getChatId(update);
+    const chatId = updateUtils.getUserId(update);
     const context = this.findContext(chatId);
     this.moduleResolver.getLogger().error(
       err.message, { update, context }, err,
