@@ -6,7 +6,7 @@ describe('bun sqlite db: add batch to db, and clear db tests', () => {
   const fakeModuleResolver = SqliteTestFixtures.getResolverWithTestDb();
   const db = fakeModuleResolver.getDatabase() as SqliteTestFixtures.TestBunSqliteDatabase;
   beforeEach(() => {
-    db.clear();
+    db.clearDb();
   });
 
   describe('add batch to db tests', () => {
@@ -104,7 +104,7 @@ describe('bun sqlite db: add batch to db, and clear db tests', () => {
 
   describe('clear db tests', () => {
     beforeEach(() => {
-      db.clear();
+      db.clearDb();
     });
 
     test('успех, бд полностью очищена, но таблица миграции не затрагивается', () => {
@@ -128,7 +128,7 @@ describe('bun sqlite db: add batch to db, and clear db tests', () => {
       const migrationsAfterBatch = db.sqliteDb.query('SELECT * FROM migrations').all();
       expect(migrationsAfterBatch.length).toBe(1);
 
-      db.clear();
+      db.clearDb();
 
       const usersAfterClear = db.sqliteDb.query('SELECT * FROM users').all();
       expect(usersAfterClear.length).toBe(0);

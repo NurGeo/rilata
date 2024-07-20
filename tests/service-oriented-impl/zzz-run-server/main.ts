@@ -15,7 +15,7 @@ function parseArgs(
       `init test database fixtures for modules: ${modules.map((m) => m.moduleName).join('; ')}`,
     );
     modules.filter((m) => m.moduleName !== 'FrontProxyModule').forEach((module) => {
-      const db = module.getModuleResolver().getDatabase() as unknown as TestDatabase<true>;
+      const db = module.getModuleResolver().getDatabase() as unknown as TestDatabase;
       db.addBatch(ServiceModulesFixtures.repoFixtures);
     });
     resolver.getLogger().info('init test database fixtures finished');

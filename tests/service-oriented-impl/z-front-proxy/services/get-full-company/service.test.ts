@@ -26,8 +26,8 @@ describe('get full company service tests', async () => {
       testServer.getModule<SubjectModule>('SubjectModule'),
       testServer.getModule<CompanyModule>('CompanyModule'),
     ].forEach(async (module) => {
-      const db = module.getModuleResolver().getDatabase() as unknown as TestDatabase<true>;
-      await db.clear();
+      const db = module.getModuleResolver().getDatabase() as unknown as TestDatabase;
+      await db.clearDb();
       await db.addBatch(ServiceModulesFixtures.repoFixtures);
     });
   });

@@ -43,8 +43,8 @@ describe('register company saga service tests', async () => {
   let addUserMock: Mock<(...args: any[]) => any>;
 
   beforeEach(async () => {
-    const db = resolver.getDatabase() as unknown as TestDatabase<true>;
-    await db.clear();
+    const db = resolver.getDatabase() as unknown as TestDatabase;
+    await db.clearDb();
     await db.addBatch(ServiceModulesFixtures.repoFixtures);
     addPersonMock = spyOn(subjectFacade, 'addPerson');
     getPersonMock = spyOn(subjectFacade, 'getPersonByIin');

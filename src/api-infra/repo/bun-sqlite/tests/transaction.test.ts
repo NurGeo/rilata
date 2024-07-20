@@ -11,7 +11,7 @@ describe('bun sqlite db transaction tests', () => {
   const db = fakeModuleResolver.getDatabase() as SqliteTestFixtures.TestBunSqliteDatabase;
 
   beforeEach(() => {
-    db.clear();
+    db.clearDb();
   });
 
   const sut = new SqliteTestFixtures.AddPostService();
@@ -29,7 +29,7 @@ describe('bun sqlite db transaction tests', () => {
   });
 
   test('успех, транзакция трех репозиториев проходит успешно', async () => {
-    db.clear();
+    db.clearDb();
     db.addBatch(SqliteTestFixtures.batchRecords);
 
     const requestDodAttrs: SqliteTestFixtures.AddPostServiceParams['input']['attrs'] = {
@@ -107,7 +107,7 @@ describe('bun sqlite db transaction tests', () => {
   });
 
   test('провал, первая транзакция происходит, вторая проваливается что приводит к отмене первого', async () => {
-    db.clear();
+    db.clearDb();
     db.addBatch(SqliteTestFixtures.batchRecords);
 
     const requestDodAttrs: SqliteTestFixtures.AddPostServiceParams['input']['attrs'] = {

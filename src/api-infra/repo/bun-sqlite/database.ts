@@ -15,7 +15,7 @@ import { consoleColor } from '#core/utils/string/console-color.js';
 
 const MEMORY_PATH = ':memory:';
 
-export class BunSqliteDatabase implements FullDatabase<false> {
+export class BunSqliteDatabase implements FullDatabase {
   protected migrationRepo: MigrationsSqliteRepository;
 
   protected resolver!: GeneralModuleResolver;
@@ -142,7 +142,7 @@ export class BunSqliteDatabase implements FullDatabase<false> {
     return repo as R;
   }
 
-  addBatch<R extends TestRepository<string, DTO, false>>(
+  addBatch<R extends TestRepository<string, DTO>>(
     batchRecords: TestBatchRecords<R>,
   ): void {
     Object.entries(batchRecords).map(([tableName, records]) => {
@@ -151,7 +151,7 @@ export class BunSqliteDatabase implements FullDatabase<false> {
     });
   }
 
-  clear(): void {
+  clearDb(): void {
     const transaction = this.sqliteDb.transaction(() => {
       this.getAllRepositories().forEach((repo) => repo.clear());
     });

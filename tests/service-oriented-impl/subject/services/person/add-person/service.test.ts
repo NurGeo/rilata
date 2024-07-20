@@ -26,8 +26,8 @@ describe('add person service tests', async () => {
   });
 
   beforeEach(async () => {
-    const db = resolver.getDatabase() as unknown as TestDatabase<true>;
-    await db.clear();
+    const db = resolver.getDatabase() as unknown as TestDatabase;
+    await db.clearDb();
     await db.addBatch(ServiceModulesFixtures.repoFixtures);
   });
 

@@ -12,7 +12,7 @@ describe('bun sql event repository tests', () => {
   const sut = db.getRepository<EventRepositorySqlite>('events');
 
   beforeEach(() => {
-    db.clear();
+    db.clearDb();
   });
 
   describe('add events tests', () => {

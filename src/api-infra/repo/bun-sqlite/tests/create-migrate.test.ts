@@ -8,7 +8,7 @@ describe('sqlite create and migrate tests', () => {
   const fakeModuleResolver = SqliteTestFixtures.getResolverWithTestDb();
   const db = fakeModuleResolver.getDatabase() as SqliteTestFixtures.TestBunSqliteDatabase;
   beforeEach(() => {
-    db.clear();
+    db.clearDb();
   });
 
   test('успех. бд и таблицы созданы', () => {

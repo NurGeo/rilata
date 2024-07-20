@@ -20,7 +20,7 @@ import { GeneralArParams, GeneralEventDod } from '../../src/domain/domain-data/d
 import { DTO } from '../../src/domain/dto.js';
 
 export namespace FakeClassImplements {
-  export class TestMemoryDatabase implements TestDatabase<true> {
+  export class TestMemoryDatabase implements TestDatabase {
     protected resolver!: GeneralModuleResolver;
 
     // eslint-disable-next-line no-use-before-define
@@ -32,7 +32,7 @@ export namespace FakeClassImplements {
 
     stop(): void {}
 
-    async clear(): Promise<void[]> {
+    async clearDb(): Promise<void[]> {
       return Promise.all(this.repositories.map((r) => r.clear()));
     }
 
@@ -42,7 +42,7 @@ export namespace FakeClassImplements {
       repo.init(this.resolver);
     }
 
-    async addBatch<R extends TestRepository<string, DTO, true>>(
+    async addBatch<R extends TestRepository<string, DTO>>(
       batchRecords: TestBatchRecords<R>,
     ): Promise<void> {
       await Promise.all(Object.entries(batchRecords)
@@ -84,7 +84,7 @@ export namespace FakeClassImplements {
     REC extends DTO,
     ID_ATTR_NAME extends GetStringAttrsKeys<REC>,
   >
-  implements TestRepository<T_NAME, REC, true> {
+  implements TestRepository<T_NAME, REC> {
     protected records: Record<RecordId, REC> = {};
 
     protected transactionCache: Record<TransactionId, Record<RecordId, REC>> = {};

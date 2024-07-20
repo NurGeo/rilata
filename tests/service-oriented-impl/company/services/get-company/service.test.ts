@@ -23,8 +23,8 @@ describe('register company saga service tests', async () => {
   });
 
   beforeEach(() => {
-    const db = resolver.getDatabase() as unknown as TestDatabase<true>;
-    db.clear();
+    const db = resolver.getDatabase() as unknown as TestDatabase;
+    db.clearDb();
     db.addBatch(ServiceModulesFixtures.repoFixtures);
   });
 

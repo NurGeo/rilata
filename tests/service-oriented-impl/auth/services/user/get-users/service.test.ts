@@ -22,8 +22,8 @@ describe('get users service test', async () => {
   const sut = module.getService<GetingUsersService>('getUsers');
 
   beforeEach(async () => {
-    const db = resolver.getDatabase() as unknown as TestDatabase<true>;
-    await db.clear();
+    const db = resolver.getDatabase() as unknown as TestDatabase;
+    await db.clearDb();
     await db.addBatch<UserRepositoryImpl['testRepo']>({
       user_repo: [
         {

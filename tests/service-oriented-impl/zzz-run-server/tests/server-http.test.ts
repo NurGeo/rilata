@@ -1,4 +1,4 @@
-import { describe, test, expect, spyOn } from 'bun:test';
+import { describe, test, expect } from 'bun:test';
 import { BunServer } from '../../../../src/api/server/bun-server.js';
 import { AuthModule } from '../../auth/module.js';
 import { CompanyModule } from '../../company/module.js';
@@ -19,7 +19,7 @@ describe('process http requests by server class', async () => {
     sut.getModule<CompanyModule>('CompanyModule'),
     sut.getModule<AuthModule>('AuthModule'),
   ].map((module) => {
-    const db = module.getModuleResolver().getDatabase() as unknown as TestDatabase<true>;
+    const db = module.getModuleResolver().getDatabase() as unknown as TestDatabase;
     return db.addBatch(ServiceModulesFixtures.repoFixtures);
   });
   await Promise.all(promises);

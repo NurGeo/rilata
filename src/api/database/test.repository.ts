@@ -1,12 +1,12 @@
+import { MaybePromise } from '#core/types.js';
 import { DTO } from '../../domain/dto.js';
-import { Asyncable } from './types.js';
 
 export interface TestRepository<
-  TABLE_NAME extends string, RECORDS extends DTO, ASYNC extends boolean
+  TABLE_NAME extends string, RECORDS extends DTO
 > {
   tableName: TABLE_NAME,
 
-  addBatch(records: RECORDS[]): Asyncable<ASYNC, void>
+  addBatch(records: RECORDS[]): MaybePromise<void>
 
-  clear(): Asyncable<ASYNC, void>
+  clear(): MaybePromise<void>
 }

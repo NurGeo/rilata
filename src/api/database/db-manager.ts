@@ -10,12 +10,13 @@ import { DatabaseServiceRow } from './types.ts';
 *   Выполнить обслуживание БД. Примеры использования:
     Создать файл обуслуживающий команду и передающий в конструктор server-starter;
 *   `METHOD=status COLOR=1 bun ./service-db.ts` - распечатает имена доступных модулей.
-      COLOR - добавляет цвета.
+      COLOR - добавляет цвета (по умолчанию включен, 0 - выключить)
 *   `METHOD=create MODULES=all bun ./service-db.ts` - создаст БД для всех модулей и сделает миграции
 *   `METHOD=create MODULES=Module1,Module2 bun ./service-db.ts` - создаст БД
       для приведенных модулей и сделает миграции.
 *   `METHOD=migrate MODULES=Module1,Module2 bun ./service-db.ts` - выполнит миграции БД
       для приведенных модулей
+*   `METHOD=clear MODULES=Module1 bun ./service-db.ts` - очистит БД для Module1
 */
 export class DatabaseManager {
   private server: RilataServer;
@@ -39,6 +40,10 @@ export class DatabaseManager {
     this.server.stop();
   }
 
+  getDatabase(moduleName: string): ServiceDatabase | undefined {
+    return this.getDbServiceRows().find((row) => row.moduleName === moduleName)?.db;
+  }
+
   protected async getStatuses(): Promise<string> {
     const color = Boolean(process.env.COLOR ?? 1);
     const promises = Promise.all(
@@ -48,20 +53,23 @@ export class DatabaseManager {
     return resolveds.join('\n\n');
   }
 
-  protected getMethod(): 'migrate' | 'create' | 'status' {
+  protected getMethod(): 'migrate' | 'create' | 'status' | 'clear' {
     const envMethod = process.env.METHOD;
-    if (envMethod && (envMethod === 'migrate' || envMethod === 'create' || envMethod === 'status')) {
+    if (envMethod && (
+      envMethod === 'migrate' || envMethod === 'create' || envMethod === 'status' || envMethod === 'clear'
+    )) {
       return envMethod;
     }
     throw Error('not finded or not valid method for work with databases');
   }
 
-  protected async runDatabases(method: 'migrate' | 'create'): Promise<void> {
+  protected async runDatabases(method: 'migrate' | 'create' | 'clear'): Promise<void> {
     const moduleNames = this.getEnvModuleNames();
     const databases = this.getDbServiceRows(moduleNames);
     databases.forEach(async (item) => {
-      if (method === 'migrate') (item.db as ServiceDatabase).migrateDb();
-      else if (method === 'create') (item.db as ServiceDatabase).createDb();
+      if (method === 'migrate') item.db.migrateDb();
+      else if (method === 'create') item.db.createDb();
+      else if (method === 'clear') item.db.clearDb();
     });
     this.server.stop();
   }
@@ -83,7 +91,7 @@ export class DatabaseManager {
       : modules.filter((m) => moduleNames.includes(m.moduleName));
     return runModules.map((m) => ({
       moduleName: m.moduleName,
-      db: m.getModuleResolver().getDatabase() as FullDatabase<false>,
+      db: m.getModuleResolver().getDatabase() as FullDatabase,
     }));
   }
 }

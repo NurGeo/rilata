@@ -5,8 +5,6 @@ import { Logger } from './logger.js';
 import { InputLoggerModes, loggerModes } from './logger-modes.js';
 import { consoleColor } from '#core/utils/string/console-color.js';
 
-const toColor = consoleColor.fgColor;
-
 export class ConsoleLogger implements Logger {
   timeFormat: Intl.DateTimeFormatOptions = {
     dateStyle: 'short',

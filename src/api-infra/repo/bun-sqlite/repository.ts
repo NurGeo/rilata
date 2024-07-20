@@ -10,7 +10,7 @@ import { DatabaseServiceStatus } from '#api/database/types.js';
 
 export abstract class BunSqliteRepository<
   TN extends string, R extends DTO
-> implements TestRepository<TN, R, false> {
+> implements TestRepository<TN, R> {
   abstract tableName: TN;
 
   protected resolver!: GeneralModuleResolver;

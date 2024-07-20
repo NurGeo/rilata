@@ -65,7 +65,7 @@ const repo = db.getRepository<JsonableBotDialogueRepository>('bot_dialogues');
 
 describe('BotDialogueRepositorySqlite', () => {
   beforeEach(() => {
-    db.clear();
+    db.clearDb();
   });
 
   test('add should add new context and throw error if active context exists', async () => {
