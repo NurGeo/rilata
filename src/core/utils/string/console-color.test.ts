@@ -62,7 +62,7 @@ describe('ConsoleColor', () => {
     expect(result).toBe(`\x1b[41m${text}\x1b[0m`);
   });
 
-  test.skip('test print', () => {
+  test('test print', () => {
     consoleColor.test();
     const cc = consoleColor;
     // eslint-disable-next-line no-console

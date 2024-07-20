@@ -3,6 +3,9 @@ import { AssertionException } from '../exeptions.js';
 import { BinaryKeyFlag } from '../utils/binary/binary-flag/binary-flag.js';
 import { Logger } from './logger.js';
 import { InputLoggerModes, loggerModes } from './logger-modes.js';
+import { consoleColor } from '#core/utils/string/console-color.js';
+
+const toColor = consoleColor.fgColor;
 
 export class ConsoleLogger implements Logger {
   timeFormat: Intl.DateTimeFormatOptions = {
@@ -56,7 +59,13 @@ export class ConsoleLogger implements Logger {
 
   private makeLogString(type: string, log: string): string {
     const dateTime = new Date().toLocaleString(undefined, this.timeFormat);
-    return `${type}-${dateTime}: ${log}`;
+    const suffix = `[${type}-${dateTime}]`.padEnd(26);
+    const color = type.includes('ERROR')
+      ? 'Red'
+      : type === 'INFO'
+        ? 'Green'
+        : 'Yellow';
+    return `${consoleColor.fgColor(suffix, color)}${log}`;
   }
 
   private getErrStack(err: Error): { stack: string[] } {
