@@ -40,7 +40,7 @@ export class DatabaseManager {
   }
 
   protected async getStatuses(): Promise<string> {
-    const color = Boolean(process.env.COLOR);
+    const color = Boolean(process.env.COLOR ?? 1);
     const promises = Promise.all(
       this.getDbServiceRows().map((sRow) => sRow.db.getStatusAsString(color)),
     );
