@@ -21,4 +21,8 @@ export type WebhookMode = {
   type: 'webhook',
 }
 
-export type BotSubscribeMode = GetUpdatesMode | WebhookMode
+export type OffMode = {
+  type: 'off',
+}
+
+export type BotSubscribeMode = GetUpdatesMode | WebhookMode | OffMode

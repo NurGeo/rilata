@@ -48,7 +48,7 @@ export namespace SqliteTestFixtures {
   export class UserRepositorySqlite extends BunSqliteRepository<'users', UserAttrs> implements UserRepository {
     tableName = 'users' as const;
 
-    migrationWRows: MigrateRow[] = [];
+    migrationRows: MigrateRow[] = [];
 
     create(): void {
       this.db.sqliteDb.run(
@@ -125,7 +125,7 @@ export namespace SqliteTestFixtures {
     implements PostRepository {
     tableName = 'posts' as const;
 
-    migrationWRows: MigrateRow[] = [
+    migrationRows: MigrateRow[] = [
       {
         id: '9c3b4923-20e3-4d29-bf37-8170103d49c0',
         description: 'add post category column',

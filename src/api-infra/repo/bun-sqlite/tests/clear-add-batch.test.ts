@@ -115,7 +115,7 @@ describe('bun sqlite db: add batch to db, and clear db tests', () => {
       const eventsBefore = db.sqliteDb.query('SELECT * FROM events').all();
       expect(eventsBefore.length).toBe(0);
       const migrationsBefore = db.sqliteDb.query('SELECT * FROM migrations').all();
-      expect(migrationsBefore.length).toBe(1);
+      expect(migrationsBefore.length).toBe(1); // миграция при загрузке
 
       db.addBatch(SqliteTestFixtures.batchRecords);
 

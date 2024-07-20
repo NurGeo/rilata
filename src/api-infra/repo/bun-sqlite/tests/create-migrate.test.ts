@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { describe, test, expect, beforeEach } from 'bun:test';
+import { describe, test, expect, beforeEach, spyOn } from 'bun:test';
 import { MigrateRow } from '../types.js';
 import { SqliteTestFixtures } from './fixtures.js';
+import { dtoUtility } from '#core/utils/dto/dto-utility.js';
 
 describe('sqlite create and migrate tests', () => {
   const fakeModuleResolver = SqliteTestFixtures.getResolverWithTestDb();
@@ -45,23 +46,20 @@ describe('sqlite create and migrate tests', () => {
   });
 
   test('провал, тест транзакции, запись миграции в таблицу posts, migrations не проходит из за ошибки записи в таблицу migrations', () => {
-    class FailMigratePostRepository extends SqliteTestFixtures.PostRepositorySqlite {
-      protected registerMigration(migration: MigrateRow): void {
-        const { id, description, sql } = migration;
-        const migrationRecordSql = `INSERT INTO migrations VALUES ('${id}', '${description}', '${sql}', '${this.tableName}', null)`;
-        this.db.sqliteDb.prepare(migrationRecordSql).run();
-      }
-    }
-    class FailBlogDatabase extends SqliteTestFixtures.TestBunSqliteDatabase {
-      constructor() {
-        super([
-          SqliteTestFixtures.UserRepositorySqlite,
-          FailMigratePostRepository,
-        ]);
-      }
-    }
-
-    const failDb = new FailBlogDatabase();
+    const failDb = new SqliteTestFixtures.TestBunSqliteDatabase([
+      SqliteTestFixtures.UserRepositorySqlite,
+      SqliteTestFixtures.PostRepositorySqlite,
+    ]);
+    const migrationRepo = failDb.getMigrationRepo();
+    const registerMigrationSpy = spyOn(migrationRepo, 'registerMigration');
+    registerMigrationSpy.mockImplementationOnce((migration: MigrateRow, tableName: string) => {
+      const row = dtoUtility.extendAttrs(migration, { tableName });
+      const migrationRecordSql = `
+        INSERT INTO migrations
+        VALUES (?, ?, ?, ?, null)
+      `;
+      failDb.sqliteDb.prepare(migrationRecordSql).run(row.id, row.description, row.sql, tableName);
+    });
     try {
       failDb.init(fakeModuleResolver);
       throw Error('not be called');
@@ -90,7 +88,7 @@ describe('sqlite create and migrate tests', () => {
     }
 
     checkMigrate();
-    db.migrateRepositories();
+    db.migrateDb();
     checkMigrate();
   });
 });

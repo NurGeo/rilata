@@ -23,7 +23,7 @@ export class BotDialogueRepositorySqlite<CTX extends DialogueContext<DTO, string
   implements BotDialogueRepository<false, CTX> {
   tableName = 'bot_dialogues' as const;
 
-  migrationWRows: MigrateRow[] = [];
+  migrationRows: MigrateRow[] = [];
 
   cache: Record<string, DialogueContext<DTO, string>> = {};
 

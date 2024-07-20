@@ -43,7 +43,5 @@ export function getEnvLogMode(): InputLoggerModes | undefined {
       if (modes.length !== 0) cachedLogMode = modes;
     }
   }
-  // eslint-disable-next-line no-console
-  if (cachedLogMode) console.log('log mode setted: ', cachedLogMode);
   return cachedLogMode;
 }

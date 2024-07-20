@@ -1,20 +1,22 @@
 /* eslint-disable no-use-before-define */
 import { Database as SqliteDb } from 'bun:sqlite';
 import { existsSync } from 'fs';
-import { TestDatabase } from '#api/database/test.database.js';
 import { TestRepository } from '#api/database/test.repository.js';
-import { TestBatchRecords } from '#api/database/types.js';
+import { DatabaseServiceStatus, TestBatchRecords } from '#api/database/types.js';
 import { GeneralModuleResolver } from '#api/module/types.js';
 import { Logger } from '#core/logger/logger.js';
 import { DTO } from '#domain/dto.js';
 import { MigrationsSqliteRepository } from './repositories/migrations.js';
 import { BunSqliteRepository } from './repository.js';
 import { BunRepoCtor } from './types.js';
+import { FullDatabase } from '#api/database/full.database.js';
+import { MaybePromise } from '#core/types.js';
+import { consoleColor } from '#core/utils/string/console-color.js';
 
 const MEMORY_PATH = ':memory:';
 
-export class BunSqliteDatabase implements TestDatabase<false> {
-  migrationRepo: MigrationsSqliteRepository;
+export class BunSqliteDatabase implements FullDatabase<false> {
+  protected migrationRepo: MigrationsSqliteRepository;
 
   protected resolver!: GeneralModuleResolver;
 
@@ -32,6 +34,7 @@ export class BunSqliteDatabase implements TestDatabase<false> {
   constructor(protected RepositoriesCtors: BunRepoCtor[]) {
     this.migrationRepo = new MigrationsSqliteRepository(this);
     this.repositories = RepositoriesCtors.map((Ctor) => new Ctor(this));
+    // this.toColored = Boolean(process.env.TO_COLOR);
   }
 
   init(moduleResolver: GeneralModuleResolver): void {
@@ -42,6 +45,9 @@ export class BunSqliteDatabase implements TestDatabase<false> {
     if (this.getFullFileName() === MEMORY_PATH) {
       this.createDb();
     } else {
+      // открытие файла приводит к создание файла БД
+      // так что запуск в режиме prod, автоматически приводит к созданию файла
+      // но он все еще требует физического создания таблиц и т.д.
       this.open();
     }
   }
@@ -54,33 +60,72 @@ export class BunSqliteDatabase implements TestDatabase<false> {
   createDb(): void {
     this.logger.info(`create db "${this.getFileName()}" for module: "${this.resolver.getModuleName()}" started`);
     this.openSqliteDb();
-    if (this.dbIsCreated()) {
-      throw this.logger.error(`database ${this.constructor.name} has already been created.`);
+    if (this.creationStatus() !== 'none') {
+      throw this.logger.error(`database ${this.getFileName()} for module: ${this.resolver.getModuleName()} has already been created.`);
     }
     this.createRepositories();
-    this.migrateRepositories();
+    this.migrateDb();
     this.logger.info(`create db "${this.getFileName()}" for module: "${this.resolver.getModuleName()}" finished`);
   }
 
-  dbIsCreated(): boolean {
-    return this.sqliteDb.query("SELECT name FROM sqlite_master WHERE type='table'").all().length > 0;
+  async getStatusAsString(needPaint?: boolean): Promise<string> {
+    const toBright = (s: string): string => (needPaint ? consoleColor.bright(s) : s);
+    const toColor = (s: string): string => (
+      needPaint
+        ? ['complete', 'notRequired', 'true'].includes(s)
+          ? consoleColor.fgColor(s, 'Green')
+          : consoleColor.fgColor(s, 'Red')
+        : s
+    );
+
+    const dbName = toBright(`module name: ${(this.resolver.getModuleName())}`);
+    const dbCreateStatus = `db creation status = ${toColor(this.creationStatus())}`;
+    const dbMigrateStatus = `db migration status = ${toColor(await this.migrationStatus())}`;
+    const dbRepositoriesStatuses = `db repositories:\n${
+      this.getAllRepositories()
+        .map((repo) => ({
+          name: toBright(repo.tableName),
+          isCreated: toColor(String(repo.isCreated())),
+          migrationStatus: toColor(repo.getMigrateStatus()),
+        }))
+        .map((rec) => `  repo name: ${rec.name}\n    repo is created = ${rec.isCreated}\n    repo migrate status = ${rec.migrationStatus}`)
+        .join('\n')
+    }`;
+    return `${dbName}\n${dbCreateStatus}\n${dbMigrateStatus}\n${dbRepositoriesStatuses}`;
   }
 
-  createRepositories(): void {
-    this.migrationRepo.create();
-    this.repositories.forEach((repo) => {
-      repo.create();
-      this.logger.info(`-| repo: "${repo.tableName}" successfully created`);
-    });
+  creationStatus(): DatabaseServiceStatus {
+    const repoCreations = this.getAllRepositories().map((r) => r.isCreated());
+    const allCreated = repoCreations.every((repoCreated) => repoCreated);
+    if (allCreated) return 'complete';
+    const noneHaveBeenCreated = repoCreations.every((repoCreated) => !repoCreated);
+    return noneHaveBeenCreated ? 'none' : 'partial';
   }
 
-  migrateRepositories(): void {
-    this.migrationRepo.migrate();
-    this.repositories.forEach((repo) => {
+  migrateDb(): MaybePromise<void> {
+    this.getAllRepositories().forEach((repo) => {
       this.logger.info(`-| migrate for repo: "${repo.tableName}" started`);
       repo.migrate();
       this.logger.info(`-| migrate for repo: "${repo.tableName}" finished`);
     });
+  }
+
+  migrationStatus(): MaybePromise<DatabaseServiceStatus> {
+    const repoMigrateStatuses = this.getAllRepositories().map((r) => r.getMigrateStatus());
+    const allMigrated = repoMigrateStatuses.every((status) => ['complete', 'notRequired'].includes(status));
+    if (allMigrated) return 'complete';
+    const allReposNotMigrated = repoMigrateStatuses.every((status) => status === 'none');
+    return allReposNotMigrated ? 'none' : 'partial';
+  }
+
+  getAllTableNames(): string[] {
+    const sql = "SELECT name FROM sqlite_master WHERE type='table'";
+    const tables = this.sqliteDb.query<{ name: string }, []>(sql).all();
+    return tables.map((tbl) => tbl.name);
+  }
+
+  getMigrationRepo(): MigrationsSqliteRepository {
+    return this.migrationRepo;
   }
 
   open(): void {
@@ -108,7 +153,7 @@ export class BunSqliteDatabase implements TestDatabase<false> {
 
   clear(): void {
     const transaction = this.sqliteDb.transaction(() => {
-      this.repositories.forEach((repo) => repo.clear());
+      this.getAllRepositories().forEach((repo) => repo.clear());
     });
     transaction();
     this.logger.info(`sqlite db for module "${this.resolver.getModuleName()}" cleared`);
@@ -130,6 +175,18 @@ export class BunSqliteDatabase implements TestDatabase<false> {
 
   stop(): void {
     this.sqliteDb?.close();
+  }
+
+  protected getAllRepositories(): BunSqliteRepository<string, DTO>[] {
+    return [this.migrationRepo, ...this.repositories];
+  }
+
+  protected createRepositories(): void {
+    this.migrationRepo.create();
+    this.repositories.forEach((repo) => {
+      repo.create();
+      this.logger.info(`-| repo: "${repo.tableName}" successfully created`);
+    });
   }
 
   protected openSqliteDb(): void {

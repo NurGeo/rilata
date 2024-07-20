@@ -12,7 +12,7 @@ export class EventRepositorySqlite
   implements EventRepository<false>, BusMessageRepository<false> {
   tableName = 'events' as const;
 
-  migrationWRows: MigrateRow[] = [];
+  migrationRows: MigrateRow[] = [];
 
   protected delivererToBus?: DelivererToBus;
 

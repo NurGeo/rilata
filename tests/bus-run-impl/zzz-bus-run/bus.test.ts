@@ -11,13 +11,9 @@ import { CompanyOutAttrs } from '../company-read/domain/company/params.js';
 import { CompanyReadRepository } from '../company-read/domain/company/repo.js';
 import { CompanyReadModule } from '../company-read/module.js';
 import { serverStarter } from './starter.js';
+import { dateTimeUtility } from '#core/utils/index.js';
 
 describe('add company service tests', async () => {
-  function timeout(sleep = 0) {
-    // eslint-disable-next-line no-promise-executor-return
-    return new Promise((resolve) => setTimeout(resolve, sleep));
-  }
-
   const requestId = 'c22fd027-a94b-4728-90eb-f6d4f96992c2';
   const testServer = serverStarter.start('all') as BusBunServer;
   testServer.run();
@@ -69,7 +65,7 @@ describe('add company service tests', async () => {
       .getModuleResolver();
 
     // выполним setTimeout, чтобы выполнились все отложенные задачи
-    await timeout();
+    await dateTimeUtility.sleep(0);
 
     const readRepo = CompanyReadRepository.instance(readResolver);
     const result = await readRepo.getByBin('222333444555');
@@ -121,6 +117,6 @@ describe('add company service tests', async () => {
         },
       });
     }, 0);
-    await timeout();
+    await dateTimeUtility.sleep(0);
   });
 });

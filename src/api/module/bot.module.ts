@@ -87,21 +87,22 @@ export abstract class BotModule extends Module {
   }
 
   protected subscribeToUpdates(): void {
-    if (this.getSubscribeMode().type === 'getUpdates') {
+    const subscribeType = this.getSubscribeMode().type;
+    if (subscribeType === 'getUpdates') {
       this.unSubscribeFromWebhook().then(() => {
         this.subscribeGetUpdates();
         const { moduleName } = this.moduleResolver.getModuleResolves();
         const msg = `successfully subscribed for bot module: ${moduleName}. Current mode: getUpdates.`;
         this.logger.info(msg);
       });
-    } else {
+    } else if (subscribeType === 'webhook') {
       this.subscribeToWebHook();
     }
   }
 
   stop(): void {
-    if (this.updatesData?.timer) {
-      clearInterval(this.updatesData.timer);
+    if (this.updatesData_?.timer) {
+      clearInterval(this.updatesData_.timer);
     } else {
       this.unSubscribeFromWebhook();
     }

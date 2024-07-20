@@ -6,6 +6,7 @@ import { dtoUtility } from '#core/utils/dto/dto-utility.js';
 import { DTO } from '#domain/dto.js';
 import { BunSqliteDatabase } from './database.js';
 import { MigrateRow } from './types.js';
+import { DatabaseServiceStatus } from '#api/database/types.js';
 
 export abstract class BunSqliteRepository<
   TN extends string, R extends DTO
@@ -16,7 +17,7 @@ export abstract class BunSqliteRepository<
 
   protected logger!: Logger;
 
-  abstract migrationWRows: MigrateRow[];
+  abstract migrationRows: MigrateRow[];
 
   /** Создать таблицу в БД */
   abstract create(): void
@@ -51,6 +52,21 @@ export abstract class BunSqliteRepository<
     transaction();
   }
 
+  isCreated(): boolean {
+    return this.db.getAllTableNames().includes(this.tableName);
+  }
+
+  getMigrateStatus(): DatabaseServiceStatus | 'notRequired' {
+    if (!this.isCreated()) return 'none';
+    if (this.migrationRows.length === 0) return 'notRequired';
+    const mRepo = this.db.getMigrationRepo();
+    const rowsIsMigrated = this.migrationRows.map((mRow) => mRepo.rowIsMigrated(mRow.id));
+    const allRowsMigrated = rowsIsMigrated.every((isMigrated) => isMigrated);
+    if (allRowsMigrated) return 'complete';
+    const allRowsNotMigrated = rowsIsMigrated.every((isMigrated) => !isMigrated);
+    return allRowsNotMigrated ? 'none' : 'partial';
+  }
+
   /** Возвращает объект приведенный для привязки */
   protected getObjectBindings(obj: Record<string, unknown>): SQLQueryBindings {
     const casted = dtoUtility.editValues(obj, (v) => (this.isObject(v) ? JSON.stringify(v) : v));
@@ -63,24 +79,20 @@ export abstract class BunSqliteRepository<
 
   /** Выполнить миграцию для репозитория */
   migrate(): void {
-    this.migrationWRows.forEach((migration) => {
-      const migrTblName = this.db.migrationRepo.tableName;
-      const query = this.db.sqliteDb.query(
-        `SELECT * FROM ${migrTblName} WHERE id=?`,
-      );
-      const rowIsMigrated = query.get(migration.id);
-      if (!rowIsMigrated) {
+    const migrationRepo = this.db.getMigrationRepo();
+    this.migrationRows.forEach((mRow) => {
+      if (migrationRepo.rowIsMigrated(mRow.id) === false) {
         try {
-          const transation = this.db.sqliteDb.transaction(() => {
-            this.migrateTable(migration);
-            this.registerMigration(migration);
+          const transaction = this.db.sqliteDb.transaction(() => {
+            this.migrateTable(mRow);
+            migrationRepo.registerMigration(mRow, this.tableName);
           });
-          transation();
-          this.logger.info(`---| migrate "${migration.description}" successfully processed`);
+          transaction();
+          this.logger.info(`---| migrate "${mRow.description}" successfully processed`);
         } catch (e) {
           throw this.logger.error(
-            `fail migrate "${migration.description}" row`,
-            migration,
+            `fail migrate "${mRow.description}" row`,
+            mRow,
             e as Error,
           );
         }
@@ -90,11 +102,5 @@ export abstract class BunSqliteRepository<
 
   protected migrateTable(migration: MigrateRow): void {
     this.db.sqliteDb.run(migration.sql);
-  }
-
-  protected registerMigration(migration: MigrateRow): void {
-    const { id, description, sql } = migration;
-    const migrationRecordSql = `INSERT INTO migrations VALUES ('${id}', '${description}', '${sql}', '${this.tableName}', unixepoch('now'))`;
-    this.db.sqliteDb.prepare(migrationRecordSql).run();
   }
 }
