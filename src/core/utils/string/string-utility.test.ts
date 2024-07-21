@@ -122,6 +122,53 @@ describe('Тестирование класса StringUtility', () => {
     expect(sut.camelCaseToSuperSnake('')).toBe('');
   });
 
+  describe('replaceTemplate tests', () => {
+    test('should replace template with default brackets and bracketCount', () => {
+      const result = sut.replaceTemplate('Hello {{ template }} world!', 'template', 'TypeScript');
+      expect(result).toBe('Hello TypeScript world!');
+    });
+
+    test('should replace template with custom brackets and bracketCount', () => {
+      const result = sut.replaceTemplate('Hello [[ template ]] world!', 'template', 'TypeScript', ['[', ']'], 2);
+      expect(result).toBe('Hello TypeScript world!');
+    });
+
+    test('should handle templates with leading and trailing spaces', () => {
+      const result = sut.replaceTemplate('Hello {{  template  }} world!', 'template', 'TypeScript');
+      expect(result).toBe('Hello TypeScript world!');
+    });
+
+    test('should replace multiple instances of the template', () => {
+      const result = sut.replaceTemplate('Hello {{ template }} world! {{ template }} again!', 'template', 'TypeScript');
+      expect(result).toBe('Hello TypeScript world! TypeScript again!');
+    });
+
+    test('should handle templates with special characters', () => {
+      const result = sut.replaceTemplate('Hello {{ template$ }} world!', 'template$', 'TypeScript');
+      expect(result).toBe('Hello TypeScript world!');
+    });
+
+    test('should not replace if template is not found', () => {
+      const result = sut.replaceTemplate('Hello {{ not_found }} world!', 'template', 'TypeScript');
+      expect(result).toBe('Hello {{ not_found }} world!');
+    });
+
+    test('should work with different bracket counts', () => {
+      const result = sut.replaceTemplate('Hello {{{{ template }}}} world!', 'template', 'TypeScript', ['{', '}'], 4);
+      expect(result).toBe('Hello TypeScript world!');
+    });
+
+    test('should replace template with pre-installed brackets', () => {
+      const result = sut.replaceTemplate('Hello *template* world!', 'template', 'TypeScript', ['*', '*'], 1);
+      expect(result).toBe('Hello TypeScript world!');
+    });
+
+    test('should replace template with custom brackets set from pre-installed', () => {
+      const result = sut.replaceTemplate('Hello < template > world!', 'template', 'TypeScript', ['<', '>'], 1);
+      expect(result).toBe('Hello TypeScript world!');
+    });
+  });
+
   describe('reduce method test', () => {
     const cbStr = (f: string, s: string): string => f + s + s;
     const cbNum = (f: number, s: string): number => f + Number(s) + Number(s);
