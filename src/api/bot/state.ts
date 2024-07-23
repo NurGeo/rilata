@@ -9,12 +9,12 @@ export abstract class BotState {
 
   protected resolver!: GeneralModuleResolver;
 
-  protected router!: BotDialogueService;
+  protected service!: BotDialogueService;
 
   // eslint-disable-next-line max-len
-  init(resolver: GeneralModuleResolver, router: BotDialogueService): void {
+  init(resolver: GeneralModuleResolver, service: BotDialogueService): void {
     this.resolver = resolver;
-    this.router = router;
+    this.service = service;
   }
 
   abstract execute(update: Update): MaybePromise<BotReplyMessage>

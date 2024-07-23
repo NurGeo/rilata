@@ -8,15 +8,15 @@ import { GeneralModuleResolver } from '#api/module/types.js';
 export abstract class BotMiddleware<C extends DialogueContext<DTO, string>> {
   protected resolver!: GeneralModuleResolver;
 
-  protected router!: BotDialogueService;
+  protected service!: BotDialogueService;
 
-  init(resolver: GeneralModuleResolver, router: BotDialogueService): void {
+  init(resolver: GeneralModuleResolver, service: BotDialogueService): void {
     this.resolver = resolver;
-    this.router = router;
+    this.service = service;
   }
 
   protected findContext(telegramId: string): C | undefined {
-    return this.router.findContext(telegramId) as C;
+    return this.service.findContext(telegramId) as C;
   }
 
   abstract process(update: Update): MaybePromise<BotReplyMessage | undefined>

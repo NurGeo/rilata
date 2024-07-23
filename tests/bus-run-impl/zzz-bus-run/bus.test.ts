@@ -11,7 +11,7 @@ import { CompanyOutAttrs } from '../company-read/domain/company/params.js';
 import { CompanyReadRepository } from '../company-read/domain/company/repo.js';
 import { CompanyReadModule } from '../company-read/module.js';
 import { serverStarter } from './starter.js';
-import { dateTimeUtility } from '#core/utils/index.js';
+import { dateTimeUtility } from '#core/utils/date-time/date-time-utility.js';
 
 describe('add company service tests', async () => {
   const requestId = 'c22fd027-a94b-4728-90eb-f6d4f96992c2';
