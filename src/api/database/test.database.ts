@@ -8,5 +8,5 @@ export interface TestDatabase {
     batchRecords: TestBatchRecords<R>
   ): MaybePromise<void>
 
-  clearDb(): MaybePromise<void | void[]>
+  clearDb(): MaybePromise<void>
 }

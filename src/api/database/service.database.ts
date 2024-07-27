@@ -4,7 +4,7 @@ import { DatabaseServiceStatus } from './types.ts';
 export interface ServiceDatabase {
   createDb(): MaybePromise<void>
 
-  clearDb(): MaybePromise<void | void[]>
+  clearDb(): MaybePromise<void>
 
   migrateDb(): MaybePromise<void>
 

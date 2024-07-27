@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { TupleToUnion } from '#core/tuple-types.js';
 import { DTO } from '../../domain/dto.js';
+import { suppliesCommands } from './db-manager.ts';
 import { ServiceDatabase } from './service.database.ts';
 import { TestRepository } from './test.repository.js';
 
@@ -22,3 +24,9 @@ export type DatabaseServiceRow = Array<{
   moduleName: string,
   db: ServiceDatabase,
 }>
+
+export type ServiceCommands = TupleToUnion<typeof suppliesCommands>;
+
+export type SqlMethod = 'run' | 'get' | 'all';
+
+export type Args = Record<string, string>;

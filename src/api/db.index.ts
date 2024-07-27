@@ -4,7 +4,7 @@ export type { ServiceDatabase } from './database/service.database.js';
 export type { FullDatabase } from './database/full.database.js';
 export type {
   TestBatchRecords, Asyncable, DatabaseServiceRow,
-  DatabaseServiceStatus,
+  DatabaseServiceStatus, ServiceCommands, SqlMethod, Args,
 } from './database/types.js';
 export * from './database/db-manager.js';
 export * from './database/event.repository.js';

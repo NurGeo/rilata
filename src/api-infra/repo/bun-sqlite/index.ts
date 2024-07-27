@@ -1,3 +1,4 @@
+export * from './db-manager.js';
 export * from './database.js';
 export * from './repository.js';
 export type {

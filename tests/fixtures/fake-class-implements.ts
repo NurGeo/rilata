@@ -32,8 +32,8 @@ export namespace FakeClassImplements {
 
     stop(): void {}
 
-    async clearDb(): Promise<void[]> {
-      return Promise.all(this.repositories.map((r) => r.clear()));
+    async clearDb(): Promise<void> {
+      await Promise.all(this.repositories.map((r) => r.clear()));
     }
 
     // eslint-disable-next-line no-use-before-define
