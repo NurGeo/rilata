@@ -20,7 +20,6 @@ import { CompanyAlreadyExistError } from '../../domain-object/company/repo-error
 import { CompanyModule } from '../../module.js';
 import { RegisterCompanyRequestDod, RegisterCompanyOut, RegisterCompanyRequestDodAttrs } from './s.params.js';
 import { RegisteringCompanyService } from './service.js';
-import { TestDatabase } from '../../../../../src/api/database/test.database.js';
 import { EventRepository } from '../../../../../src/api/database/event.repository.js';
 import { DomainUser } from '../../../../../src/api/controller/types.js';
 import { requestStoreMock } from '../../../../fixtures/request-store-mock.js';
@@ -43,7 +42,7 @@ describe('register company saga service tests', async () => {
   let addUserMock: Mock<(...args: any[]) => any>;
 
   beforeEach(async () => {
-    const db = resolver.getDatabase() as unknown as TestDatabase;
+    const db = resolver.getDatabase();
     await db.clearDb();
     await db.addBatch(ServiceModulesFixtures.repoFixtures);
     addPersonMock = spyOn(subjectFacade, 'addPerson');

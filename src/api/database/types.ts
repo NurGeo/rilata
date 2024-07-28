@@ -1,31 +1,24 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { TupleToUnion } from '#core/tuple-types.js';
 import { DTO } from '../../domain/dto.js';
-import { suppliesCommands } from './db-manager.ts';
-import { ServiceDatabase } from './service.database.ts';
-import { TestRepository } from './test.repository.js';
+import { Database } from './database.ts';
+import { Repository } from './repository.ts';
 
 export type BusPayloadAsJson = string;
 
 export type Asyncable<ASYNC extends boolean, T> = ASYNC extends true ? Promise<T> : T;
 
-type GetTestRepoName<R extends TestRepository<string, DTO>> =
-  R extends TestRepository<infer N, infer _> ? N : never
+type GetRepoRecord<R extends Repository<string, DTO>> =
+  R extends Repository<infer _, infer REC> ? REC : never
 
-type GetTestRepoRecord<R extends TestRepository<string, DTO>> =
-  R extends TestRepository<infer _, infer REC> ? REC : never
-
-export type TestBatchRecords<R extends TestRepository<string, DTO>> =
-  Record<GetTestRepoName<R>, GetTestRepoRecord<R>[]>
+export type BatchRecords<R extends Repository<string, DTO>> =
+  Record<R['tableName'], GetRepoRecord<R>[]>
 
 export type DatabaseServiceStatus = 'complete' | 'partial' | 'none';
 
-export type DatabaseServiceRow = Array<{
+export type DatabaseServiceRow = {
   moduleName: string,
-  db: ServiceDatabase,
-}>
-
-export type ServiceCommands = TupleToUnion<typeof suppliesCommands>;
+  db: Database,
+}
 
 export type SqlMethod = 'run' | 'get' | 'all';
 

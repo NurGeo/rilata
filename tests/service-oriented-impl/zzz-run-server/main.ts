@@ -2,7 +2,6 @@ import { BunServer } from '../../../src/api/server/bun-server.js';
 import { RilataServer } from '../../../src/api/server/server.js';
 import { serverStarter } from './starter.js';
 import { ServiceModulesFixtures } from './server-fixtures.js';
-import { TestDatabase } from '../../../src/api/database/test.database.js';
 import { GeneralServerResolver } from '../../../src/api/server/types.js';
 
 function parseArgs(
@@ -15,7 +14,7 @@ function parseArgs(
       `init test database fixtures for modules: ${modules.map((m) => m.moduleName).join('; ')}`,
     );
     modules.filter((m) => m.moduleName !== 'FrontProxyModule').forEach((module) => {
-      const db = module.getModuleResolver().getDatabase() as unknown as TestDatabase;
+      const db = module.getModuleResolver().getDatabase();
       db.addBatch(ServiceModulesFixtures.repoFixtures);
     });
     resolver.getLogger().info('init test database fixtures finished');

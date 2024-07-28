@@ -3,7 +3,7 @@
 /* eslint-disable no-use-before-define */
 import { DomainUser } from '#api/controller/types.js';
 import { EventRepository } from '#api/database/event.repository.js';
-import { TestBatchRecords } from '#api/database/types.js';
+import { BatchRecords } from '#api/database/types.js';
 import { GeneralModuleResolver } from '#api/module/types.js';
 import { requestStoreDispatcher } from '#api/request-store/request-store-dispatcher.js';
 import { Repositoriable } from '#api/resolve/repositoriable.js';
@@ -417,7 +417,7 @@ export namespace SqliteTestFixtures {
     },
   ];
 
-  export const batchRecords: TestBatchRecords<UserRepositorySqlite | PostRepositorySqlite> = {
+  export const batchRecords: BatchRecords<UserRepositorySqlite | PostRepositorySqlite> = {
     users: [
       {
         userId: '08ea51a1-6d14-42bf-81de-a94a809e3286',

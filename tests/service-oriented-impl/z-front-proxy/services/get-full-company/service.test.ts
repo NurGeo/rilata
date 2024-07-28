@@ -11,7 +11,6 @@ import { ServiceModulesFixtures } from '../../../zzz-run-server/server-fixtures.
 import { FullCompany } from '../../domain-data/full-company/params.js';
 import { FrontProxyModule } from '../../module.js';
 import { GetFullCompanyRequestDod } from './s-params.js';
-import { TestDatabase } from '../../../../../src/api/database/test.database.js';
 import { GetingFullCompanyService } from './service.js';
 
 describe('get full company service tests', async () => {
@@ -26,7 +25,7 @@ describe('get full company service tests', async () => {
       testServer.getModule<SubjectModule>('SubjectModule'),
       testServer.getModule<CompanyModule>('CompanyModule'),
     ].forEach(async (module) => {
-      const db = module.getModuleResolver().getDatabase() as unknown as TestDatabase;
+      const db = module.getModuleResolver().getDatabase();
       await db.clearDb();
       await db.addBatch(ServiceModulesFixtures.repoFixtures);
     });

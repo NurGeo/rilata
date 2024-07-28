@@ -7,7 +7,6 @@ import { SubjectModule } from '../../subject/module.js';
 import { GetPersonByIinRequestDod } from '../../subject/services/person/get-by-iin/s-params.js';
 import { serverStarter } from '../starter.js';
 import { ServiceModulesFixtures } from '../server-fixtures.js';
-import { TestDatabase } from '../../../../src/api/database/test.database.js';
 import { dodUtility } from '#core/utils/dod/dod-utility.js';
 
 describe('process http requests by server class', async () => {
@@ -19,7 +18,7 @@ describe('process http requests by server class', async () => {
     sut.getModule<CompanyModule>('CompanyModule'),
     sut.getModule<AuthModule>('AuthModule'),
   ].map((module) => {
-    const db = module.getModuleResolver().getDatabase() as unknown as TestDatabase;
+    const db = module.getModuleResolver().getDatabase();
     return db.addBatch(ServiceModulesFixtures.repoFixtures);
   });
   await Promise.all(promises);

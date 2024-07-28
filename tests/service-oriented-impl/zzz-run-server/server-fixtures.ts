@@ -1,10 +1,10 @@
-import { TestBatchRecords } from '../../../src/api/database/types.js';
+import { BatchRecords } from '../../../src/api/database/types.js';
 import { UserRepositoryImpl } from '../zz-infra/repositories/auth-module/user.js';
 import { CompanyRepositoryImpl } from '../zz-infra/repositories/company-module/company.js';
 import { PersonRepositoryImpl } from '../zz-infra/repositories/subject-module/person.js';
 
 export namespace ServiceModulesFixtures {
-  export const repoFixtures: TestBatchRecords<
+  export const repoFixtures: BatchRecords<
     CompanyRepositoryImpl['testRepo']
     | PersonRepositoryImpl['testRepo']
     | UserRepositoryImpl['testRepo']

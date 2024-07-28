@@ -1,7 +1,6 @@
 import {
   beforeEach, describe, expect, test,
 } from 'bun:test';
-import { TestDatabase } from '../../../../../../src/api/database/test.database.js';
 import { dodUtility } from '../../../../../../src/core/utils/dod/dod-utility.js';
 import { requestStoreMock } from '../../../../../fixtures/request-store-mock.js';
 import { UserRepositoryImpl } from '../../../../zz-infra/repositories/auth-module/user.js';
@@ -22,7 +21,7 @@ describe('get users service test', async () => {
   const sut = module.getService<GetingUsersService>('getUsers');
 
   beforeEach(async () => {
-    const db = resolver.getDatabase() as unknown as TestDatabase;
+    const db = resolver.getDatabase();
     await db.clearDb();
     await db.addBatch<UserRepositoryImpl['testRepo']>({
       user_repo: [

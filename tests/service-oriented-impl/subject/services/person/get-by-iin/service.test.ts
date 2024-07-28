@@ -8,7 +8,6 @@ import { GetPersonByIinRequestDod, GetPersonByIinOut } from './s-params.js';
 import { GetingPersonByIinService } from './service.js';
 import { PersonDoesntExistByIinError } from '../../../domain-object/person/repo-errors.js';
 import { serverStarter } from '../../../../zzz-run-server/starter.js';
-import { TestDatabase } from '../../../../../../src/api/database/test.database.js';
 import { requestStoreMock } from '../../../../../fixtures/request-store-mock.js';
 
 describe('get person by iin service tests', async () => {
@@ -22,7 +21,7 @@ describe('get person by iin service tests', async () => {
   });
 
   beforeEach(async () => {
-    const db = resolver.getDatabase() as unknown as TestDatabase;
+    const db = resolver.getDatabase();
     await db.clearDb();
     await db.addBatch(ServiceModulesFixtures.repoFixtures);
   });

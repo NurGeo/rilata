@@ -9,7 +9,6 @@ import { UserRepository } from '../../../domain-object/user/repo.js';
 import { AuthModule } from '../../../module.js';
 import { AddUserRequestDod, AddUserOut } from './s-params.js';
 import { AddingUserService } from './service.js';
-import { TestDatabase } from '../../../../../../src/api/database/test.database.js';
 import { EventRepository } from '../../../../../../src/api/database/event.repository.js';
 import { requestStoreMock } from '../../../../../fixtures/request-store-mock.js';
 
@@ -24,7 +23,7 @@ describe('add user service tests', async () => {
   });
 
   beforeEach(async () => {
-    const db = resolver.getDatabase() as unknown as TestDatabase;
+    const db = resolver.getDatabase();
     await db.clearDb();
     await db.addBatch(ServiceModulesFixtures.repoFixtures);
   });

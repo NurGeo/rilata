@@ -9,7 +9,6 @@ import { CompanyDoesntExistByIdError } from '../../domain-object/company/repo-er
 import { CompanyModule } from '../../module.js';
 import { GetCompanyRequestDod } from './s.params.js';
 import { GetingCompanyService } from './service.js';
-import { TestDatabase } from '../../../../../src/api/database/test.database.js';
 import { requestStoreMock } from '../../../../fixtures/request-store-mock.js';
 
 describe('register company saga service tests', async () => {
@@ -23,7 +22,7 @@ describe('register company saga service tests', async () => {
   });
 
   beforeEach(() => {
-    const db = resolver.getDatabase() as unknown as TestDatabase;
+    const db = resolver.getDatabase();
     db.clearDb();
     db.addBatch(ServiceModulesFixtures.repoFixtures);
   });

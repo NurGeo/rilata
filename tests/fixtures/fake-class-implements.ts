@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
+import { Repository } from '#api/database/repository.js';
+import { Database } from '#api/db.index.js';
 import { DelivererToBus } from '../../src/api/bus/deliverer-to-bus.js';
 import { DeliveryBusMessage, DeliveryEvent } from '../../src/api/bus/types.js';
 import { BusMessageRepository } from '../../src/api/database/bus-message.repository.js';
 import { EventRepository } from '../../src/api/database/event.repository.js';
-import { TestDatabase } from '../../src/api/database/test.database.js';
-import { TestRepository } from '../../src/api/database/test.repository.js';
-import { TestBatchRecords } from '../../src/api/database/types.js';
+import { BatchRecords, DatabaseServiceStatus } from '../../src/api/database/types.js';
 import { GeneralModuleResolver } from '../../src/api/module/types.js';
 import { requestStoreDispatcher } from '../../src/api/request-store/request-store-dispatcher.js';
 import { failure } from '../../src/core/result/failure.js';
 import { success } from '../../src/core/result/success.js';
 import { Result } from '../../src/core/result/types.js';
-import { UuidType } from '../../src/core/types.js';
+import { MaybePromise, UuidType } from '../../src/core/types.js';
 import { dtoUtility } from '../../src/core/utils/dto/dto-utility.js';
 import { uuidUtility } from '../../src/core/utils/uuid/uuid-utility.js';
 import { GeneralArParams, GeneralEventDod } from '../../src/domain/domain-data/domain-types.js';
 import { DTO } from '../../src/domain/dto.js';
 
 export namespace FakeClassImplements {
-  export class TestMemoryDatabase implements TestDatabase {
+  export class TestMemoryDatabase implements Database {
     protected resolver!: GeneralModuleResolver;
 
     // eslint-disable-next-line no-use-before-define
@@ -42,8 +42,8 @@ export namespace FakeClassImplements {
       repo.init(this.resolver);
     }
 
-    async addBatch<R extends TestRepository<string, DTO>>(
-      batchRecords: TestBatchRecords<R>,
+    async addBatch<R extends Repository<string, DTO>>(
+      batchRecords: BatchRecords<R>,
     ): Promise<void> {
       await Promise.all(Object.entries(batchRecords)
         .filter(([inputTableName, _]) => this.repositories.find(
@@ -70,6 +70,26 @@ export namespace FakeClassImplements {
     async rollback(transactionId: string): Promise<void> {
       await Promise.all(this.repositories.map((repo) => repo.rollback(transactionId)));
     }
+
+    getRepositories(): Repository<string, DTO>[] {
+      throw new Error('Method not implemented.');
+    }
+
+    createDb(): MaybePromise<void> {
+      throw new Error('Method not implemented.');
+    }
+
+    migrateDb(): MaybePromise<void> {
+      throw new Error('Method not implemented.');
+    }
+
+    creationStatus(): MaybePromise<DatabaseServiceStatus> {
+      throw new Error('Method not implemented.');
+    }
+
+    migrationStatus(): MaybePromise<DatabaseServiceStatus> {
+      throw new Error('Method not implemented.');
+    }
   }
 
   type TransactionId = string;
@@ -84,7 +104,7 @@ export namespace FakeClassImplements {
     REC extends DTO,
     ID_ATTR_NAME extends GetStringAttrsKeys<REC>,
   >
-  implements TestRepository<T_NAME, REC> {
+  implements Repository<T_NAME, REC> {
     protected records: Record<RecordId, REC> = {};
 
     protected transactionCache: Record<TransactionId, Record<RecordId, REC>> = {};
@@ -179,6 +199,22 @@ export namespace FakeClassImplements {
         )
       ));
       return dtoUtility.deepCopy(filtered);
+    }
+
+    isCreated(): MaybePromise<boolean> {
+      throw new Error('Method not implemented.');
+    }
+
+    create(): MaybePromise<void> {
+      throw new Error('Method not implemented.');
+    }
+
+    getMigrateStatus(): MaybePromise<DatabaseServiceStatus | 'notRequired'> {
+      throw new Error('Method not implemented.');
+    }
+
+    migrate(): MaybePromise<void> {
+      throw new Error('Method not implemented.');
     }
 
     protected addRecordByTransaction(
