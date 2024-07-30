@@ -2,6 +2,8 @@
 import { describe, test, expect } from 'bun:test';
 import { AssertionException } from '../../exeptions.js';
 import { uuidUtility } from './uuid-utility.js';
+import { domainStoreDispatcher } from '#core/domain-store/domain-store-dispatcher.js';
+import { Logger } from '#core/logger/logger.js';
 
 describe('uuidUtility class test', () => {
   const incorrectUUID = '0dd856f7-c085-4c1b-8805-15ef64';
@@ -83,6 +85,45 @@ describe('uuidUtility class test', () => {
       valuesRows.forEach((uuidStr) => {
         expect(() => uuidUtility.toBytes(uuidStr)).toThrow(`not valid uuid: ${uuidStr}`);
       });
+    });
+  });
+
+  describe('extractUuid', () => {
+    const logger = {
+      error: (message: string, context: any): Error => (
+        new Error(`${message}: ${JSON.stringify(context)}`)
+      ),
+    } as unknown as Logger;
+    domainStoreDispatcher.setPaylod({ logger });
+
+    const sut = uuidUtility;
+
+    test('извлечение первого UUID', () => {
+      const url = 'https://example.com?sgmTestId=123e4567-e89b-12d3-a456-426614174000';
+      const result = sut.extractUuid(url, 1);
+      expect(result).toBe('123e4567-e89b-12d3-a456-426614174000');
+    });
+
+    test('извлечение второго UUID', () => {
+      const url = 'https://example.com?sgmTestId=123e4567-e89b-12d3-a456-426614174000&sgmTestId=123e4567-e89b-12d3-a456-426614174001';
+      const result = sut.extractUuid(url, 2);
+      expect(result).toBe('123e4567-e89b-12d3-a456-426614174001');
+    });
+
+    test('извлечение третьего UUID', () => {
+      const url = 'https://example.com?userId=123e4567-e89b-12d3-a456-426614174000&sgmTestId=123e4567-e89b-12d3-a456-426614174001&resultId=123e4567-e89b-12d3-a456-426614174002';
+      const result = sut.extractUuid(url, 3);
+      expect(result).toBe('123e4567-e89b-12d3-a456-426614174002');
+    });
+
+    test('ошибка при отсутствии UUID в указанной позиции', () => {
+      const url = 'https://example.com?sgmTestId=123e4567-e89b-12d3-a456-426614174000';
+      expect(() => sut.extractUuid(url, 2)).toThrow('Строка не содержит uuid в указанной позиции');
+    });
+
+    test('ошибка при отсутствии UUID', () => {
+      const url = 'https://example.com';
+      expect(() => sut.extractUuid(url, 1)).toThrow('Строка не содержит uuid');
     });
   });
 });

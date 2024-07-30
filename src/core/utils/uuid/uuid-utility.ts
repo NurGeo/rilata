@@ -1,6 +1,7 @@
 import { uuidv7 } from 'uuidv7';
 import { UuidType } from '../../types.js';
 import { AssertionException } from '../../exeptions.js';
+import { domainStoreDispatcher } from '#core/domain-store/domain-store-dispatcher.js';
 
 class UUIDUtility {
   private uuidRegex = '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$';
@@ -24,6 +25,16 @@ class UUIDUtility {
     throw new AssertionException(
       `Значение ${value} не является валидным для типа UUID v4`,
     );
+  }
+
+  extractUuid(url: string, position = 1): string {
+    const uuidRegex = /([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/gi;
+
+    const matchResults = Array.from(url.matchAll(uuidRegex));
+    if (matchResults.length >= position) {
+      return matchResults[position - 1][0];
+    }
+    throw domainStoreDispatcher.getPayload().logger.error('Строка не содержит uuid в указанной позиции', { text: url, position });
   }
 
   toBytes(uuid: UuidType): Uint8Array {
