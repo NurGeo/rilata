@@ -17,7 +17,7 @@ export type {
 } from './type-functions.js';
 export * from './exeptions.js';
 
-export { domainStoreDispatcher, DomainStoreDispatcher } from './domain-store/domain-store-dispatcher.js';
+export { domainStore as domainStoreDispatcher, DomainStore as DomainStoreDispatcher } from './domain-store/domain-store-dispatcher.js';
 export { type DomainStorePayload } from './domain-store/types.js';
 
 export type { JwtType, JwtPayload } from './jwt/types.js';

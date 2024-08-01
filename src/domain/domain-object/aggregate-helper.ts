@@ -5,7 +5,7 @@ import { Logger } from '../../core/logger/logger.js';
 import { Caller } from '../../api/controller/types.js';
 import { dodUtility } from '../../core/utils/dod/dod-utility.js';
 import { GetArrayType } from '../../core/type-functions.js';
-import { domainStoreDispatcher } from '#core/domain-store/domain-store-dispatcher.js';
+import { domainStore } from '#core/domain-store/domain-store-dispatcher.js';
 
 /** Класс помощник агрегата. Забирает себе всю техническую работу агрегата,
     позволяя агрегату сосредоточиться на решении логики предметного уровня. */
@@ -54,7 +54,7 @@ export class AggregateRootHelper<PARAMS extends GeneralArParams> {
   }
 
   getLogger(): Logger {
-    return domainStoreDispatcher.getPayload().logger;
+    return domainStore.getPayload().logger;
   }
 
   registerEvent<EVENTS extends GetArrayType<PARAMS['events']>>(

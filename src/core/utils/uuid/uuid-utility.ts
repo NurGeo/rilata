@@ -1,7 +1,7 @@
 import { uuidv7 } from 'uuidv7';
 import { UuidType } from '../../types.js';
 import { AssertionException } from '../../exeptions.js';
-import { domainStoreDispatcher } from '#core/domain-store/domain-store-dispatcher.js';
+import { domainStore } from '#core/domain-store/domain-store-dispatcher.js';
 
 class UUIDUtility {
   private uuidRegex = '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$';
@@ -34,7 +34,7 @@ class UUIDUtility {
     if (matchResults.length >= position) {
       return matchResults[position - 1][0];
     }
-    throw domainStoreDispatcher.getPayload().logger.error('Строка не содержит uuid в указанной позиции', { text: url, position });
+    throw domainStore.getPayload().logger.error('Строка не содержит uuid в указанной позиции', { text: url, position });
   }
 
   toBytes(uuid: UuidType): Uint8Array {

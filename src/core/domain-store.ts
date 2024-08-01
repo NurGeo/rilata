@@ -5,17 +5,19 @@ import { DomainStorePayload } from './types.js';
   Должна быть реализована и во фронтэнд и в бэкенда частях,
   так как доменные объекты могут использоваться в обеих частях приложения.
   */
-export class DomainStoreDispatcher<P extends DomainStorePayload> {
-  private payload!: P;
+export class DomainStore {
+  private payload!: DomainStorePayload;
 
-  getPayload(): P {
+  getPayload<P extends DomainStorePayload>(): P {
     if (this.payload === undefined) throw Error(`not inited "${this.constructor.name}" store dispatcher`);
-    return this.payload;
+    return this.payload as P;
   }
 
-  setPaylod(payload: P): void {
+  setPaylod(payload: DomainStorePayload): void {
     this.payload = payload;
   }
 }
 
-export const domainStoreDispatcher = new DomainStoreDispatcher();
+// гарантируем синглтон через global;
+export const domainStore = (globalThis as any).domainStore || new DomainStore();
+(globalThis as any).domainStore = domainStore;

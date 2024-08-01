@@ -21,7 +21,7 @@ import {
   RulesValidatedAnswer, RuleErrors, FieldResult, FullFieldResult,
   ArrayFieldResult, ArrayFieldErrors, FieldErrors,
 } from './types.js';
-import { domainStoreDispatcher } from '#core/domain-store/domain-store-dispatcher.js';
+import { domainStore } from '#core/domain-store/domain-store-dispatcher.js';
 
 export abstract class FieldValidator<
   NAME extends string,
@@ -174,7 +174,7 @@ export abstract class FieldValidator<
 
   protected throwError(errStr: string): never {
     try {
-      const { logger } = domainStoreDispatcher.getPayload();
+      const { logger } = domainStore.getPayload();
       throw logger.error(errStr);
     } catch (e) {
       throw new AssertionException(errStr);
