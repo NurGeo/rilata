@@ -1,4 +1,4 @@
-import { requestStoreDispatcher } from '../../../../src/api/request-store/request-store-dispatcher.js';
+import { requestStore } from '../../../../src/api/request-store/request-store.js';
 import { DatabaseObjectSavingError } from '../../../../src/core/exeptions.js';
 import { Logger } from '../../../../src/core/logger/logger.js';
 import { failure } from '../../../../src/core/result/failure.js';
@@ -38,7 +38,7 @@ export class CompanyReadRepositoryImpl implements CompanyReadRepository {
     const result = await this.testRepo.add({ ...attrs });
     if (result.isSuccess()) return undefined;
 
-    const { requestId } = requestStoreDispatcher.getPayload();
+    const { requestId } = requestStore.getPayload();
     const errStr = `Компания с id: ${attrs.id} уже существует`;
     this.logger.error(errStr, { err: result.value, requestId });
     throw new DatabaseObjectSavingError(errStr);

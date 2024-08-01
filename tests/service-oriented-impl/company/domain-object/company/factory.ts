@@ -6,7 +6,7 @@ import { CompanyAR } from './a-root.js';
 
 export class CompanyARFactory extends AggregateFactory<CompanyParams> {
   create(command: RegisterCompanyDomainCommand): CompanyAR {
-    const attrs = { id: uuidUtility.getNewUUID(), ...command };
+    const attrs = { id: uuidUtility.getNewUuidV4(), ...command };
     const company = new CompanyAR(attrs, 0);
     company.getHelper().registerEvent<CompanyRegisteredEvent>('CompanyRegisteredEvent', command);
     return company;

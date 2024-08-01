@@ -18,7 +18,7 @@ describe('register company saga service tests', async () => {
   const resolver = module.getModuleResolver();
   requestStoreMock({
     requestId,
-    moduleResolver: resolver,
+    resolver: resolver,
   });
 
   beforeEach(() => {

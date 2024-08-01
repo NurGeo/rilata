@@ -17,10 +17,7 @@ describe('add user service tests', async () => {
   const testSever = serverStarter.start(['AuthModule']);
   const module = testSever.getModule<AuthModule>('AuthModule');
   const resolver = module.getModuleResolver();
-  requestStoreMock({
-    requestId,
-    moduleResolver: resolver,
-  });
+  requestStoreMock({ requestId, resolver });
 
   beforeEach(async () => {
     const db = resolver.getDatabase();
@@ -53,7 +50,7 @@ describe('add user service tests', async () => {
       requestId,
     );
     let mockCallCount = 0;
-    const randomUuidMock = spyOn(uuidUtility, 'getNewUUID').mockImplementation(() => {
+    const randomUuidMock = spyOn(uuidUtility, 'getNewUuidV4').mockImplementation(() => {
       mockCallCount += 1;
       return mockCallCount === 2
         ? 'edc6bfdc-ae44-4e7d-a35e-f26a0e92ffdd' // second call generate new userId

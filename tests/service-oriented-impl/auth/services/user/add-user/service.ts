@@ -28,7 +28,7 @@ export class AddingUserService extends CommandService<
     input: AddUserRequestDod,
   ): Promise<ServiceResult<AddUserServiceParams>> {
     const userRecord: UserRepositoryRecord = {
-      userId: uuidUtility.getNewUUID(),
+      userId: uuidUtility.getNewUuidV4(),
       personIin: input.attrs.personIin,
       version: 0,
     };

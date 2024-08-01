@@ -22,7 +22,7 @@ import {
 } from './s.params.js';
 import { RegisterCompanyValidator } from './v.map.js';
 import { UowTransactionStrategy } from '../../../../../src/api/service/transaction-strategy/uow.strategy.js';
-import { requestStoreDispatcher } from '../../../../../src/api/request-store/request-store-dispatcher.js';
+import { requestStore } from '../../../../../src/api/request-store/request-store.js';
 
 export class RegisteringCompanyService extends CommandService<
   CompanyRegisteredServiceParams, CompanyModuleResolver
@@ -44,7 +44,7 @@ export class RegisteringCompanyService extends CommandService<
   async runDomain(
     input: RegisterCompanyRequestDod,
   ): Promise<ServiceResult<CompanyRegisteredServiceParams>> {
-    const { caller } = requestStoreDispatcher.getPayload();
+    const { caller } = requestStore.getPayload();
     if (caller.type !== 'DomainUser') {
       throw this.logger.error(`not supported called by call: ${caller.type}`);
     }

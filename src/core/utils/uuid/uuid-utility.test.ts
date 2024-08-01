@@ -2,13 +2,13 @@
 import { describe, test, expect } from 'bun:test';
 import { AssertionException } from '../../exeptions.js';
 import { uuidUtility } from './uuid-utility.js';
-import { domainStore } from '#core/domain-store/domain-store-dispatcher.js';
+import { domainStore } from '#core/domain-store.js';
 import { Logger } from '#core/logger/logger.js';
 
 describe('uuidUtility class test', () => {
   const incorrectUUID = '0dd856f7-c085-4c1b-8805-15ef64';
   const correctUUID = '0dd856f7-c085-4c1b-8805-15ef6469c177';
-  const uuid = uuidUtility.getNewUUID();
+  const uuid = uuidUtility.getNewUuidV4();
   test('test getNewUUIDValue method returned value', () => {
     expect(typeof uuid).toBe('string');
   });
@@ -30,7 +30,7 @@ describe('uuidUtility class test', () => {
   test('test cleanValue method, throw exception case', () => {
     const cb = () => uuidUtility.cleanValue(incorrectUUID);
     // eslint-disable-next-line quotes
-    expect(cb).toThrow(new AssertionException(`Значение ${incorrectUUID} не является валидным для типа UUID v4`));
+    expect(cb).toThrow(new AssertionException(`Значение ${incorrectUUID} не является валидным для типа UUID`));
   });
 
   describe('UUID Conversion', () => {
@@ -90,7 +90,7 @@ describe('uuidUtility class test', () => {
 
   describe('extractUuid', () => {
     const logger = {
-      error: (message: string, context: any): Error => (
+      error: (message: string, context: unknown): Error => (
         new Error(`${message}: ${JSON.stringify(context)}`)
       ),
     } as unknown as Logger;

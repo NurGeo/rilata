@@ -3,13 +3,14 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Repository } from '#api/database/repository.js';
 import { Database } from '#api/db.index.js';
+import { CommandRequestStorePayload } from '#api/request-store/types.js';
 import { DelivererToBus } from '../../src/api/bus/deliverer-to-bus.js';
 import { DeliveryBusMessage, DeliveryEvent } from '../../src/api/bus/types.js';
 import { BusMessageRepository } from '../../src/api/database/bus-message.repository.js';
 import { EventRepository } from '../../src/api/database/event.repository.js';
 import { BatchRecords, DatabaseServiceStatus } from '../../src/api/database/types.js';
 import { GeneralModuleResolver } from '../../src/api/module/types.js';
-import { requestStoreDispatcher } from '../../src/api/request-store/request-store-dispatcher.js';
+import { requestStore } from '../../src/api/request-store/request-store.js';
 import { failure } from '../../src/core/result/failure.js';
 import { success } from '../../src/core/result/success.js';
 import { Result } from '../../src/core/result/types.js';
@@ -58,7 +59,7 @@ export namespace FakeClassImplements {
     }
 
     async startTransaction(): Promise<string> {
-      const transctionId = uuidUtility.getNewUUID();
+      const transctionId = uuidUtility.getNewUuidV4();
       this.repositories.forEach((repo) => repo.startTransaction(transctionId));
       return transctionId;
     }
@@ -274,7 +275,7 @@ export namespace FakeClassImplements {
 
     protected getTransactionId(): TransactionId | undefined {
       try {
-        const payload = requestStoreDispatcher.getPayload();
+        const payload = requestStore.getPayload<CommandRequestStorePayload>();
         return payload?.unitOfWorkId;
       } catch (e) {
         return undefined;

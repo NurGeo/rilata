@@ -16,7 +16,7 @@ describe('get users service test', async () => {
   const resolver = module.getModuleResolver();
   requestStoreMock({
     requestId,
-    moduleResolver: resolver,
+    resolver: resolver,
   });
   const sut = module.getService<GetingUsersService>('getUsers');
 

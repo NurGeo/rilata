@@ -1,8 +1,57 @@
 import { describe, test, expect } from 'bun:test';
 import { stringUtility } from './string-utility.js';
+import { domainStore } from '#core/domain-store.js';
+import { ConsoleLogger } from '#core/logger/console-logger.js';
+import { getEnvLogMode } from '#core/logger/logger-modes.js';
+
+domainStore.setPaylod({ logger: new ConsoleLogger(getEnvLogMode() ?? 'all') });
 
 describe('Тестирование класса StringUtility', () => {
   const sut = stringUtility;
+
+  describe('random method tests', () => {
+    test('should generate string matching the format hh-hhhh-hhhh', () => {
+      const result = sut.random('hh-hhhh-hhhh');
+      const regex = /^[0-9a-f]{2}-[0-9a-f]{4}-[0-9a-f]{4}$/;
+      expect(result).toMatch(regex);
+    });
+
+    test('should generate string matching the format dd.dddd.dddd with custom delimiter', () => {
+      const result = sut.random('dd.dddd.dddd', '.');
+      const regex = /^[0-9]{2}\.[0-9]{4}\.[0-9]{4}$/;
+      expect(result).toMatch(regex);
+    });
+
+    test('should generate string matching the format bb-bbbb-bbbb', () => {
+      const result = sut.random('bb-bbbb-bbbb');
+      const regex = /^[01]{2}-[01]{4}-[01]{4}$/;
+      expect(result).toMatch(regex);
+    });
+
+    test('should generate string matching the format oo-oooo-oooo', () => {
+      const result = sut.random('oo-oooo');
+      const regex = /^[0-7]{2}-[0-7]{4}$/;
+      expect(result).toMatch(regex);
+    });
+
+    test('should generate string matching the format 3-34-4h-hhh', () => {
+      const result = sut.random('3-34-4h-hhh');
+      const regex = /^[0-3]-[0-3][0-4]-[0-4][0-9a-f]-[0-9a-f]{3}$/;
+      expect(result).toMatch(regex);
+    });
+
+    test('should generate string matching the format with custom delimiter and alphabet and digits', () => {
+      const result = sut.random('zzzz#ddd', '#');
+      const regex = /^[a-z]{4}#[0-9]{3}$/;
+      expect(result).toMatch(regex);
+    });
+
+    test('should generate string matching the format with custom delimiter and digits', () => {
+      const result = sut.random('2.2.4', '.');
+      const regex = /^[0-2]\.[0-2]\.[0-4]$/;
+      expect(result).toMatch(regex);
+    });
+  });
 
   test('Метод trimChars', () => {
     expect(sut.trim('  text   ', '')).toBe('  text   ');

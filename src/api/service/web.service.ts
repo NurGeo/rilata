@@ -10,7 +10,7 @@ import { GeneralModuleResolver } from '../module/types.js';
 import { permissionDeniedError } from './constants.js';
 import { CallerType } from '../controller/types.js';
 import { dodUtility } from '../../core/utils/dod/dod-utility.js';
-import { requestStoreDispatcher } from '../request-store/request-store-dispatcher.js';
+import { requestStore } from '../request-store/request-store.js';
 import { Result } from '#core/result/types.js';
 import { ValidationError } from './error-types.ts';
 
@@ -53,7 +53,7 @@ export abstract class WebService<
 
   // eslint-disable-next-line max-len
   protected checkCallerPermission(): Result<typeof permissionDeniedError, undefined> {
-    const { caller } = requestStoreDispatcher.getPayload();
+    const { caller } = requestStore.getPayload();
     if (this.supportedCallers.includes(caller.type)) return success(undefined);
     return failure(permissionDeniedError);
   }

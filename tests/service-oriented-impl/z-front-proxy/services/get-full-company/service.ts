@@ -1,5 +1,5 @@
 import { DomainUser } from '../../../../../src/api/controller/types.js';
-import { requestStoreDispatcher } from '../../../../../src/api/request-store/request-store-dispatcher.js';
+import { requestStore } from '../../../../../src/api/request-store/request-store.js';
 import { QueryService } from '../../../../../src/api/service/concrete-service/query.service.js';
 import { ServiceResult } from '../../../../../src/api/service/types.js';
 import { success } from '../../../../../src/core/result/success.js';
@@ -30,7 +30,7 @@ export class GetingFullCompanyService extends QueryService<
   async runDomain(
     input: GetFullCompanyRequestDod,
   ): Promise<ServiceResult<GetFullCompanyServiceParams>> {
-    const store = requestStoreDispatcher.getPayload();
+    const store = requestStore.getPayload();
     const { caller } = store;
     let domainUser: DomainUser;
     if (caller.type === 'DomainUser') {

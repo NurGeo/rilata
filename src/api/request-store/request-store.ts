@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { stringUtility } from '#core/utils/index.js';
 import { AssertionException } from '../../core/exeptions.js';
-import { WebReqeustStorePayload, RequestStore } from './types.js';
+import { Storagable } from './storable.ts';
+import { WebReqeustStorePayload } from './types.js';
 
 /**
   Оберка над asyncLocalStorage.
@@ -11,22 +14,26 @@ import { WebReqeustStorePayload, RequestStore } from './types.js';
   Данный диспетчер тажке позволяет в момент выполнения тестов установить заглушку пустышку
   через метод setStore и тестировать различные тестовые ситуации.
   */
-export class RequestStoreDispatcher<T extends WebReqeustStorePayload> {
-  private requestStore!: RequestStore<T>;
+export class RequestStore {
+  private requestStore!: Storagable;
 
-  setRequestStore(requestStore: RequestStore<T>): void {
-    this.requestStore = requestStore;
+  id = stringUtility.random('hh-hhhh-hhhh');
+
+  setStorage(store: Storagable): void {
+    this.requestStore = store;
   }
 
-  getRequestStore(): RequestStore<T> {
+  getStorage(): Storagable {
     return this.requestStore;
   }
 
-  getPayload(): T {
+  getPayload<T extends WebReqeustStorePayload>(): T {
     const payload = this.requestStore?.getStore();
     if (!payload) throw new AssertionException('not found async local storage store');
-    return payload;
+    return payload as T;
   }
 }
 
-export const requestStoreDispatcher = new RequestStoreDispatcher<WebReqeustStorePayload>();
+// гарантируем синглтон через global;
+export const requestStore: RequestStore = (globalThis as any).requestStore || new RequestStore();
+(globalThis as any).requestStore = requestStore;

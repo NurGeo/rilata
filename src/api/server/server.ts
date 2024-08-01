@@ -1,5 +1,5 @@
 import { Logger } from '../../core/logger/logger.js';
-import { domainStore } from '../../core/domain-store/domain-store-dispatcher.js';
+import { domainStore } from '../../core/domain-store.js';
 import { Module } from '../module/module.js';
 import { GeneralServerResolver } from './types.js';
 

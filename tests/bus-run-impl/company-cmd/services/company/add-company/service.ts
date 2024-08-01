@@ -1,4 +1,4 @@
-import { requestStoreDispatcher } from '../../../../../../src/api/request-store/request-store-dispatcher.js';
+import { requestStore } from '../../../../../../src/api/request-store/request-store.js';
 import { CommandService } from '../../../../../../src/api/service/concrete-service/command.service.js';
 import { UowTransactionStrategy } from '../../../../../../src/api/service/transaction-strategy/uow.strategy.js';
 import { ServiceResult } from '../../../../../../src/api/service/types.js';
@@ -35,7 +35,7 @@ export class AddingCompanyService extends CommandService<
   async runDomain(
     input: AddCompanyRequestDod,
   ): Promise<ServiceResult<AddCompanyServiceParams>> {
-    const { caller } = requestStoreDispatcher.getPayload();
+    const { caller } = requestStore.getPayload();
     if (caller.type !== 'DomainUser') {
       throw this.logger.error(`not supported called by call: ${caller.type}`);
     }

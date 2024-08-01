@@ -52,5 +52,5 @@ export type { Facadable } from './resolve/facadable.js';
 export type { Realisable } from './resolve/realisable.js';
 export type { Repositoriable } from './resolve/repositoriable.js';
 
-export type { RequestStore, WebReqeustStorePayload } from './request-store/types.js';
-export * from './request-store/request-store-dispatcher.js';
+export type { WebReqeustStorePayload } from './request-store/types.js';
+export * from './request-store/request-store.js';

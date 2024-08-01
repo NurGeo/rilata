@@ -1,5 +1,6 @@
+import { domainStore } from '#core/domain-store.js';
 import { Caller } from '../../../api/controller/types.js';
-import { requestStoreDispatcher } from '../../../api/request-store/request-store-dispatcher.js';
+import { requestStore } from '../../../api/request-store/request-store.js';
 import { ValidationError } from '../../../api/service/error-types.js';
 import { GeneralRequestDod, GeneralErrorDod, GeneralEventDod } from '../../../domain/domain-data/domain-types.js';
 import { UuidType } from '../../types.js';
@@ -46,7 +47,7 @@ class DodUtility {
     return {
       meta: {
         name,
-        requestId: requestId ?? uuidUtility.getNewUUID(),
+        requestId: requestId ?? uuidUtility.getNewUuidV4(),
         domainType: 'request',
       },
       attrs,
@@ -67,7 +68,7 @@ class DodUtility {
     return {
       attrs,
       meta: {
-        eventId: uuidUtility.getNewUUID(),
+        eventId: uuidUtility.getNewUuidV4(),
         requestId: storeData?.requestId ?? this.getCurrentRequestId(),
         name,
         moduleName: storeData?.moduleName ?? this.getCurrentModuleName(),
@@ -90,7 +91,7 @@ class DodUtility {
     return dtoUtility.replaceAttrs(event, {
       meta: {
         name: newName ?? event.meta.name,
-        eventId: uuidUtility.getNewUUID(),
+        eventId: uuidUtility.getNewUuidV4(),
         moduleName,
         serviceName,
         created: Date.now(),
@@ -110,25 +111,23 @@ class DodUtility {
   }
 
   protected getCurrentRequestId(): string {
-    return requestStoreDispatcher.getPayload().requestId ?? this.throwErr('not read requesid from store');
+    return requestStore.getPayload().requestId ?? this.throwErr('not read requesid from store');
   }
 
   protected getCurrentModuleName(): string {
-    return requestStoreDispatcher.getPayload().moduleName ?? this.throwErr('not read moduleName from store');
+    return requestStore.getPayload().moduleName ?? this.throwErr('not read moduleName from store');
   }
 
   protected getCurrentServiceName(): string {
-    return requestStoreDispatcher.getPayload().serviceName ?? this.throwErr('not read serviceName from store');
+    return requestStore.getPayload().serviceName ?? this.throwErr('not read serviceName from store');
   }
 
   protected getCurrentCaller(): Caller {
-    return requestStoreDispatcher.getPayload().caller ?? this.throwErr('not read caller from store');
+    return requestStore.getPayload().caller ?? this.throwErr('not read caller from store');
   }
 
   protected throwErr(errStr: string): never {
-    throw requestStoreDispatcher.getPayload().moduleResolver
-      ? requestStoreDispatcher.getPayload().moduleResolver.getLogger().error(errStr)
-      : new Error(errStr);
+    throw domainStore.getPayload().logger.error(errStr);
   }
 }
 

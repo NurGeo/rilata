@@ -21,7 +21,7 @@ import {
   RulesValidatedAnswer, RuleErrors, FieldResult, FullFieldResult,
   ArrayFieldResult, ArrayFieldErrors, FieldErrors,
 } from './types.js';
-import { domainStore } from '#core/domain-store/domain-store-dispatcher.js';
+import { domainStore } from '#core/domain-store.js';
 
 export abstract class FieldValidator<
   NAME extends string,

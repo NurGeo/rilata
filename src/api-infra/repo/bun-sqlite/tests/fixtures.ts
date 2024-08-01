@@ -5,7 +5,8 @@ import { DomainUser } from '#api/controller/types.js';
 import { EventRepository } from '#api/database/event.repository.js';
 import { BatchRecords } from '#api/database/types.js';
 import { GeneralModuleResolver } from '#api/module/types.js';
-import { requestStoreDispatcher } from '#api/request-store/request-store-dispatcher.js';
+import { requestStore } from '#api/request-store/request-store.js';
+import { CommandRequestStorePayload } from '#api/request-store/types.js';
 import { Repositoriable } from '#api/resolve/repositoriable.js';
 import { GeneralServerResolver } from '#api/server/types.js';
 import { CommandService } from '#api/service/concrete-service/command.service.js';
@@ -262,8 +263,8 @@ export namespace SqliteTestFixtures {
     protected validator = addPostValidator;
 
     runDomain(input: AddPostRequestDod): ServiceResult<AddPostServiceParams> {
-      const caller = requestStoreDispatcher.getPayload().caller as DomainUser;
-      const postId = uuidUtility.getNewUUID();
+      const caller = requestStore.getPayload().caller as DomainUser;
+      const postId = uuidUtility.getNewUuidV4();
 
       const userRepo = UserRepository.instance(this.moduleResolver);
       const postRepo = PostRepository.instance(this.moduleResolver);
@@ -291,7 +292,7 @@ export namespace SqliteTestFixtures {
         const event = dodUtility.getEventDod<PostAddedEvent>('PostAdded', input.attrs, postArdt);
         eventRepo.addEvents([event]);
       } catch (e) {
-        if (requestStoreDispatcher.getPayload().databaseErrorRestartAttempts === 0) {
+        if (requestStore.getPayload<CommandRequestStorePayload>().databaseErrorRestartAttempts === 0) {
           throw e;
         }
         throw new DatabaseObjectSavingError('fail add user post or post record to repository');

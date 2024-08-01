@@ -12,7 +12,7 @@ describe('auth facade tests', async () => {
   const companyResolver = companyModule.getModuleResolver();
 
   test('успех, пользователь добавился, получен массив пользователей из добавленного пользователя', async () => {
-    const domainUser: DomainUser = { type: 'DomainUser', userId: uuidUtility.getNewUUID() };
+    const domainUser: DomainUser = { type: 'DomainUser', userId: uuidUtility.getNewUuidV4() };
     const sut = AuthFacade.instance(companyResolver);
     const result = await sut.addUser('135135135135', domainUser);
     expect(result.isSuccess()).toBe(true);

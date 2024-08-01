@@ -2,7 +2,7 @@ export type {
   UuidType, IdType, UserId, AttrName, DeepAttr,
   FlatAttrs, Timestamp, LiteralType,
   LiteralRecord, LiteralWithUndefined, LiteralRecordWithUndefined,
-  Constructor, ConstructorReturnType, MaybePromise,
+  Constructor, ConstructorReturnType, MaybePromise, DomainStorePayload,
 } from './types.js';
 export type {
   TupleToUnion, UnionToTuple, TupleToObject, RemoveFirstFromTuple,
@@ -17,8 +17,7 @@ export type {
 } from './type-functions.js';
 export * from './exeptions.js';
 
-export { domainStore as domainStoreDispatcher, DomainStore as DomainStoreDispatcher } from './domain-store/domain-store-dispatcher.js';
-export { type DomainStorePayload } from './domain-store/types.js';
+export { domainStore } from './domain-store.js';
 
 export type { JwtType, JwtPayload } from './jwt/types.js';
 export type {

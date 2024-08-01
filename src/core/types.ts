@@ -1,3 +1,5 @@
+import { Logger } from './logger/logger.ts';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type LiteralType = string | number | boolean | bigint;
 export type LiteralWithUndefined = LiteralType | undefined;
@@ -30,3 +32,7 @@ export type Constructor<T> = new (...args: any[]) => T;
 
 export type ConstructorReturnType<C extends Constructor<any>>
 = C extends Constructor<infer R> ? R : never;
+
+export type DomainStorePayload = {
+  logger: Logger
+}

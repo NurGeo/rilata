@@ -11,8 +11,7 @@ import { GeneralEventDod, GeneralRequestDod, InputDod } from '../../domain/domai
 import { failure } from '../../core/result/failure.js';
 import { GeneralServerResolver } from '../server/types.js';
 import { Caller } from '../controller/types.js';
-import { WebReqeustStorePayload } from '../request-store/types.js';
-import { requestStoreDispatcher } from '../request-store/request-store-dispatcher.js';
+import { RequestStorePayload } from '../request-store/types.js';
 import { Module } from './module.js';
 import { Result } from '#core/result/types.js';
 import { dodUtility } from '#core/utils/dod/dod-utility.js';
@@ -22,6 +21,7 @@ import { ServiceBaseErrors } from '#api/service/error-types.js';
 import { badRequestError, internalError } from '#api/service/constants.js';
 import { success } from '#core/result/success.js';
 import { AssertionException } from '#core/exeptions.js';
+import { requestStore } from '#api/base.index.js';
 
 export abstract class WebModule extends Module {
   readonly abstract queryServices: GeneraQueryService[]
@@ -101,8 +101,8 @@ export abstract class WebModule extends Module {
     let service: GeneralWebService;
     try {
       service = this.getService(inputDod.meta.name);
-      const requestStore = requestStoreDispatcher.getRequestStore();
-      return requestStore.run(
+      const store = requestStore.getStorage();
+      return store.run(
         this.getStorePayload(inputDod, caller),
         (serviceInput) => service.execute(serviceInput),
         inputDod,
@@ -159,15 +159,15 @@ export abstract class WebModule extends Module {
     return failure(err);
   }
 
-  protected getStorePayload(inputDod: InputDod, caller: Caller): WebReqeustStorePayload {
+  protected getStorePayload(inputDod: InputDod, caller: Caller): RequestStorePayload {
     return {
+      type: 'request',
       serviceName: inputDod.meta.name,
       moduleName: this.moduleName,
       caller,
-      moduleResolver: this.moduleResolver,
+      resolver: this.moduleResolver,
       logger: this.logger,
       requestId: inputDod.meta.requestId,
-      databaseErrorRestartAttempts: 1,
     };
   }
 

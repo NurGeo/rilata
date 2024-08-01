@@ -12,7 +12,7 @@ import { dodUtility } from '../../core/utils/dod/dod-utility.js';
 import { responseUtility } from '../../core/utils/response/response-utility.js';
 import { Middleware } from '../middle-after-ware/middleware.js';
 import { Afterware } from '../middle-after-ware/afterware.js';
-import { requestStoreDispatcher } from '../request-store/request-store-dispatcher.js';
+import { requestStore } from '../request-store/request-store.js';
 import { WebReqeustStorePayload } from '../request-store/types.js';
 
 export abstract class BunServer extends RilataServer {
@@ -44,7 +44,7 @@ export abstract class BunServer extends RilataServer {
     this.setControllerUrls();
     this.logger.info('all controllers loaded');
 
-    requestStoreDispatcher.setRequestStore(new AsyncLocalStorage<WebReqeustStorePayload>());
+    requestStore.setStorage(new AsyncLocalStorage<WebReqeustStorePayload>());
     this.logger.info('async local store dispatcher setted');
     this.initFinished();
   }

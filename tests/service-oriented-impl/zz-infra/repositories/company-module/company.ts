@@ -1,5 +1,5 @@
 import { EventRepository } from '../../../../../src/api/database/event.repository.js';
-import { requestStoreDispatcher } from '../../../../../src/api/request-store/request-store-dispatcher.js';
+import { requestStore } from '../../../../../src/api/request-store/request-store.js';
 import { DatabaseObjectSavingError } from '../../../../../src/core/exeptions.js';
 import { Logger } from '../../../../../src/core/logger/logger.js';
 import { failure } from '../../../../../src/core/result/failure.js';
@@ -52,7 +52,7 @@ export class CompanyRepositoryImpl implements CompanyRepository {
     const result = await this.testRepo.add({ ...attrs, version });
     if (result.isSuccess()) return success({ id: attrs.id });
 
-    const { requestId } = requestStoreDispatcher.getPayload();
+    const { requestId } = requestStore.getPayload();
     this.logger.error(`Компания с id: ${attrs.id} уже существует`, { err: result.value, requestId });
     throw new DatabaseObjectSavingError();
   }

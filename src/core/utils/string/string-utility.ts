@@ -1,5 +1,60 @@
+import { domainStore } from '#core/domain-store.js';
+
+const CHARS_COUNT = 25;
+const CODE_OF_A_LETTER = 97;
+
+const randomGenerators = {
+  h: (): string => Math.floor(Math.random() * 16).toString(16),
+  d: (): string => Math.floor(Math.random() * 10).toString(),
+  b: (): string => Math.floor(Math.random() * 2).toString(),
+  o: (): string => Math.floor(Math.random() * 8).toString(),
+  z: (): string => String.fromCharCode(
+    Math.floor(Math.random() * CHARS_COUNT) + CODE_OF_A_LETTER,
+  ),
+
+  0: (maxDigit: number): string => Math.floor(Math.random() * (maxDigit + 1)).toString(),
+};
+
 /* eslint-disable no-plusplus */
 class StringUtility {
+  /**
+   * Генерирует отформатированную строку на основе заданного формата и разделителя.
+   * Каждый символ в строке формата указывает тип значения для генерации:
+   * - 'h' для шестнадцатеричного числа (0-9, a-f)
+   * - 'd' для десятичного числа (0-9)
+   * - 'b' для двоичного числа (0, 1)
+   * - 'o' для восьмеричного числа (0-7)
+   * - 'z' для латинского алфавита (a-z)
+   * - цифры (0-9) указывают случайное число от 0 до указанной цифры
+   *
+   * @param format Строка формата, указывающая структуру и типы значений.
+   * @param [delimiter='-'] Разделитель, используемый для разделения сегментов.
+   * @returns Сгенерированная строка, соответствующая указанному формату и разделителю.
+   *
+   * @example
+   * random('hh-hhhh-hhhh'); // 'a3-4f7b-9acd'
+   * random('dd.dddd.dddd', '.'); // '73.5489.1920'
+   * random('bb-bbbb-bbbb'); // '01-1010-0111'
+   * random('oo-oooo'); // '01-7264'
+   * random('3-34-4h-hhh'); // '1-23-7d-8fc'
+   * random('zzzz#ddd', '#'); // 'hisr#836'
+   */
+  random(format: string, delimiter = '-'): string {
+    const segments = format.split(delimiter);
+
+    return segments.map((segment) => (
+      segment.split('').map((char) => {
+        if (char === 'h' || char === 'd' || char === 'b' || char === 'o' || char === 'z') {
+          return randomGenerators[char]();
+        }
+
+        const digit = Number(char);
+        if (isNaN(digit)) throw domainStore.getPayload().logger.error(`not valid char: ${char}`);
+        return randomGenerators[0](digit);
+      }).join('')
+    )).join(delimiter);
+  }
+
   /**
    * Удаляет указанные символы с начала и конца строки.
    *
@@ -7,7 +62,7 @@ class StringUtility {
    * @param chars - Символы для удаления, по умолчанию пробелы, табуляции и вертикальные табуляции.
    * @returns Строка без указанных символов с начала и конца.
    */
-  trim(target: string, chars = ' \t\v'): string {
+  trim(target: string, chars: string): string {
     return this.trimStart(this.trimEnd(target, chars), chars);
   }
 
@@ -18,7 +73,7 @@ class StringUtility {
    * @param chars - Символы для удаления, по умолчанию пробелы, табуляции и вертикальные табуляции.
    * @returns Строка без указанных символов с начала.
    */
-  trimStart(target: string, chars = ' \t\v'): string {
+  trimStart(target: string, chars: string): string {
     let start = 0;
     const end = target.length;
     while (start < end && chars.includes(target[start])) {
@@ -34,7 +89,7 @@ class StringUtility {
    * @param chars - Символы для удаления, по умолчанию пробелы, табуляции и вертикальные табуляции.
    * @returns Строка без указанных символов с конца.
    */
-  trimEnd(target: string, chars = ' \t\v'): string {
+  trimEnd(target: string, chars: string): string {
     let end = target.length;
     while (end > 0 && chars.includes(target[end - 1])) {
       end -= 1;

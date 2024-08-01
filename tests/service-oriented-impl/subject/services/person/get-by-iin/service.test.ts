@@ -17,7 +17,7 @@ describe('get person by iin service tests', async () => {
   const resolver = module.getModuleResolver();
   requestStoreMock({
     requestId,
-    moduleResolver: resolver,
+    resolver: resolver,
   });
 
   beforeEach(async () => {

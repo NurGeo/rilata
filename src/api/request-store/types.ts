@@ -3,16 +3,23 @@ import { UuidType } from '../../core/types.js';
 import { Caller } from '../controller/types.js';
 import { GeneralModuleResolver } from '../module/types.js';
 
-export type WebReqeustStorePayload = {
+export type RequestStorePayload = {
+  type: 'request',
+  requestId: UuidType,
   serviceName: string,
   moduleName: string,
-  logger: Logger,
-  moduleResolver: GeneralModuleResolver,
+  resolver: GeneralModuleResolver,
   caller: Caller,
-  databaseErrorRestartAttempts: number;
-  requestId: UuidType,
-  unitOfWorkId?: UuidType, // доступна только после commandService.execute();
+  logger: Logger,
 }
+
+export type CommandRequestStorePayload = Omit<RequestStorePayload, 'type'> & {
+  type: 'commandRequest',
+  databaseErrorRestartAttempts: number;
+  unitOfWorkId?: UuidType,
+}
+
+export type WebReqeustStorePayload = RequestStorePayload | CommandRequestStorePayload;
 
 export type BotRequestStorePayload = {
   serviceName: string,
@@ -20,11 +27,4 @@ export type BotRequestStorePayload = {
   logger: Logger,
   moduleResolver: GeneralModuleResolver,
   telegramId: number,
-}
-
-export type RequestStore<T extends WebReqeustStorePayload> = {
-  run<F, Fargs extends unknown[]>(store: T, fn: (...args: Fargs) => F, ...args: Fargs): F,
-
-  /** Возвращает RequestStorePayload. Название метода привязано к AsyncLocalStorage API. */
-  getStore(): T | undefined;
 }

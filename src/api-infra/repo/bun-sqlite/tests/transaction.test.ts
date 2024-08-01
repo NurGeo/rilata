@@ -23,7 +23,7 @@ describe('bun sqlite db transaction tests', () => {
   };
   requestStoreMock({
     caller,
-    moduleResolver: fakeModuleResolver,
+    resolver: fakeModuleResolver,
     serviceName: 'AddingPostService',
     moduleName: 'PostModule',
   });

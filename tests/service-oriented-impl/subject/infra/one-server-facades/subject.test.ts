@@ -18,7 +18,7 @@ describe('subject facade tests', async () => {
   const companyResolver = companyModule.getModuleResolver();
 
   test('успех, service выполнился и пользователь добавился', async () => {
-    const domainUser: DomainUser = { type: 'DomainUser', userId: uuidUtility.getNewUUID() };
+    const domainUser: DomainUser = { type: 'DomainUser', userId: uuidUtility.getNewUuidV4() };
     const sut = SubjectFacade.instance(companyResolver);
     const addPersonAttrs: AddPersonRequestDodAttrs = {
       iin: '135135135135',

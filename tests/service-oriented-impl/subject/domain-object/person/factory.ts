@@ -8,7 +8,7 @@ export class PersonFactory extends AggregateFactory<PersonParams> {
   create(actionAttrs: AddingPersonActionAttrs): PersonAR {
     const personAttrs: PersonAttrs = {
       ...actionAttrs,
-      id: uuidUtility.getNewUUID(),
+      id: uuidUtility.getNewUuidV4(),
       contacts: { phones: [] },
     };
     const person = new PersonAR(personAttrs, 0);
