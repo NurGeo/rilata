@@ -20,7 +20,6 @@ import { dodUtility } from '#core/utils/dod/dod-utility.js';
 import { dtoUtility } from '#core/utils/dto/dto-utility.js';
 import { uuidUtility } from '#core/utils/uuid/uuid-utility.js';
 import { AggregateRootParams, ARDT, DomainMeta, EventDod, GeneralEventDod, RequestDod } from '#domain/domain-data/domain-types.js';
-import { DTO } from '#domain/dto.js';
 import { DtoFieldValidator } from '#domain/validator/field-validator/dto-field-validator.js';
 import { LiteralFieldValidator } from '#domain/validator/field-validator/literal-field-validator.js';
 import { StringChoiceValidationRule } from '#domain/validator/rules/validate-rules/string/string-choice.v-rule.js';
@@ -45,7 +44,7 @@ export namespace SqliteTestFixtures {
     },
   };
 
-  export class UserRepositorySqlite extends BunSqliteRepository<'users', UserAttrs> implements UserRepository {
+  export class UserRepositorySqlite extends BunSqliteRepository<'users', UserRecord> implements UserRepository {
     tableName = 'users' as const;
 
     migrationRows: MigrateRow[] = [];
@@ -153,7 +152,7 @@ export namespace SqliteTestFixtures {
         (postId, name, body, desc, authorId, category, published, version)
         VALUES ($postId, $name, $body, $desc, $authorId, $category, $published, $version);
       `);
-      sql.run(this.getObjectBindings({ ...attrs, published: false, version: 0 }));
+      sql.run(this.bindKeys({ ...attrs, published: false, version: 0 }));
     }
 
     findPost(postId: string): PostAttrs | undefined {
@@ -201,7 +200,7 @@ export namespace SqliteTestFixtures {
     posts: UuidType[],
   }
 
-  export type UserRecord = {
+  type UserRecord = {
     userId: string,
     login: string,
     hash: string,
@@ -423,19 +422,19 @@ export namespace SqliteTestFixtures {
         userId: '08ea51a1-6d14-42bf-81de-a94a809e3286',
         login: 'Bill',
         hash: 'fff',
-        posts: [],
+        posts: JSON.stringify([]),
       },
       {
         userId: '38d929f5-d20d-47f3-8844-eb1986ee46ae',
         login: 'f1rstFx',
         hash: 'hhh',
-        posts: ['3ee45022-4253-4dbe-9da0-80db931184cc'],
+        posts: JSON.stringify(['3ee45022-4253-4dbe-9da0-80db931184cc']),
       },
       {
         userId: '131b499e-927d-477c-9d97-c2ae6104985e',
         login: 'Nick',
         hash: 'ccc',
-        posts: ['09cdf3d6-93ef-44be-8a3d-2e9da3982049', 'fb369b27-ec5e-452f-b454-e48db4bf6ab4'],
+        posts: JSON.stringify(['09cdf3d6-93ef-44be-8a3d-2e9da3982049', 'fb369b27-ec5e-452f-b454-e48db4bf6ab4']),
       },
     ],
     posts: [

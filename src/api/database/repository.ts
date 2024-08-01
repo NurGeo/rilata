@@ -1,8 +1,10 @@
 import { MaybePromise } from '#core/types.js';
-import { DTO } from '#domain/dto.js';
 import { DatabaseServiceStatus } from './types.ts';
 
-export interface Repository<T_NAME extends string, REC extends DTO> {
+export interface Repository<
+  T_NAME extends string,
+  REC extends Record<string, unknown>
+> {
   tableName: T_NAME
 
   isCreated(): MaybePromise<boolean>

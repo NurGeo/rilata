@@ -2,14 +2,13 @@ import { SQLQueryBindings } from 'bun:sqlite';
 import { GeneralModuleResolver } from '#api/module/types.js';
 import { Logger } from '#core/logger/logger.js';
 import { dtoUtility } from '#core/utils/dto/dto-utility.js';
-import { DTO } from '#domain/dto.js';
 import { BunSqliteDatabase } from './database.js';
 import { MigrateRow } from './types.js';
 import { DatabaseServiceStatus } from '#api/database/types.js';
 import { Repository } from '#api/database/repository.js';
 
 export abstract class BunSqliteRepository<
-  TN extends string, R extends DTO
+  TN extends string, R extends Record<string, string | number | null>
 > implements Repository<TN, R> {
   abstract tableName: TN;
 
@@ -39,7 +38,7 @@ export abstract class BunSqliteRepository<
         const valueNames = colNames.map((nm) => (
           this.isObject(rec[nm]) ? `json($${nm})` : `$${nm}`
         ));
-        const bindings = this.getObjectBindings(rec);
+        const bindings = this.bindKeys(rec);
 
         const sql = `INSERT INTO ${this.tableName} (${colNames.join(',')}) VALUES (${valueNames.join(',')})`;
         this.db.sqliteDb.prepare(sql).run(bindings);
@@ -91,9 +90,8 @@ export abstract class BunSqliteRepository<
   }
 
   /** Возвращает объект приведенный для привязки */
-  protected getObjectBindings(obj: Record<string, unknown>): SQLQueryBindings {
-    const casted = dtoUtility.editValues(obj, (v) => (this.isObject(v) ? JSON.stringify(v) : v));
-    return dtoUtility.editKeys(casted, (k) => `$${k}`);
+  protected bindKeys(obj: Record<string, unknown>): SQLQueryBindings {
+    return dtoUtility.editKeys(obj, (k) => `$${k}`);
   }
 
   protected isObject(value: unknown): boolean {

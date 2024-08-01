@@ -7,8 +7,18 @@ import { GeneralArParams, GeneralEventDod } from '#domain/domain-data/domain-typ
 import { BunSqliteRepository } from '../repository.js';
 import { MigrateRow } from '../types.js';
 
+type EventRecord = {
+  id: string,
+  name: string,
+  payload: string,
+  requestId: string,
+  isPublished: 0 | 1,
+  aRootName: string,
+  aRootId: string,
+}
+
 export class EventRepositorySqlite
-  extends BunSqliteRepository<'events', GeneralEventDod>
+  extends BunSqliteRepository<'events', EventRecord>
   implements EventRepository<false>, BusMessageRepository<false> {
   tableName = 'events' as const;
 

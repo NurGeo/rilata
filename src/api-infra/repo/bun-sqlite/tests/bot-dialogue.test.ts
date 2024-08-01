@@ -4,6 +4,7 @@ import { BotDialogueRepositorySqlite } from '../repositories/bot-dialogue.ts';
 import { BunSqliteDatabase } from '../database.ts';
 import { DialogueContext } from '#api/bot/types.js';
 import { dtoUtility } from '#core/utils/dto/dto-utility.js';
+import { BotDialogueContextRecord } from '../types.ts';
 
 type TestContextData = {
   data: string[],
@@ -13,37 +14,49 @@ type TestStates = 'inited' | 'updated' | 'finished';
 
 type TestDialogueContext = DialogueContext<TestContextData, TestStates>
 
-const fixtures: Record<'bot_dialogues', TestDialogueContext[]> = {
+const fixtures: Record<'bot_dialogues', BotDialogueContextRecord[]> = {
   bot_dialogues: [
     {
       telegramId: '12345',
-      isActive: false,
+      isActive: 0,
       stateName: 'finished',
       lastUpdate: Date.now(),
-      payload: {
+      payload: JSON.stringify({
         data: ['test data'],
-      },
+      }),
     },
     {
       telegramId: '67890',
-      isActive: false,
-      stateName: 'finished',
+      isActive: 0,
+      stateName: 'finished' as const,
       lastUpdate: Date.now(),
-      payload: {
+      payload: JSON.stringify({
         data: ['test data', 'other data'],
-      },
+      }),
     },
     {
       telegramId: '12345',
-      isActive: true,
-      stateName: 'inited',
+      isActive: 1,
+      stateName: 'inited' as const,
       lastUpdate: Date.now(),
-      payload: {
+      payload: JSON.stringify({
         data: ['some data'],
-      },
+      }),
     },
   ],
 };
+
+function recordToAttrs(
+  rec: BotDialogueContextRecord,
+  part?: Partial<BotDialogueContextRecord>,
+): TestDialogueContext {
+  return {
+    ...rec,
+    isActive: Boolean(part?.isActive ? part.isActive : rec.isActive),
+    payload: part?.payload ? JSON.parse(part.payload) : JSON.parse(rec.payload),
+    ...(dtoUtility.excludeAttrs(part ?? {}, ['isActive', 'payload'])),
+  } as TestDialogueContext;
+}
 
 class JsonableBotDialogueRepository extends BotDialogueRepositorySqlite<TestDialogueContext> {
   pushNumberForJson(
@@ -71,19 +84,28 @@ describe('BotDialogueRepositorySqlite', () => {
   test('add should add new context and throw error if active context exists', async () => {
     const now = Date.now();
     spyOn(repo, 'getNow').mockReturnValue(now);
-    const context1 = dtoUtility.excludeAttrs(fixtures.bot_dialogues[0], ['isActive', 'lastUpdate']);
-    const context2 = dtoUtility.excludeAttrs(fixtures.bot_dialogues[2], ['isActive', 'lastUpdate']);
+    const context1 = {
+      ...fixtures.bot_dialogues[0],
+      isActive: undefined,
+      lastUpdate: undefined,
+      payload: JSON.parse(fixtures.bot_dialogues[0].payload) as TestContextData,
+    };
+    const context2 = {
+      ...fixtures.bot_dialogues[2],
+      isActive: undefined,
+      lastUpdate: undefined,
+      payload: JSON.parse(fixtures.bot_dialogues[2].payload) as TestContextData,
+    };
 
-    repo.add(context1); // isActive === true
+    repo.add(context1 as Omit<TestDialogueContext, 'isActive' | 'lastUpdate'>); // isActive === true
     const findContext = repo.findActive(context1.telegramId);
     expect(findContext).not.toBeUndefined();
-    const expectContext1 = dtoUtility.replaceAttrs(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      fixtures.bot_dialogues[0], { isActive: true, lastUpdate: now },
+    const expectContext1 = recordToAttrs(
+      fixtures.bot_dialogues[0], { isActive: 1, lastUpdate: now },
     );
     expect(findContext).toEqual(expectContext1);
 
-    expect(() => repo.add(context2)).toThrow(
+    expect(() => repo.add(context2 as Omit<TestDialogueContext, 'isActive' | 'lastUpdate'>)).toThrow(
       `Активный контекст диалога уже существует для пользователя с telegramId: ${context2.telegramId}`,
     );
   });
@@ -92,7 +114,7 @@ describe('BotDialogueRepositorySqlite', () => {
     db.addBatch(fixtures);
 
     const user1Context = repo.findActive(fixtures.bot_dialogues[0].telegramId);
-    const user1ExpectContext = fixtures.bot_dialogues[2]; // last context is active;
+    const user1ExpectContext = recordToAttrs(fixtures.bot_dialogues[2]); // last context is active;
     expect(user1Context).toEqual(user1ExpectContext);
     const user2Context = repo.findActive(fixtures.bot_dialogues[1].telegramId);
     expect(user2Context).toBeUndefined();
@@ -103,13 +125,13 @@ describe('BotDialogueRepositorySqlite', () => {
 
     const user1Contexts = repo.findAll(fixtures.bot_dialogues[0].telegramId);
     const user1ExpectContexts = [
-      fixtures.bot_dialogues[0],
-      fixtures.bot_dialogues[2],
+      recordToAttrs(fixtures.bot_dialogues[0]),
+      recordToAttrs(fixtures.bot_dialogues[2]),
     ];
     expect(user1Contexts).toEqual(user1ExpectContexts);
     const user2Contexts = repo.findAll(fixtures.bot_dialogues[1].telegramId);
     const user2ExpectContexts = [
-      fixtures.bot_dialogues[1],
+      recordToAttrs(fixtures.bot_dialogues[1]),
     ];
     expect(user2Contexts).toEqual(user2ExpectContexts);
   });
@@ -195,7 +217,12 @@ describe('BotDialogueRepositorySqlite', () => {
     });
 
     test('should throw for update at unactive dialogue', async () => {
-      repo.addBatch([notActiveContext]);
+      const record: BotDialogueContextRecord = {
+        ...notActiveContext,
+        isActive: notActiveContext.isActive ? 1 : 0,
+        payload: JSON.stringify(notActiveContext.payload),
+      };
+      repo.addBatch([record]);
       expect(repo.findAll('333')).toEqual([notActiveContext]);
       expect(repo.findActive('333')).toBeUndefined();
 
@@ -243,7 +270,12 @@ describe('BotDialogueRepositorySqlite', () => {
     });
 
     test('should not finished, not have active context', async () => {
-      repo.addBatch([expectContext]);
+      const record: BotDialogueContextRecord = {
+        ...expectContext,
+        isActive: expectContext.isActive ? 1 : 0,
+        payload: JSON.stringify(expectContext.payload),
+      };
+      repo.addBatch([record]);
       expect(repo.findAll('333')).toEqual([expectContext]);
       expect(repo.findActive('333')).toBeUndefined();
 
@@ -260,7 +292,7 @@ describe('BotDialogueRepositorySqlite', () => {
       repo.pushNumberForJson('12345', 'pushed data');
 
       const updatedContext = repo.findActive('12345');
-      const expectContext = dtoUtility.deepCopy(fixtures.bot_dialogues[2]);
+      const expectContext = recordToAttrs(fixtures.bot_dialogues[2]);
       expectContext.payload.data.push('pushed data');
       expect(updatedContext).toEqual(expectContext);
     });
@@ -271,7 +303,7 @@ describe('BotDialogueRepositorySqlite', () => {
 
       const updatedContexts = repo.findAll('67890');
       expect(updatedContexts.length).toBe(1);
-      const expectContext = dtoUtility.deepCopy(fixtures.bot_dialogues[1]);
+      const expectContext = recordToAttrs(fixtures.bot_dialogues[1]);
       expect(updatedContexts[0]).toEqual(expectContext);
     });
   });

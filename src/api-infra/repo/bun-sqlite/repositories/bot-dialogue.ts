@@ -3,15 +3,7 @@ import { DialogueContext, FinishContextAttrs, UpdateContextAttrs } from '#api/bo
 import { dtoUtility } from '#core/utils/dto/dto-utility.js';
 import { DTO } from '#domain/dto.js';
 import { BunSqliteRepository } from '../repository.ts';
-import { MigrateRow } from '../types.ts';
-
-type BotDialogueContextRecord = {
-  telegramId: string,
-  isActive: 1 | 0,
-  stateName: string,
-  lastUpdate: number,
-  payload: string,
-}
+import { BotDialogueContextRecord, MigrateRow } from '../types.ts';
 
 type RunResult = {
   changes: number,
@@ -19,7 +11,7 @@ type RunResult = {
 }
 
 export class BotDialogueRepositorySqlite<CTX extends DialogueContext<DTO, string>>
-  extends BunSqliteRepository<'bot_dialogues', DialogueContext<DTO, string>>
+  extends BunSqliteRepository<'bot_dialogues', BotDialogueContextRecord>
   implements BotDialogueRepository<false, CTX> {
   tableName = 'bot_dialogues' as const;
 
@@ -96,7 +88,7 @@ export class BotDialogueRepositorySqlite<CTX extends DialogueContext<DTO, string
       INSERT INTO ${this.tableName}
       VALUES ($telegramId, $isActive, $stateName, $lastUpdate, json($payload))
     `;
-    this.db.sqliteDb.query(query).run(this.getObjectBindings(recordContext));
+    this.db.sqliteDb.query(query).run(this.bindKeys(recordContext));
   }
 
   clear(): void {
@@ -148,7 +140,7 @@ export class BotDialogueRepositorySqlite<CTX extends DialogueContext<DTO, string
       db.exec('BEGIN TRANSACTION');
       const result = db
         .prepare(query)
-        .run(this.getObjectBindings(record)) as unknown as RunResult;
+        .run(this.bindKeys(record)) as unknown as RunResult;
 
       if (result.changes === 1) {
         db.exec('COMMIT');

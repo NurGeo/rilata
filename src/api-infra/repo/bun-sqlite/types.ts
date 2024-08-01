@@ -22,3 +22,11 @@ export type BunSqliteTransactionData = {
 }
 
 export type BunRepoCtor = new (db: BunSqliteDatabase) => BunSqliteRepository<string, DTO>;
+
+export type BotDialogueContextRecord = {
+  telegramId: string,
+  isActive: 1 | 0,
+  stateName: string,
+  lastUpdate: number,
+  payload: string,
+}

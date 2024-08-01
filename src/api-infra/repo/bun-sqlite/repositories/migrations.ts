@@ -33,7 +33,7 @@ export class MigrationsSqliteRepository extends BunSqliteRepository<'migrations'
       INSERT INTO ${this.tableName}
       VALUES ($id, $description, $sql, $tableName, unixepoch('now'))
     `;
-    this.db.sqliteDb.prepare(migrationRecordSql).run(this.getObjectBindings(row));
+    this.db.sqliteDb.prepare(migrationRecordSql).run(this.bindKeys(row));
   }
 
   clear(): void {} // записи таблицы миграции не очищаются
