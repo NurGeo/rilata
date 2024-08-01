@@ -18,6 +18,10 @@ export class ConsoleLogger implements Logger {
     this.modeDispatcher = new BinaryKeyFlag(loggerModes, logMode);
   }
 
+  setLogMode(logMode: InputLoggerModes): void {
+    this.logMode = logMode;
+  }
+
   info(log: string): void {
     if (this.modeDispatcher.isAny(['info']) === false) return;
     this.toConsole(this.makeLogString('INFO', log));

@@ -17,4 +17,6 @@ export interface Logger {
 
   /** Фатальные ошибки, которые ловятся обработчиком на верхнем уровне */
   fatalError(log: string, logAttrs?: unknown, err?: Error): Error
+
+  setLogMode(logMode: InputLoggerModes): void
 }
