@@ -184,6 +184,9 @@ export abstract class BotModule extends Module {
   }
 
   protected async getUpdates(): Promise<Update[]> {
+    if (this.moduleResolver.getServerResolver().getRunMode() === 'test') {
+      throw Error('Произведена попытка получения Updates с телеграм сервер во время теста.');
+    }
     const body: ApiMethodsParams<'getUpdates'> = {
       method: 'getUpdates',
       offset: this.updatesData.newUpdateId,
