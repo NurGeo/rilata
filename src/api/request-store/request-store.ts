@@ -1,8 +1,21 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { stringUtility } from '#core/utils/index.js';
 import { AssertionException } from '../../core/exeptions.js';
 import { Storagable } from './storable.ts';
 import { WebReqeustStorePayload } from './types.js';
+
+function getId(): string {
+  let result = '';
+
+  for (const segmentLength of [2, 4, 4]) {
+    for (let i = 0; i < segmentLength; i += 1) {
+      result += Math.floor(Math.random() * 16).toString(16);
+    }
+    result += '-';
+  }
+
+  return result.slice(0, -1);
+}
 
 /**
   Оберка над asyncLocalStorage.
@@ -17,7 +30,7 @@ import { WebReqeustStorePayload } from './types.js';
 export class RequestStore {
   private requestStore!: Storagable;
 
-  id = stringUtility.random('hh-hhhh-hhhh');
+  id = getId();
 
   setStorage(store: Storagable): void {
     this.requestStore = store;
