@@ -35,7 +35,10 @@ export class BotModuleController extends ModuleController {
 
   async postRequest(reply: ApiMethodsParams<ApiMethodNames>): Promise<Response> {
     if (this.resolver.getServerResolver().getRunMode() === 'test') {
-      throw Error('Произведен попытка отправки сообщения в телеграм сервер во время теста.');
+      throw this.resolver.getLogger().error(
+        'Произведен попытка отправки сообщения в телеграм сервер во время теста.',
+        { reply },
+      );
     }
     const data = {
       method: 'POST',

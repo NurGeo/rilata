@@ -131,7 +131,7 @@ export abstract class BotModule extends Module {
     const controller = this.getModuleController();
     const response = await controller.postRequest({ method: 'deleteWebhook' });
     if (!response.ok) {
-      throw new Error('Failed to unsubscribe from webhook');
+      throw this.logger.error('Failed to unsubscribe from webhook', { response });
     }
     const resolves = this.moduleResolver.getModuleResolves();
     const msg = `successfully webhook unsubscribed for bot module: ${resolves.moduleName}`;
@@ -185,7 +185,9 @@ export abstract class BotModule extends Module {
 
   protected async getUpdates(): Promise<Update[]> {
     if (this.moduleResolver.getServerResolver().getRunMode() === 'test') {
-      throw Error('Произведена попытка получения Updates с телеграм сервер во время теста.');
+      throw this.logger.error(
+        'Произведена попытка получения Updates с телеграм сервер во время теста.',
+      );
     }
     const body: ApiMethodsParams<'getUpdates'> = {
       method: 'getUpdates',
