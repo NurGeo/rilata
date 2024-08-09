@@ -14,6 +14,17 @@ export class BotLogger extends BaseLogger {
     this.telegramApi = new TelegramApi(config.token);
   }
 
+  sendToBot(text: string, options?: Partial<SendMessage>): void {
+    this.config.managerIds.forEach((managerId) => {
+      this.telegramApi.postRequest({
+        method: 'sendMessage',
+        text,
+        chat_id: managerId,
+        ...options,
+      });
+    });
+  }
+
   protected toLog(text: string, logAttrs?: unknown): void {
     if (logAttrs === undefined) {
       this.sendToBot(text);
@@ -25,18 +36,7 @@ export class BotLogger extends BaseLogger {
     }
   }
 
-  protected sendToBot(text: string, options?: Partial<SendMessage>): void {
-    this.config.managerIds.forEach((managerId) => {
-      this.telegramApi.postRequest({
-        method: 'sendMessage',
-        text,
-        chat_id: managerId,
-        ...options,
-      });
-    });
-  }
-
-  checkInvariants(): void {
+  protected checkInvariants(): void {
     if (this.config.managerIds.length === 0) {
       throw getLogger().error('not setted manager ids for bot logger', { config: this.config });
     }
