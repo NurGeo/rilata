@@ -1,4 +1,4 @@
-import { domainStore } from '#core/domain-store.js';
+import { domainStore } from '#core/store/domain-store.js';
 
 const CHARS_COUNT = 25;
 const CODE_OF_A_LETTER = 97;

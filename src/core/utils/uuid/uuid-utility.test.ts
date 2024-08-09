@@ -2,7 +2,7 @@
 import { describe, test, expect } from 'bun:test';
 import { AssertionException } from '../../exeptions.js';
 import { uuidUtility } from './uuid-utility.js';
-import { domainStore } from '#core/domain-store.js';
+import { domainStore } from '#core/store/domain-store.js';
 import { Logger } from '#core/logger/logger.js';
 
 describe('uuidUtility class test', () => {
@@ -94,7 +94,7 @@ describe('uuidUtility class test', () => {
         new Error(`${message}: ${JSON.stringify(context)}`)
       ),
     } as unknown as Logger;
-    domainStore.setPaylod({ logger });
+    domainStore.setPaylod({ logger, runMode: 'test' });
 
     const sut = uuidUtility;
 

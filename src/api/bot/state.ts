@@ -1,8 +1,8 @@
 import { Update } from '@grammyjs/types';
-import { BotReplyMessage } from './types.ts';
 import { GeneralModuleResolver } from '#api/module/types.js';
 import { MaybePromise } from '#core/types.js';
 import { BotDialogueService } from './dialogue-service.ts';
+import { BotReplyMessage } from '#core/utils/telegram-api/types.js';
 
 export abstract class BotState {
   abstract stateName: string;

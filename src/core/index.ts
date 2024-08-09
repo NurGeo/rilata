@@ -17,7 +17,7 @@ export type {
 } from './type-functions.js';
 export * from './exeptions.js';
 
-export { domainStore } from './domain-store.js';
+export { domainStore } from './store/domain-store.js';
 
 export type { JwtType, JwtPayload } from './jwt/types.js';
 export type {

@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import { loggerModes } from '../../core/logger/logger-modes.js';
 import { Constructor } from '../../core/types.js';
 import { DTO } from '../../domain/dto.js';

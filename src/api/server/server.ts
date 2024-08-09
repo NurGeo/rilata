@@ -1,5 +1,4 @@
 import { Logger } from '../../core/logger/logger.js';
-import { domainStore } from '../../core/domain-store.js';
 import { Module } from '../module/module.js';
 import { GeneralServerResolver } from './types.js';
 
@@ -11,11 +10,10 @@ export abstract class RilataServer {
   constructor(protected modules: Module[]) {}
 
   init(serverResolver: GeneralServerResolver): void {
-    serverResolver.init(this);
-    // инициализация модулей производится server-starter-ом
     this.logger = serverResolver.getLogger();
-    domainStore.setPaylod({ logger: this.logger });
     this.resolver = serverResolver;
+    // инициализация модулей производится server-starter-ом
+    serverResolver.init(this);
   }
 
   stop(): void {

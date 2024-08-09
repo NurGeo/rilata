@@ -1,10 +1,5 @@
 import { describe, test, expect } from 'bun:test';
 import { stringUtility } from './string-utility.js';
-import { domainStore } from '#core/domain-store.js';
-import { ConsoleLogger } from '#core/logger/console-logger.js';
-import { getEnvLogMode } from '#core/logger/logger-modes.js';
-
-domainStore.setPaylod({ logger: new ConsoleLogger(getEnvLogMode() ?? 'all') });
 
 describe('Тестирование класса StringUtility', () => {
   const sut = stringUtility;

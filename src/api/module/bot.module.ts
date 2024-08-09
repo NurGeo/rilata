@@ -6,10 +6,10 @@ import { GeneralServerResolver } from '#api/server/types.js';
 import { BotSubscribeMode, GeneralBotModuleResolves, GetUpdatesMode } from './bot-types.ts';
 import { ModuleResolver } from './m-resolver.ts';
 import { Module } from './module.js';
-import { ApiMethodsParams, BotReplyMessage, SendMessage } from '#api/bot/types.js';
-import { TELEGRAM_API } from '#api/controller/constants.js';
 import { updateUtils } from '#api/bot/utils/update.js';
 import { BotDialogueService } from '#api/bot/dialogue-service.js';
+import { ApiMethodsParams, BotReplyMessage, SendMessage } from '#core/utils/telegram-api/types.ts';
+import { TelegramApi } from '#core/utils/telegram-api/telegram-api.js';
 
 type TelegramId = string;
 
@@ -36,6 +36,8 @@ export abstract class BotModule extends Module {
     return this.updatesData_;
   }
 
+  protected telegramApi!: TelegramApi;
+
   init(
     moduleResolver: ModuleResolver<GeneralServerResolver, GeneralBotModuleResolves>,
     serverResolver: GeneralServerResolver,
@@ -45,6 +47,7 @@ export abstract class BotModule extends Module {
     super.init(moduleResolver, serverResolver);
     this.subscribeToUpdates();
     this.service.init(moduleResolver);
+    this.telegramApi = new TelegramApi(this.getBotToken());
   }
 
   getSubscribeMode(): BotSubscribeMode {
@@ -116,7 +119,7 @@ export abstract class BotModule extends Module {
       url: `${host}${controller.getUrls()[0]}`,
     };
 
-    const response = await controller.postRequest(params);
+    const response = await this.telegramApi.postRequest(params);
     if (!response.ok) {
       const logger = this.moduleResolver.getLogger();
       throw logger.error('Failed to subscribe to telegram webhook');
@@ -128,8 +131,7 @@ export abstract class BotModule extends Module {
     if (subscribeMode.type === 'off') return;
     if (subscribeMode.type === 'getUpdates' && !subscribeMode.unsubscribeWebhook) return;
 
-    const controller = this.getModuleController();
-    const response = await controller.postRequest({ method: 'deleteWebhook' });
+    const response = await this.telegramApi.postRequest({ method: 'deleteWebhook' });
     if (!response.ok) {
       throw this.logger.error('Failed to unsubscribe from webhook', { response });
     }
@@ -195,7 +197,7 @@ export abstract class BotModule extends Module {
       allowed_updates: ['message', 'callback_query'],
     };
     try {
-      const response = await this.moduleController.postRequest(body);
+      const response = await this.telegramApi.postRequest(body);
       if (response.ok) return (await response.json()).result as Update[];
 
       this.logger.error(
@@ -206,7 +208,7 @@ export abstract class BotModule extends Module {
     } catch (e) {
       this.logger.error(
         `Не удалось выполнить запрос getUpdates на сервер telegram: ${(e as Error).message}`,
-        { body, url: this.getBotUrl() },
+        { body, url: this.telegramApi.getBotUrl() },
         e as Error,
       );
       return [];
@@ -234,9 +236,5 @@ export abstract class BotModule extends Module {
       else result[telegramId] = [update];
     });
     return result;
-  }
-
-  getBotUrl(): string {
-    return `${TELEGRAM_API}bot${this.getBotToken()}`;
   }
 }

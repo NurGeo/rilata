@@ -40,6 +40,14 @@ export function getJwtConfig(config?: Partial<JwtConfig>): JwtConfig {
   };
 }
 
+export function getBotLoggerToken(token?: string): string {
+  return process.env.BOT_LOGGER_TOKEN ?? token ?? throwErr('not found bot logger token in env.BOT_LOGGER_TOKEN');
+}
+
+export function getBotLoggerManagerIds(ids?: string[]): string[] {
+  return process.env.BOT_LOGGER_MANAGER_IDS?.split(',') ?? ids ?? throwErr('not found bot logger manager ids in env.BOT_LOGGER_MANAGER_IDS');
+}
+
 export function getServerConfig(config?: Partial<ServerConfig>): ServerConfig {
   let envPort: number | undefined = Number(process.env.LOCAL_PORT);
   envPort = isNaN(envPort) ? undefined : envPort;

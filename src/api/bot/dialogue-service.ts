@@ -1,14 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 import { Update } from '@grammyjs/types';
 import { BotState } from './state.js';
-import { ApiMethodNames, ApiMethodsParams, BotReplyMessage, DialogueContext, GeneralBotMiddleware, SendMessage } from './types.js';
+import { DialogueContext, GeneralBotMiddleware } from './types.js';
 import { BotDialogueRepository } from './dialogue-repo.js';
 import { updateUtils } from './utils/update.ts';
-import { Constructor } from '#core/types.js';
+import { Constructor, MaybePromise } from '#core/types.js';
 import { DTO } from '#domain/dto.js';
 import { Service } from '#api/service/service.js';
 import { GeneralModuleResolver } from '#api/module/types.js';
-import { BotModuleController } from '#api/controller/bot.m-controller.js';
+import { TelegramApi } from '#core/utils/telegram-api/telegram-api.js';
+import { ApiMethodNames, ApiMethodsParams, BotReplyMessage, SendMessage } from '#core/utils/telegram-api/types.js';
 
 export abstract class BotDialogueService extends Service<GeneralModuleResolver> {
   protected abstract stateCtors: Constructor<BotState>[];
@@ -19,12 +20,16 @@ export abstract class BotDialogueService extends Service<GeneralModuleResolver> 
 
   protected middlewares!: GeneralBotMiddleware[];
 
+  protected telegramApi!: TelegramApi;
+
   init(resolver: GeneralModuleResolver): void {
     super.init(resolver);
     this.states = this.stateCtors.map((Ctor) => new Ctor());
     this.states.forEach((state) => state.init(this.moduleResolver, this));
     this.middlewares = this.middlewareCtors.map((Ctor) => new Ctor());
     this.middlewares.forEach((m) => m.init(this.moduleResolver, this));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.telegramApi = new TelegramApi((resolver.getModuleResolves() as any).botToken);
   }
 
   async execute(update: Update): Promise<BotReplyMessage> {
@@ -46,10 +51,8 @@ export abstract class BotDialogueService extends Service<GeneralModuleResolver> 
     }
   }
 
-  async sendByBot(promise: Promise<ApiMethodsParams<ApiMethodNames>>): Promise<Response> {
-    const params = await promise;
-    const controller = this.moduleResolver.getModule().getModuleController() as BotModuleController;
-    return controller.postRequest(params);
+  async sendByBot(promise: MaybePromise<ApiMethodsParams<ApiMethodNames>>): Promise<Response> {
+    return this.telegramApi.postRequest(await promise);
   }
 
   getState<S extends BotState>(stateName: S['stateName']): S {

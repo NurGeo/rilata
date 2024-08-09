@@ -1,24 +1,28 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-bitwise */
 /* eslint-disable consistent-return */
 // ++++++++++++ types +++++++++++++++++
 import { BinaryKeyFlag } from '#core/utils/binary/binary-flag/binary-flag.js';
 
 /* eslint-disable key-spacing */
 export const loggerModes = {
-  info:  0b000001, // 1
-  warn:  0b000010, // 2
-  error: 0b000100, // 4
-  fatal: 0b001000, // 8
+  info:  1 << 0, // 1
+  warn:  1 << 1, // 2
+  error: 1 << 2, // 4
+  fatal: 1 << 3, // 8
+  // 1 << 4  - reserved 1,
+  // 1 << 5  - reserved 2,
 };
 
-export type LoggerModes = keyof typeof loggerModes;
+type LoggerModeKeys = keyof typeof loggerModes;
 
-export type InputLoggerModes = LoggerModes[] | 'all' | 'off';
+export type LoggerModes = LoggerModeKeys[] | 'all' | 'off';
 
 // ++++++++++++ const and functions +++++++++++++++++
 
-let cachedLogMode: InputLoggerModes | undefined;
+let cachedLogMode: LoggerModes | undefined;
 
-export function getEnvLogMode(): InputLoggerModes | undefined {
+export function getEnvLogMode(): LoggerModes | undefined {
   if (cachedLogMode) return cachedLogMode;
 
   // в env можно передавать одну из значений 'info', 'warn', 'error', 'fatal', 'all', 'off'
@@ -33,7 +37,7 @@ export function getEnvLogMode(): InputLoggerModes | undefined {
     if (envLogMode === 'all' || envLogMode === 'off') {
       cachedLogMode = envLogMode;
     } else if (Object.keys(loggerModes).includes(envLogMode)) {
-      cachedLogMode = [envLogMode] as LoggerModes[];
+      cachedLogMode = [envLogMode] as LoggerModeKeys[];
     }
   } else if (flags >= 0) {
     if (flags <= 0) {

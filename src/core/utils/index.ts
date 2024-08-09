@@ -8,4 +8,6 @@ export * from './enum/enum-utility.js';
 export * from './number/number-utility.js';
 export * from './set/set-utils.js';
 export * from './string/string-utility.js';
+export * from './telegram-api/telegram-api.ts';
+export * from './telegram-api/types.ts';
 export * from './url/url-utils.js';

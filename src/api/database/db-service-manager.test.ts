@@ -4,11 +4,12 @@
 import { describe, test, expect, spyOn, beforeEach, Mock } from 'bun:test';
 import { MaybePromise } from '#core/types.js';
 import { DatabaseServiceStatus, SqlMethod } from './types.ts';
-import { GeneralModuleResolver, Module } from '#api/base.index.js';
 import { Database } from './database.ts';
 import { DatabaseServiceManager } from './db-service-manager.ts';
 import { Repository } from './repository.ts';
 import { DTO } from '#domain/dto.js';
+import { GeneralModuleResolver } from '#api/module/types.js';
+import { Module } from '#api/module/module.js';
 
 const repo = {
   tableName: 'users',

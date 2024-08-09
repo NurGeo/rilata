@@ -1,3 +1,4 @@
+import { BotLoggerConfig } from '#core/utils/telegram-api/types.js';
 import { JwtDecoder } from '../../core/jwt/jwt-decoder.js';
 import { Logger } from '../../core/logger/logger.js';
 import { DTO } from '../../domain/dto.js';
@@ -8,6 +9,7 @@ import { RunMode, ServerConfig } from './types.js';
 
 export type ServerResolves<JWT_P extends DTO> = {
   logger: Logger,
+  botLoggerConfig?: BotLoggerConfig,
   runMode: RunMode,
   jwtDecoder: JwtDecoder<JWT_P>,
   jwtVerifier: JwtVerifier<JWT_P>,

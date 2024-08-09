@@ -1,8 +1,6 @@
-import { InputLoggerModes } from './logger-modes.js';
+import { LoggerModes } from './logger-modes.js';
 
 export interface Logger {
-  logMode: InputLoggerModes
-
   /** Различная информация о работе приложения */
   info(log: string): void
 
@@ -18,5 +16,7 @@ export interface Logger {
   /** Фатальные ошибки, которые ловятся обработчиком на верхнем уровне */
   fatalError(log: string, logAttrs?: unknown, err?: Error): Error
 
-  setLogMode(logMode: InputLoggerModes): void
+  setLogMode(logMode: LoggerModes): void
+
+  getLogMode(): LoggerModes
 }

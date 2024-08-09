@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
+import { Database } from '#api/database/database.js';
 import { Repository } from '#api/database/repository.js';
-import { Database } from '#api/db.index.js';
 import { CommandRequestStorePayload } from '#api/request-store/types.js';
 import { DelivererToBus } from '../../src/api/bus/deliverer-to-bus.js';
 import { DeliveryBusMessage, DeliveryEvent } from '../../src/api/bus/types.js';

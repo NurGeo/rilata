@@ -1,4 +1,4 @@
-import { domainStore } from '#core/domain-store.js';
+import { domainStore } from '#core/store/domain-store.js';
 import { Caller } from '../../../api/controller/types.js';
 import { requestStore } from '../../../api/request-store/request-store.js';
 import { ValidationError } from '../../../api/service/error-types.js';

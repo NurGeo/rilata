@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-restricted-syntax */
-import { DomainStorePayload } from './types.js';
+import { ConsoleLogger } from '#core/logger/console-logger.js';
+import { DomainStorePayload } from '../types.js';
 
 function getId(): string {
   let result = '';
@@ -23,15 +24,26 @@ function getId(): string {
 class DomainStore {
   private payload!: DomainStorePayload;
 
+  private setCount = 0;
+
   id = getId;
 
   getPayload<P extends DomainStorePayload>(): P {
-    if (this.payload === undefined) throw Error(`not inited "${this.constructor.name}" store dispatcher`);
-    return this.payload as P;
+    if (this.payload === undefined) throw Error('not inited store payload');
+    return { ...this.payload } as P;
   }
 
   setPaylod(payload: DomainStorePayload): void {
-    this.payload = payload;
+    const logger = this.payload?.logger ?? payload?.logger ?? new ConsoleLogger('all');
+    const runMode = this.payload?.runMode ?? payload?.runMode ?? 'prod';
+    if (this.setCount > 0 && runMode !== 'test') {
+      logger.warning(
+        'domain payload repeated setted',
+        { count: this.setCount, stack: Error().stack, old: this.payload, new: payload },
+      );
+    }
+    this.payload = Object.freeze(payload);
+    this.setCount += 1;
   }
 }
 

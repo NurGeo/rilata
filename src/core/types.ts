@@ -1,3 +1,4 @@
+import { RunMode } from '#api/server/types.js';
 import { Logger } from './logger/logger.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -34,5 +35,6 @@ export type ConstructorReturnType<C extends Constructor<any>>
 = C extends Constructor<infer R> ? R : never;
 
 export type DomainStorePayload = {
-  logger: Logger
+  logger: Logger,
+  runMode: RunMode,
 }

@@ -1,7 +1,7 @@
 import { uuidv7 } from 'uuidv7';
 import { UuidType } from '../../types.js';
 import { AssertionException } from '../../exeptions.js';
-import { domainStore } from '#core/domain-store.js';
+import { domainStore } from '#core/store/domain-store.js';
 
 class UUIDUtility {
   private uuidRegex = '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$';

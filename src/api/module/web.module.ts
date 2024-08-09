@@ -21,7 +21,7 @@ import { ServiceBaseErrors } from '#api/service/error-types.js';
 import { badRequestError, internalError } from '#api/service/constants.js';
 import { success } from '#core/result/success.js';
 import { AssertionException } from '#core/exeptions.js';
-import { requestStore } from '#api/base.index.js';
+import { requestStore } from '#api/request-store/request-store.js';
 
 export abstract class WebModule extends Module {
   readonly abstract queryServices: GeneraQueryService[]

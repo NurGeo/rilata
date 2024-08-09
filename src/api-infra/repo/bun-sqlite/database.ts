@@ -10,8 +10,8 @@ import { BunSqliteRepository } from './repository.js';
 import { BunRepoCtor } from './types.js';
 import { MaybePromise } from '#core/types.js';
 import { consoleColor } from '#core/utils/string/console-color.js';
-import { Database } from '#api/db.index.js';
 import { Repository } from '#api/database/repository.js';
+import { Database } from '#api/database/database.js';
 
 const MEMORY_PATH = ':memory:';
 

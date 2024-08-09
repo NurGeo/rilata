@@ -5,6 +5,7 @@ import { Module } from '../module/module.js';
 import { RilataServer } from './server.js';
 import { ServerResolves } from './s-resolves.js';
 import { GeneralServerResolver, ModuleConstructors } from './types.js';
+import { domainStore } from '#core/store/domain-store.js';
 
 export class ServerStarter<M extends Module> {
   protected server!: RilataServer;
@@ -16,7 +17,12 @@ export class ServerStarter<M extends Module> {
     protected ServerResolverCtor: Constructor<GeneralServerResolver>,
     protected resolves:ServerResolves<DTO>,
     protected ModuleCtors: ModuleConstructors<M>[],
-  ) {}
+  ) {
+    domainStore.setPaylod({
+      logger: resolves.logger,
+      runMode: resolves.runMode,
+    });
+  }
 
   start(runModuleNames: M['moduleName'][] | 'all'): RilataServer {
     this.serverResolver = new this.ServerResolverCtor(this.resolves);
