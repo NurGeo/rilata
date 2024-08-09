@@ -45,7 +45,7 @@ export abstract class BotDialogueService extends Service<GeneralModuleResolver> 
       const context = this.findContext(telegramId);
       const stateName = context ? context.stateName : 'initialState';
 
-      return this.getState(stateName).execute(update);
+      return await this.getState(stateName).execute(update);
     } catch (e) {
       return this.processCatch(update, e as Error);
     }
