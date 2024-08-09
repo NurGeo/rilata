@@ -1,20 +1,16 @@
 import { domainStore } from '#core/store/domain-store.js';
-import { DomainStorePayload } from '#core/types.js';
 import { dtoUtility } from '../dto/dto-utility.ts';
 import { ApiMethodNames, ApiMethodsParams } from './types.ts';
 
 export class TelegramApi {
   static TELEGRAM_API = 'https://api.telegram.org/';
 
-  store: DomainStorePayload;
-
-  constructor(protected botToken: string) {
-    this.store = domainStore.getPayload();
-  }
+  constructor(protected botToken: string) {}
 
   async postRequest(reply: ApiMethodsParams<ApiMethodNames>): Promise<Response> {
-    if (this.store.runMode === 'test') {
-      throw this.store.logger.error(
+    const store = domainStore.getPayload();
+    if (store.runMode === 'test') {
+      throw store.logger.error(
         'Произведен попытка отправки сообщения в телеграм сервер во время теста.',
         { reply },
       );
@@ -48,7 +44,7 @@ export class TelegramApi {
       bodyUsed: response.bodyUsed,
       body: await response.text(),
     };
-    this.store.logger.error('Ошибка при отпраке данных в телеграм сервер', {
+    domainStore.getPayload().logger.error('Ошибка при отправке данных в телеграм сервер', {
       fetchData: data, response: resp,
     });
   }

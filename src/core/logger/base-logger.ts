@@ -1,7 +1,10 @@
 import { AssertionException } from '#core/exeptions.js';
+import { domainStore } from '#core/store/domain-store.js';
 import { BinaryKeyFlag } from '#core/utils/binary/binary-flag/binary-flag.js';
 import { LoggerModes, loggerModes } from './logger-modes.ts';
 import { Logger } from './logger.ts';
+
+let appName: string;
 
 export abstract class BaseLogger implements Logger {
   timeFormat: Intl.DateTimeFormatOptions = {
@@ -11,6 +14,8 @@ export abstract class BaseLogger implements Logger {
   };
 
   protected modeDispatcher: BinaryKeyFlag<typeof loggerModes>;
+
+  protected abstract toLog(text: string, logAttrs?: unknown): void
 
   constructor(public logMode: LoggerModes) {
     this.modeDispatcher = new BinaryKeyFlag(loggerModes, logMode);
@@ -23,8 +28,6 @@ export abstract class BaseLogger implements Logger {
   setLogMode(logMode: LoggerModes): void {
     this.logMode = logMode;
   }
-
-  protected abstract toLog(text: string, logAttrs?: unknown): void
 
   info(log: string): void {
     if (this.modeDispatcher.isAny(['info']) === false) return;
@@ -45,7 +48,7 @@ export abstract class BaseLogger implements Logger {
     if (this.modeDispatcher.isAny(['error'])) {
       this.toLog(
         this.makeLogString('ERROR', log),
-        { error: this.getErr(err), logAttrs },
+        { logAttrs, error: this.getErr(err) },
       );
     }
     return new AssertionException(log);
@@ -55,16 +58,17 @@ export abstract class BaseLogger implements Logger {
     if (this.modeDispatcher.isAny(['fatal'])) {
       this.toLog(
         this.makeLogString('FATAL_ERROR', log),
-        { error: this.getErr(err), logAttrs },
+        { logAttrs, error: this.getErr(err) },
       );
     }
     return new AssertionException(log);
   }
 
   protected makeLogString(type: string, log: string): string {
+    if (!appName) appName = domainStore.getPayload().appName;
     const dateTime = new Date().toLocaleString(undefined, this.timeFormat);
     const suffix = `[${type}-${dateTime}]`.padEnd(26);
-    return `${suffix}${log}`;
+    return `${suffix}**${appName}**  ${log}`;
   }
 
   protected getErr(err?: Error): Record<string, unknown> {
@@ -73,6 +77,6 @@ export abstract class BaseLogger implements Logger {
         ...err,
         stack: err.stack?.split('\n') ?? ['no stack'],
       }
-      : {};
+      : { description: 'not excepted', stack: Error().stack?.split('\n') };
   }
 }

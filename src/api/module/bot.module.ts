@@ -45,9 +45,9 @@ export abstract class BotModule extends Module {
     const { botToken } = moduleResolver.getModuleResolves();
     this.moduleController = new BotModuleController(botToken);
     super.init(moduleResolver, serverResolver);
+    this.telegramApi = new TelegramApi(this.getBotToken());
     this.subscribeToUpdates();
     this.service.init(moduleResolver);
-    this.telegramApi = new TelegramApi(this.getBotToken());
   }
 
   getSubscribeMode(): BotSubscribeMode {

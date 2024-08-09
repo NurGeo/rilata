@@ -19,6 +19,7 @@ export class ServerStarter<M extends Module> {
     protected ModuleCtors: ModuleConstructors<M>[],
   ) {
     domainStore.setPaylod({
+      appName: resolves.appName,
       logger: resolves.logger,
       runMode: resolves.runMode,
     });

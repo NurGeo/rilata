@@ -94,7 +94,7 @@ describe('uuidUtility class test', () => {
         new Error(`${message}: ${JSON.stringify(context)}`)
       ),
     } as unknown as Logger;
-    domainStore.setPaylod({ logger, runMode: 'test' });
+    domainStore.setPaylod({ logger, runMode: 'test', appName: 'uuid test app' });
 
     const sut = uuidUtility;
 

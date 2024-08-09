@@ -35,6 +35,7 @@ export type ConstructorReturnType<C extends Constructor<any>>
 = C extends Constructor<infer R> ? R : never;
 
 export type DomainStorePayload = {
+  appName: string,
   logger: Logger,
   runMode: RunMode,
 }

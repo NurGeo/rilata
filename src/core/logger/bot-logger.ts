@@ -1,6 +1,6 @@
 import { getLogger } from '#core/store/get-logger.js';
 import { TelegramApi } from '#core/utils/telegram-api/telegram-api.js';
-import { BotLoggerConfig } from '#core/utils/telegram-api/types.js';
+import { BotLoggerConfig, SendMessage } from '#core/utils/telegram-api/types.js';
 import { BaseLogger } from './base-logger.ts';
 import { LoggerModes } from './logger-modes.ts';
 
@@ -15,18 +15,23 @@ export class BotLogger extends BaseLogger {
   }
 
   protected toLog(text: string, logAttrs?: unknown): void {
-    this.sendToBot(text);
     if (logAttrs === undefined) {
-      this.sendToBot(`${blockCode}\n${JSON.stringify(logAttrs, null, 2)}\n${blockCode}`);
+      this.sendToBot(text);
+    } else {
+      this.sendToBot(
+        `${text}\n${blockCode}\n${JSON.stringify(logAttrs, null, 2)}\n${blockCode}`,
+        { parse_mode: 'Markdown' },
+      );
     }
   }
 
-  protected sendToBot(text: string): void {
+  protected sendToBot(text: string, options?: Partial<SendMessage>): void {
     this.config.managerIds.forEach((managerId) => {
       this.telegramApi.postRequest({
         method: 'sendMessage',
         text,
         chat_id: managerId,
+        ...options,
       });
     });
   }

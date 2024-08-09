@@ -40,12 +40,17 @@ export function getJwtConfig(config?: Partial<JwtConfig>): JwtConfig {
   };
 }
 
-export function getBotLoggerToken(token?: string): string {
-  return process.env.BOT_LOGGER_TOKEN ?? token ?? throwErr('not found bot logger token in env.BOT_LOGGER_TOKEN');
+export function getAppName(name?: string): string {
+  return process.env.APP_NAME ?? name ?? throwErr('not found app name in env.APP_NAME');
 }
 
-export function getBotLoggerManagerIds(ids?: string[]): string[] {
-  return process.env.BOT_LOGGER_MANAGER_IDS?.split(',') ?? ids ?? throwErr('not found bot logger manager ids in env.BOT_LOGGER_MANAGER_IDS');
+export function getBotLoggerToken(): string {
+  return process.env.BOT_LOGGER_TOKEN ?? throwErr('not found bot logger token in env.BOT_LOGGER_TOKEN');
+}
+
+export function getBotLoggerManagerIds(): string[] {
+  const ids = process.env.BOT_LOGGER_MANAGER_IDS ?? throwErr('not found bot logger manager ids in env.BOT_LOGGER_MANAGER_IDS');
+  return ids.split(',').map((id) => id.trim());
 }
 
 export function getServerConfig(config?: Partial<ServerConfig>): ServerConfig {

@@ -31,6 +31,7 @@ class BusRunServerStarter extends ServerStarter<AllServerModules> {
     resolves?: Partial<BusServerResolves<UserJwtPayload>>,
   ) {
     const defaultResolves: BusServerResolves<UserJwtPayload> = {
+      appName: 'bus server testing',
       logger: new ConsoleLogger(getEnvLogMode() ?? 'all'),
       runMode: 'test',
       jwtDecoder: new JwtDecoderImpl(),

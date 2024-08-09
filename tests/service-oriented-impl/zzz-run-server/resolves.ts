@@ -10,6 +10,7 @@ import { JwtDecoderImpl } from '../../service-oriented-impl/zz-infra/jwt/decoder
 const jwtSecretKey = 'your-256-bit-secret';
 
 export const serverResolves: ServerResolves<UserJwtPayload> = {
+  appName: 'service oriented server testing',
   logger: new ConsoleLogger(getEnvLogMode() ?? 'all'),
   runMode: 'test',
   publicHost: getPublicHost('localhost'),

@@ -27,8 +27,11 @@ export type {
 export type { JwtDecoder } from './jwt/jwt-decoder.js';
 
 export type { Logger } from './logger/logger.js';
-export * from './logger/console-logger.js';
 export * from './logger/logger-modes.js';
+export * from './logger/composite-logger.ts';
+export * from './logger/base-logger.ts';
+export * from './logger/console-logger.js';
+export * from './logger/bot-logger.ts';
 
 export type { Result, GeneralResult } from './result/types.js';
 export * from './result/success.js';
