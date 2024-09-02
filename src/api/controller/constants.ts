@@ -28,6 +28,8 @@ export const mimeTypesMap = {
   ico: 'image/x-icon',
 };
 
+export const blobTypes = ['jpeg', 'jpg', 'png', 'pdf', 'zip', 'mp3', 'ico'];
+
 /**
  * STATUS_CODES - Карта статусов HTTP, связанных с определенными ошибками.
  */

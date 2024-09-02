@@ -17,18 +17,6 @@ describe('Тестирование класса StringUtility', () => {
       expect(result).toMatch(regex);
     });
 
-    test('should generate string matching the format bb-bbbb-bbbb', () => {
-      const result = sut.random('bb-bbbb-bbbb');
-      const regex = /^[01]{2}-[01]{4}-[01]{4}$/;
-      expect(result).toMatch(regex);
-    });
-
-    test('should generate string matching the format oo-oooo-oooo', () => {
-      const result = sut.random('oo-oooo');
-      const regex = /^[0-7]{2}-[0-7]{4}$/;
-      expect(result).toMatch(regex);
-    });
-
     test('should generate string matching the format 3-34-4h-hhh', () => {
       const result = sut.random('3-34-4h-hhh');
       const regex = /^[0-3]-[0-3][0-4]-[0-4][0-9a-f]-[0-9a-f]{3}$/;
@@ -44,6 +32,24 @@ describe('Тестирование класса StringUtility', () => {
     test('should generate string matching the format with custom delimiter and digits', () => {
       const result = sut.random('2.2.4', '.');
       const regex = /^[0-2]\.[0-2]\.[0-4]$/;
+      expect(result).toMatch(regex);
+    });
+
+    test('should generate string matching the format AA-zz-04', () => {
+      const result = sut.random('AA-zz-04');
+      const regex = /^[a-zA-Z0-9]{2}-[a-z]{2}-0[0-4]$/;
+      expect(result).toMatch(regex);
+    });
+
+    test('should generate string matching the format ZZ-a', () => {
+      const result = sut.random('ZZ-a');
+      const regex = /^[a-zA-Z]{2}-[a-z0-9]$/;
+      expect(result).toMatch(regex);
+    });
+
+    test('should generate a valid IP address format', () => {
+      const result = sut.random('255.255.255.255', '.'); // может сгенерировать секцию 000
+      const regex = /^([0-2]?[0-5]?[0-5]\.){3}[0-2]?[0-5]?[0-5]$/;
       expect(result).toMatch(regex);
     });
   });

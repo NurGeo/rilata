@@ -73,9 +73,7 @@ export abstract class BotDialogueService extends Service<GeneralModuleResolver> 
   protected processCatch(update: Update, err: Error): BotReplyMessage {
     const chatId = updateUtils.getUserId(update);
     const context = this.findContext(chatId);
-    this.moduleResolver.getLogger().error(
-      err.message, { update, context }, err,
-    );
+    this.moduleResolver.getLogger().error(err.message, { update, context }, err);
     const msg: SendMessage = {
       method: 'sendMessage',
       chat_id: chatId,

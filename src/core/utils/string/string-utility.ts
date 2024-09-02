@@ -1,19 +1,38 @@
-import { domainStore } from '#core/store/domain-store.js';
+const HEX_BASE = 16;
+const DECIMAL_BASE = 10;
+const ALPHABET_COUNT = 26;
+const CODE_OF_A_LOWER = 97; // 'a'
+const CODE_OF_A_UPPER = 65; // 'A'
 
-const CHARS_COUNT = 25;
-const CODE_OF_A_LETTER = 97;
+const random = (max: number): number => Math.floor(Math.random() * max);
 
-const randomGenerators = {
-  h: (): string => Math.floor(Math.random() * 16).toString(16),
-  d: (): string => Math.floor(Math.random() * 10).toString(),
-  b: (): string => Math.floor(Math.random() * 2).toString(),
-  o: (): string => Math.floor(Math.random() * 8).toString(),
-  z: (): string => String.fromCharCode(
-    Math.floor(Math.random() * CHARS_COUNT) + CODE_OF_A_LETTER,
-  ),
-
-  0: (maxDigit: number): string => Math.floor(Math.random() * (maxDigit + 1)).toString(),
+const randomGenerators: Record<string, () => string | number > = {
+  h: (): string => random(HEX_BASE).toString(HEX_BASE),
+  d: (): string => random(DECIMAL_BASE).toString(),
+  z: (): string => String.fromCharCode(random(ALPHABET_COUNT) + CODE_OF_A_LOWER),
+  a: (): string => {
+    const isLetter = Math.random() > 0.5;
+    return isLetter
+      ? String.fromCharCode(random(ALPHABET_COUNT) + CODE_OF_A_LOWER) // a-z
+      : random(DECIMAL_BASE).toString(); // 0-9
+  },
+  A: (): string => {
+    const isLetter = Math.random() > 0.5;
+    const offset = isLetter && Math.random() > 0.5 ? CODE_OF_A_UPPER : CODE_OF_A_LOWER;
+    return isLetter
+      ? String.fromCharCode(random(ALPHABET_COUNT) + offset)
+      : random(DECIMAL_BASE).toString(); // 0-9
+  },
+  Z: (): string => {
+    const offset = Math.random() > 0.5 ? CODE_OF_A_UPPER : CODE_OF_A_LOWER; // A-Z or a-z
+    return String.fromCharCode(random(ALPHABET_COUNT) + offset);
+  },
 };
+
+// добавляем цифры
+for (let i = 0; i < 10; i += 1) {
+  randomGenerators[i] = (): number => random(i + 1);
+}
 
 /* eslint-disable no-plusplus */
 class StringUtility {
@@ -22,9 +41,10 @@ class StringUtility {
    * Каждый символ в строке формата указывает тип значения для генерации:
    * - 'h' для шестнадцатеричного числа (0-9, a-f)
    * - 'd' для десятичного числа (0-9)
-   * - 'b' для двоичного числа (0, 1)
-   * - 'o' для восьмеричного числа (0-7)
+   * - 'a' для любого числа или символа латинского алфавита (a-z, 0-9)
+   * - 'A' для любого числа или символа латинского алфавита (a-z, A-Z, 0-9)
    * - 'z' для латинского алфавита (a-z)
+   * - 'Z' для символа латинского алфавита (a-z, A-Z)
    * - цифры (0-9) указывают случайное число от 0 до указанной цифры
    *
    * @param format Строка формата, указывающая структуру и типы значений.
@@ -33,24 +53,19 @@ class StringUtility {
    *
    * @example
    * random('hh-hhhh-hhhh'); // 'a3-4f7b-9acd'
-   * random('dd.dddd.dddd', '.'); // '73.5489.1920'
-   * random('bb-bbbb-bbbb'); // '01-1010-0111'
-   * random('oo-oooo'); // '01-7264'
-   * random('3-34-4h-hhh'); // '1-23-7d-8fc'
-   * random('zzzz#ddd', '#'); // 'hisr#836'
+   * random('dd-dddd-dddd'); // '73-5489-1920'
+   * random('AA-zz-04'); // 'A9-zf-02'
+   * random('ZZ-a'); // 'Mw-q'
    */
   random(format: string, delimiter = '-'): string {
     const segments = format.split(delimiter);
 
     return segments.map((segment) => (
       segment.split('').map((char) => {
-        if (char === 'h' || char === 'd' || char === 'b' || char === 'o' || char === 'z') {
-          return randomGenerators[char]();
+        if (!(char in randomGenerators)) {
+          throw new Error(`Not a valid char: ${char}`);
         }
-
-        const digit = Number(char);
-        if (isNaN(digit)) throw domainStore.getPayload().logger.error(`not valid char: ${char}`);
-        return randomGenerators[0](digit);
+        return randomGenerators[char]();
       }).join('')
     )).join(delimiter);
   }

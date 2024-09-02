@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { stat } from 'fs/promises';
 import { MimeTypes, ResponseFileOptions } from '../../../api/controller/types.js';
-import { mimeTypesMap, dispositionTypeMap } from '../../../api/controller/constants.js';
+import { mimeTypesMap, dispositionTypeMap, blobTypes } from '../../../api/controller/constants.js';
 
 class ResponseUtility {
   /**
@@ -44,7 +44,9 @@ class ResponseUtility {
         'Content-Disposition': disposition,
       };
 
-      const content = await this.fileContent(filePath);
+      const content = blobTypes.includes(mimeType)
+        ? await this.fileContentAsBlob(filePath)
+        : await this.fileContentAsText(filePath);
 
       return new Response(content, {
         status: options?.status ?? 200,
@@ -60,8 +62,18 @@ class ResponseUtility {
    * @param path - Путь к файлу.
    * @returns Промис, который возвращает содержимое файла как строку.
    */
-  protected fileContent(path: string): Promise<string> {
+  protected fileContentAsText(path: string): Promise<string> {
     return Bun.file(path).text();
+  }
+
+  /**
+   * Читает содержимое файла как Blob.
+   * @param path - Путь к файлу.
+   * @returns Промис, который возвращает содержимое файла как Blob.
+   */
+  protected async fileContentAsBlob(path: string): Promise<Blob> {
+    const buffer = await Bun.file(path).arrayBuffer();
+    return new Blob([buffer]);
   }
 
   /**
